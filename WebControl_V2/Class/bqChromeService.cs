@@ -29,7 +29,7 @@ namespace WebControl_V2.Class
             ((ChromeOptions)option).LeaveBrowserRunning = true;
             ((ChromeOptions)option).PageLoadStrategy = PageLoadStrategy.Normal;
             driver = new RemoteWebDriver(service.ServiceUrl, option);
-            driver.Manage().Window.Minimize();
+            //driver.Manage().Window.Minimize();
         }
     }
 }
