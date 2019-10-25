@@ -444,8 +444,8 @@ namespace WebControl_V2.Class
                     if (service.TryFindElement(By.CssSelector("div.col.mr-2.px-2.text-right"), out job))
                     {//Confirm OK to exit
                         job.Click();
-                        bqInterface.UpdateAccount("Timer", "1000");
-                        System.Threading.Thread.Sleep(1000);
+                        bqInterface.UpdateAccount("Timer", "3000");
+                        System.Threading.Thread.Sleep(3000);
                     }
                     //Choose Job
                     //Class i.material-icons.mr-2.float-right.b200
@@ -454,8 +454,8 @@ namespace WebControl_V2.Class
                     if (LikeArticel == false)
                     {
                         filterJob[0].Click();
-                        bqInterface.UpdateAccount("Timer", "1000");
-                        System.Threading.Thread.Sleep(1000);
+                        bqInterface.UpdateAccount("Timer", "3000");
+                        System.Threading.Thread.Sleep(3000);
                         
                         job.Click();
                     }
@@ -465,16 +465,16 @@ namespace WebControl_V2.Class
                         break;
                     }
                     filterJob[1].Click();
-                    bqInterface.UpdateAccount("Timer", "1000");
-                    System.Threading.Thread.Sleep(1000);
+                    bqInterface.UpdateAccount("Timer", "3000");
+                    System.Threading.Thread.Sleep(3000);
                     
                     job.Click();
 
                     if (FollowPage == false)
                     {
                         filterJob[2].Click();
-                        bqInterface.UpdateAccount("Timer", "1000");
-                        System.Threading.Thread.Sleep(1000);
+                        bqInterface.UpdateAccount("Timer", "3000");
+                        System.Threading.Thread.Sleep(3000);
                         
                         job.Click();
                     }
@@ -482,21 +482,21 @@ namespace WebControl_V2.Class
                     if (LikePage == false)
                     {
                         filterJob[3].Click();
-                        bqInterface.UpdateAccount("Timer", "1000");
-                        System.Threading.Thread.Sleep(1000);
+                        bqInterface.UpdateAccount("Timer", "3000");
+                        System.Threading.Thread.Sleep(3000);
                         
                         job.Click();
                     }
 
                     filterJob[4].Click();
-                    bqInterface.UpdateAccount("Timer", "1000");
-                    System.Threading.Thread.Sleep(1000);
+                    bqInterface.UpdateAccount("Timer", "3000");
+                    System.Threading.Thread.Sleep(3000);
                     
                     job.Click();
 
                     filterJob[5].Click();
-                    bqInterface.UpdateAccount("Timer", "1000");
-                    System.Threading.Thread.Sleep(1000);
+                    bqInterface.UpdateAccount("Timer", "3000");
+                    System.Threading.Thread.Sleep(3000);
                     
 
                     driver.Navigate().Back();
@@ -664,6 +664,25 @@ namespace WebControl_V2.Class
 
                         bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
                         System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
+                        
+                        //Check Facebook "Bat dau tro chuyen" window.
+                        //If window present then CLOSE it
+                        try
+                        {
+                            if (service.TryFindElement(By.CssSelector("div._66n5"), out loginButton))
+                            {
+                                System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> faceChat = driver.FindElements(By.CssSelector("div._66n5"));
+                                if (faceChat.Count >= 4)
+                                    faceChat[3].Click();
+                                bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
+                                System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
+                            }
+                        }
+                        catch (Exception ie)
+                        {
+
+                        }
+                        //End
 
                         bool faceOK = true;
                         if (value.Contains("THEO"))
@@ -676,7 +695,7 @@ namespace WebControl_V2.Class
                                 //Waiting alert facebook
                                 bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
                                 System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
-                                
+
 
                                 while (CGlobal._pauseJob)
                                 {
@@ -698,7 +717,7 @@ namespace WebControl_V2.Class
 
                                 bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
                                 System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
-                                
+
                             }
                             else
                                 faceOK = false;
@@ -713,7 +732,7 @@ namespace WebControl_V2.Class
                                 //Waiting alert facebook
                                 bqInterface.UpdateAccount("Timer", "3000");
                                 System.Threading.Thread.Sleep(3000);
-                                
+
 
                                 while (CGlobal._pauseJob)
                                 {
@@ -735,12 +754,12 @@ namespace WebControl_V2.Class
 
                                 bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
                                 System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
-                                
+
                             }
                             else
                                 faceOK = false;
                         }
-                        else if (value.Contains("TĂNG LIKE CHO BÀI VIẾT") || value.Contains("TĂNG LIKE CHO ALBUM")) 
+                        else if (value.Contains("TĂNG LIKE CHO BÀI VIẾT") || value.Contains("TĂNG LIKE CHO ALBUM"))
                         {//Thich Bai viet : Class
                             //Like Icon hidden on bai viet : i._6rk2.img.sp_60uDIWt_Org.sx_32f45f 
                             //Like Icon on Nhan Xet column : i._6rk2.img.sp_60uDIWt_Org.sx_6ec908 
@@ -753,7 +772,7 @@ namespace WebControl_V2.Class
                                 //Waiting alert facebook
                                 bqInterface.UpdateAccount("Timer", "3000");
                                 System.Threading.Thread.Sleep(3000);
-                                
+
 
                                 while (CGlobal._pauseJob)
                                 {
@@ -789,7 +808,7 @@ namespace WebControl_V2.Class
                                         likeArticel[2].Click();
                                         ok = true;
                                     }
-                                    catch (Exception j)                                    
+                                    catch (Exception j)
                                     {
                                         ok = false;
                                     }
@@ -818,19 +837,19 @@ namespace WebControl_V2.Class
                                         {
                                             faceOK = false;
                                         }
-                                    }    
+                                    }
                                 }
 
                                 bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
                                 System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
-                                
+
                             }
                             else if (service.TryFindElement(By.CssSelector("a._6a-y._3l2t._18vj"), out like))
                             {
                                 //Waiting alert facebook
                                 bqInterface.UpdateAccount("Timer", "3000");
                                 System.Threading.Thread.Sleep(3000);
-                                
+
 
                                 while (CGlobal._pauseJob)
                                 {
@@ -887,12 +906,12 @@ namespace WebControl_V2.Class
                                         {
                                             faceOK = false;
                                         }
-                                    }    
+                                    }
                                 }
 
                                 bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
                                 System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
-                                
+
                             }
                             else if (service.TryFindElement(By.CssSelector("div._khz._4sz1._4rw5._3wv2"), out like))
                             {
@@ -926,7 +945,7 @@ namespace WebControl_V2.Class
                                 catch (Exception ii)
                                 {
                                     ok = false;
-                                }                               
+                                }
 
                                 bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
                                 System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
@@ -946,7 +965,7 @@ namespace WebControl_V2.Class
                                 //Waiting alert facebook
                                 bqInterface.UpdateAccount("Timer", "3000");
                                 System.Threading.Thread.Sleep(3000);
-                                
+
 
                                 while (CGlobal._pauseJob)
                                 {
@@ -969,9 +988,12 @@ namespace WebControl_V2.Class
 
                                 bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
                                 System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
-                                
+
                             }
                         }
+                        else
+                            faceOK = false;
+
                         if (faceOK)
                         {
                             bqInterface.UpdateProgress("Cong viec : Hoan thanh");
