@@ -69,7 +69,7 @@ namespace WebControl_V2.Class
             WebDriverWait w = new WebDriverWait(driver, t);
             w.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
 
-            service.Driver().Manage().Window.Minimize();
+            //service.Driver().Manage().Window.Minimize();
 
             //Login facebook
             //class username text: input.inputtext.login_form_input_box
@@ -154,7 +154,7 @@ namespace WebControl_V2.Class
             }
 
             service.GotoURL("https://app.golike.net");
-            service.Driver().Manage().Window.Minimize();
+            //service.Driver().Manage().Window.Minimize();
 
             bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
             System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
@@ -541,6 +541,8 @@ namespace WebControl_V2.Class
 
                     bqInterface.UpdateProgress("Bat dau ...");
 
+                    CEventLog.Log.WriteEntry(linkAccount.User, "Bat dau ... [Job count on GoLike: " + ab.Count + "]");
+
                     bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
                     System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
                     
@@ -559,8 +561,20 @@ namespace WebControl_V2.Class
 
                         if (jobFinish >= linkAccount.JobCount || _exit)
                             break;
+                        try
+                        {
+                            ab[i].Click();
+                        }
+                        catch (Exception e)
+                        {
+                            CEventLog.Log.WriteEntry(linkAccount.User, "Point#1 : Cannot click on job");
+                            bqInterface.UpdateProgress("Lay lai cong viec .....");
 
-                        ab[i].Click();
+                            ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+
+                            bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
+                            System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
+                        }
 
                         bqInterface.UpdateAccount("Timer", "1000");
                         System.Threading.Thread.Sleep(1000);
@@ -568,7 +582,7 @@ namespace WebControl_V2.Class
                         //font-18 font-bold b200 block-text
                         IWebElement info = null;//driver.FindElement(By.CssSelector("span.font-18.font-bold.b200.block-text"));
                         if (service.TryFindElement(By.CssSelector("span.font-18.font-bold.b200.block-text"), out info) == false)
-                        {
+                        {//GoLike display Message Box "Job Da Du So Luong"
                             if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out info))
                             {//Confirm OK to exit
                                 info.Click();
@@ -576,12 +590,25 @@ namespace WebControl_V2.Class
                                 System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
                                 
                             }
-                            i++;
+                            //i++;
+                            //continue;
+                            if (service.TryFindElement(By.CssSelector("i.material-icons.float-right.mt-1.mr-2.bg-gradient-1"), out job))
+                            {//Confirm OK to exit
+                                job.Click();
+                                bqInterface.UpdateAccount("Timer", "30000");
+                                System.Threading.Thread.Sleep(30000);
+
+                                //driver.Navigate().Refresh();
+                                ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+                            }
+                            i = 0;
                             continue;
                         }
 
                         string value = info.Text; //TĂNG LIKE CHO FANPAGE
                         Console.WriteLine("COMAPRE ==>> " + value);
+
+                        CEventLog.Log.WriteEntry(linkAccount.User, "Point#2 Job name: ");
 
                         IWebElement jobID = null;
                         //Load Job ID   h6.font-id
@@ -687,6 +714,7 @@ namespace WebControl_V2.Class
                         bool faceOK = true;
                         if (value.Contains("THEO"))
                         {//TANG LUOT THEO DOI 
+                            CEventLog.Log.WriteEntry(linkAccount.User, "Point#3 Follow: ");
                             bqInterface.UpdateProgress("Cong viec : Theo doi FanPage");
 
                             IWebElement follow = null; //driver.FindElement(By.CssSelector("Button.likeButton._4jy0._4jy4._517h._51sy._42ft"));
@@ -696,6 +724,7 @@ namespace WebControl_V2.Class
                                 bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
                                 System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
 
+                                CEventLog.Log.WriteEntry(linkAccount.User, "Point#3.1 Follow: ");
 
                                 while (CGlobal._pauseJob)
                                 {
@@ -725,6 +754,7 @@ namespace WebControl_V2.Class
                         else if (value.Contains("LIKE CHO FANPAGE"))
                         {//TĂNG LIKE CHO FANPAGE
                             bqInterface.UpdateProgress("Cong viec : Like Page");
+                            CEventLog.Log.WriteEntry(linkAccount.User, "Point#4 LIKE CHO FANPAGE: ");
 
                             IWebElement like = null; //driver.FindElement(By.CssSelector("Button.likeButton._4jy0._4jy4._517h._51sy._42ft"));
                             if (service.TryFindElement(By.CssSelector("Button.likeButton._4jy0._4jy4._517h._51sy._42ft"), out like))
@@ -732,7 +762,7 @@ namespace WebControl_V2.Class
                                 //Waiting alert facebook
                                 bqInterface.UpdateAccount("Timer", "3000");
                                 System.Threading.Thread.Sleep(3000);
-
+                               
 
                                 while (CGlobal._pauseJob)
                                 {
@@ -766,6 +796,9 @@ namespace WebControl_V2.Class
                             //Like Icon on Mix bai viet :    a._6a-y._3l2t._18vj ==> index 2
                             //Like DIV div._8c74 ==> index 32 for Like Icon
                             bqInterface.UpdateProgress("Cong viec : Like bai viet");
+
+                            CEventLog.Log.WriteEntry(linkAccount.User, "Point#5 TANG LIKE: ");
+
                             IWebElement like = null;
                             if (service.TryFindElement(By.CssSelector("i._6rk2.img.sp_60uDIWt_Org.sx_6ec908"), out like))
                             {
@@ -959,6 +992,9 @@ namespace WebControl_V2.Class
                             //Like Icon on Nhan Xet column : i._6rk2.img.sp_60uDIWt_Org.sx_6ec908 
                             //Like Icon on Mix bai viet :    a._6a-y._3l2t._18vj
                             bqInterface.UpdateProgress("Cong viec : Love bai viet");
+
+                            CEventLog.Log.WriteEntry(linkAccount.User, "Point#6 TANG LOVE: " );
+
                             IWebElement like = null;
                             if (service.TryFindElement(By.CssSelector("i._6rk2.img.sp_60uDIWt_Org.sx_6ec908"), out like))
                             {
@@ -998,9 +1034,11 @@ namespace WebControl_V2.Class
                         {
                             bqInterface.UpdateProgress("Cong viec : Hoan thanh");
 
+                            CEventLog.Log.WriteEntry(linkAccount.User, "Point#7 FACEBOOK OK: ");
+
                             //Change back to first tab
                             driver.SwitchTo().Window(driver.WindowHandles.First());
-                            service.Driver().Manage().Window.Minimize();
+                            //service.Driver().Manage().Window.Minimize();
 
                             bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
                             System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
@@ -1034,6 +1072,7 @@ namespace WebControl_V2.Class
                                 else
                                 {
                                     isArticelFull = true;
+                                    CEventLog.Log.WriteEntry(linkAccount.User, "Point#8 GOLIKE NOT ACCEPT: ");
                                 }
 
                             }
@@ -1076,7 +1115,7 @@ namespace WebControl_V2.Class
                                     }
                                 }
                                 if (service.TryFindElement(By.CssSelector("a.row.align-items-center"), out error))
-                                {
+                                {//GoLike cannot back to Job list page
                                     driver.Navigate().Back();
 
                                     bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
@@ -1103,6 +1142,7 @@ namespace WebControl_V2.Class
                                     jobFinish++;
                                 bqInterface.UpdateJob(i, jobIDText, "Thanh Cong");
                                 bqInterface.UpdateAccountJob(linkAccount.User, linkAccount.JobCount.ToString(), jobFinish.ToString());
+                                CEventLog.Log.WriteEntry(linkAccount.User, "Point#8 GOLIKE ACCEPT: ");
                             }
                             
                         }
@@ -1110,12 +1150,14 @@ namespace WebControl_V2.Class
                         {
                             Console.WriteLine("Facebook content NOT valid ");
 
+                            CEventLog.Log.WriteEntry(linkAccount.User, "Point#9 FACEBOOK INVALID: ");
+
                             //jobFinish++;
 
                             bqInterface.UpdateJob(i, jobIDText, "That bai");
 
                             driver.SwitchTo().Window(driver.WindowHandles.First());
-                            service.Driver().Manage().Window.Minimize();
+                            //service.Driver().Manage().Window.Minimize();
 
                             bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
                             System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
@@ -1159,7 +1201,7 @@ namespace WebControl_V2.Class
 
                         driver.SwitchTo().Window(driver.WindowHandles.Last()).Close();
                         driver.SwitchTo().Window(driver.WindowHandles.First());
-                        service.Driver().Manage().Window.Minimize();
+                        //service.Driver().Manage().Window.Minimize();
                        
 
                         bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
