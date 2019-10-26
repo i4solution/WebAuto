@@ -89,6 +89,7 @@
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.chkEnableRedo = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridJobReport)).BeginInit();
             this.panel4.SuspendLayout();
@@ -517,6 +518,7 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.chkEnableRedo);
             this.panel2.Controls.Add(this.lblRedo);
             this.panel2.Controls.Add(this.lblCheck);
             this.panel2.Controls.Add(this.lblMoney);
@@ -722,6 +724,18 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // chkEnableRedo
+            // 
+            this.chkEnableRedo.AutoSize = true;
+            this.chkEnableRedo.Checked = true;
+            this.chkEnableRedo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkEnableRedo.Location = new System.Drawing.Point(293, 3);
+            this.chkEnableRedo.Name = "chkEnableRedo";
+            this.chkEnableRedo.Size = new System.Drawing.Size(67, 17);
+            this.chkEnableRedo.TabIndex = 17;
+            this.chkEnableRedo.Text = "Tự động";
+            this.chkEnableRedo.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -814,6 +828,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.CheckBox chkEnableRedo;
     }
 }
 

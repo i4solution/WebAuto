@@ -66,6 +66,7 @@ namespace WebControl_V2
                             txtPassword.Text = CGlobal.user.Password;
                             txtGolikeDelay1.Text = CGlobal.user.InstricGoLikeDelay1.ToString();
                             txtFBDelay1.Text = CGlobal.user.InstricFBDelay1.ToString();
+                            chkEnableRedo.Checked = CGlobal.user.EnableRedoJob;
                             gridUser.Rows.Clear();
                             foreach (CLinkAccount ac in CGlobal.user.linkAccount.Values)
                             {
@@ -234,11 +235,15 @@ namespace WebControl_V2
                 return;
             }
             if (CGlobal.user == null)
+            {
                 CGlobal.user = new CUserAccount(txtUserName.Text, txtPassword.Text);
+                CGlobal.user.EnableRedoJob = chkEnableRedo.Checked;
+            }
             try
             {
                 CGlobal.user.GoLikeDelay1 = Int32.Parse(txtGolikeDelay1.Text);
                 CGlobal.user.FBDelay1 = Int32.Parse(txtFBDelay1.Text);
+                CGlobal.user.EnableRedoJob = chkEnableRedo.Checked;
             }
             catch (Exception ii)
             {
@@ -287,6 +292,7 @@ namespace WebControl_V2
                     btnSave.Enabled = false;
                     btnLikeArticle.Enabled = false;
                     btnLikeFanPage.Enabled = false;
+                    chkEnableRedo.Enabled = false;
                     btnFollow.Enabled = false;
                     timeCountDown = 0;
                     timer1.Start();
@@ -324,6 +330,7 @@ namespace WebControl_V2
                     btnSave.Enabled = true;
                     btnLikeArticle.Enabled = true;
                     btnLikeFanPage.Enabled = true;
+                    chkEnableRedo.Enabled = true;
                     btnFollow.Enabled = true;
                     timeCountDown = 0;
                     lblCountDown.Text = "0";
@@ -406,6 +413,7 @@ namespace WebControl_V2
             {
                 user.GoLikeDelay1 = Int32.Parse(txtGolikeDelay1.Text);
                 user.FBDelay1 = Int32.Parse(txtFBDelay1.Text);
+                user.EnableRedoJob = chkEnableRedo.Checked;
             }
             catch (Exception ii)
             {
@@ -467,6 +475,7 @@ namespace WebControl_V2
                         txtPassword.Text = CGlobal.user.Password;
                         txtGolikeDelay1.Text = CGlobal.user.InstricGoLikeDelay1.ToString();
                         txtFBDelay1.Text = CGlobal.user.InstricFBDelay1.ToString();
+                        chkEnableRedo.Checked = CGlobal.user.EnableRedoJob;
                         gridUser.Rows.Clear();
                         foreach (CLinkAccount ac in CGlobal.user.linkAccount.Values)
                         {
