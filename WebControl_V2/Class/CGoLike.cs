@@ -226,7 +226,7 @@ namespace WebControl_V2.Class
                 bqInterface.UpdateAccount("Cho duyet", redo.Text);
             }
             //Check "Can lam lai"           
-            if (service.TryFindElement(By.CssSelector("h6.font-semi-bold.hold_coin"), out redo))
+            if (CGlobal.user.EnableRedoJob && service.TryFindElement(By.CssSelector("h6.font-semi-bold.hold_coin"), out redo))
             {//Confirm OK to exit
                 bqInterface.UpdateAccount("Can lam lai", redo.Text);
                 if (redo.Text.Equals("0 đ") == false)
@@ -994,37 +994,51 @@ namespace WebControl_V2.Class
                             bqInterface.UpdateProgress("Cong viec : Love bai viet");
 
                             CEventLog.Log.WriteEntry(linkAccount.User, "Point#6 TANG LOVE: " );
-
-                            IWebElement like = null;
-                            if (service.TryFindElement(By.CssSelector("i._6rk2.img.sp_60uDIWt_Org.sx_6ec908"), out like))
+                            try
                             {
-                                //Waiting alert facebook
-                                bqInterface.UpdateAccount("Timer", "3000");
-                                System.Threading.Thread.Sleep(3000);
-
-
-                                while (CGlobal._pauseJob)
+                                IWebElement like = null;
+                                if (service.TryFindElement(By.CssSelector("i._6rk2.img.sp_60uDIWt_Org.sx_6ec908"), out like))
                                 {
-                                    bqInterface.UpdateProgress("Tạm ngưng ..");
-                                    System.Threading.Thread.Sleep(270);
-                                    bqInterface.UpdateProgress("Tạm ngưng .....");
-                                    System.Threading.Thread.Sleep(270);
+                                    //Waiting alert facebook
+                                    bqInterface.UpdateAccount("Timer", "3000");
+                                    System.Threading.Thread.Sleep(3000);
+
+                                    System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> likeArticel = driver.FindElements(By.CssSelector("a._6a-y._3l2t._18vj"));
+                                    OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                    action.MoveToElement(likeArticel[0]).Perform();
+
+                                    CEventLog.Log.WriteEntry(linkAccount.User, "Point#6 TANG LOVE: Mouse move OK");
+
+                                    bqInterface.UpdateAccount("Timer", "3000");
+                                    System.Threading.Thread.Sleep(3000);
+
+                                    while (CGlobal._pauseJob)
+                                    {
+                                        bqInterface.UpdateProgress("Tạm ngưng ..");
+                                        System.Threading.Thread.Sleep(270);
+                                        bqInterface.UpdateProgress("Tạm ngưng .....");
+                                        System.Threading.Thread.Sleep(270);
+                                    }
+
+                                    //try
+                                    //{
+                                    //    IAlert a = driver.SwitchTo().Alert();
+                                    //    driver.SwitchTo().Alert().Accept();
+                                    //}
+                                    //catch (Exception ii)
+                                    //{ }
+                                    //End 
+                                    likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
+                                    likeArticel[2].Click();
+
+                                    bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
+                                    System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
+
                                 }
-
-                                //try
-                                //{
-                                //    IAlert a = driver.SwitchTo().Alert();
-                                //    driver.SwitchTo().Alert().Accept();
-                                //}
-                                //catch (Exception ii)
-                                //{ }
-                                //End 
-                                System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
-                                likeArticel[2].Click();
-
-                                bqInterface.UpdateAccount("Timer", CGlobal.user.FBDelay1.ToString());
-                                System.Threading.Thread.Sleep(CGlobal.user.FBDelay1);
-
+                            }
+                            catch (Exception ex)
+                            {
+                                faceOK = false;
                             }
                         }
                         else
@@ -1098,11 +1112,22 @@ namespace WebControl_V2.Class
 
                                 IWebElement error = null;
                                 if (service.TryFindElement(By.CssSelector("div.col-6.pl-0.pr-2"), out error))
-                                {
+                                {//found div "Bo qua"
                                     bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
                                     System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
 
-                                    error.Click();
+                                    //found button "Bo qua"
+                                    //button.btn.btn-block.px-0.bg-button-1
+                                    if (service.TryFindElement(By.CssSelector("button.btn.btn-block.px-0.bg-button-1"), out error))
+                                    {
+                                        IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                        js.ExecuteScript("arguments[0].scrollIntoView();", error);
+
+                                        bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
+                                        System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
+
+                                        error.Click();
+                                    }
                                     bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
                                     System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
 
@@ -1165,11 +1190,22 @@ namespace WebControl_V2.Class
 
                             IWebElement error = null;
                             if (service.TryFindElement(By.CssSelector("div.col-6.pl-0.pr-2"), out error))
-                            {
+                            {//found div "Bo qua"
                                 bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
                                 System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);                                
 
-                                error.Click();
+                                //found button "Bo qua"
+                                //button.btn.btn-block.px-0.bg-button-1
+                                if (service.TryFindElement(By.CssSelector("button.btn.btn-block.px-0.bg-button-1"), out error))
+                                {
+                                    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                    js.ExecuteScript("arguments[0].scrollIntoView();", error);
+
+                                    bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
+                                    System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
+
+                                    error.Click();
+                                }
                                 bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
                                 System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
                                 
