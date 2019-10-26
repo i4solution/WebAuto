@@ -16,6 +16,7 @@ namespace WebControl_V2.Class
         string password = "";
         int lickGoLikeDelay1 = 4000;
         int lickFBDelay1 = 7000;
+        bool enableRedo = true;
         public Dictionary<string, CLinkAccount> linkAccount;
         string _obj;
         public CUserAccount(string user, string pass)
@@ -23,6 +24,7 @@ namespace WebControl_V2.Class
             username = user;
             password = pass;
             linkAccount = new Dictionary<string, CLinkAccount>();
+            enableRedo = true;
         }
         public string User
         {
@@ -55,6 +57,11 @@ namespace WebControl_V2.Class
         {
             set { lickFBDelay1 = value; }
             get { return lickFBDelay1 + ((new Random().Next(1, 10)) * 100); }
+        }
+        public bool EnableRedoJob
+        {
+            get { return enableRedo; }
+            set { enableRedo = value; }
         }
         public bool addLinkAccount (string type, string user, string pass, int count, bool enable)
         {
