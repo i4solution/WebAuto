@@ -29,6 +29,9 @@ namespace WebControl_V2
         public frmMain()
         {            
             goLike = new CGoLike();
+
+            CEventLog.Log.EnableLog = true;
+
             InitializeComponent();
         }
 
