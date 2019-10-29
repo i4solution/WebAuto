@@ -71,6 +71,9 @@ namespace WebControl_V2.Class
             w.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
             //service.Driver().Manage().Window.Minimize();
 
+            bqInterface.UpdateAccount("Timer", "7000");
+            System.Threading.Thread.Sleep(7000);
+
             //Login facebook
             //class username text: input.inputtext.login_form_input_box
             //class pass : input.inputtext.login_form_input_box
@@ -80,12 +83,12 @@ namespace WebControl_V2.Class
             {
                 System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> faceLogin = driver.FindElements(By.CssSelector("input.inputtext.login_form_input_box"));
                 faceLogin[0].SendKeys(linkAccount.User);
-                bqInterface.UpdateAccount("Timer", "1000");
-                System.Threading.Thread.Sleep(1000);
+                bqInterface.UpdateAccount("Timer", "3000");
+                System.Threading.Thread.Sleep(3000);
 
                 faceLogin[1].SendKeys(linkAccount.Password);
-                bqInterface.UpdateAccount("Timer", "2000");
-                System.Threading.Thread.Sleep(2000);
+                bqInterface.UpdateAccount("Timer", "3000");
+                System.Threading.Thread.Sleep(3000);
 
 
                 while (CGlobal._pauseJob)
@@ -153,6 +156,13 @@ namespace WebControl_V2.Class
                 }
             }
 
+            if (faceName == "")
+            {
+                bqInterface.UpdateProgress("Facebook bi lỗi. Chuyển qua tài khoản kế tiếp...");
+                bqInterface.UpdateAccount("Timer", "5000");
+                System.Threading.Thread.Sleep(5000);
+                return;
+            }
             service.GotoURL("https://app.golike.net");
             //service.Driver().Manage().Window.Minimize();
 
@@ -304,6 +314,9 @@ namespace WebControl_V2.Class
                                 {
                                     try
                                     {
+                                        IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                        js.ExecuteScript("arguments[0].scrollIntoView(true);", lstAccount[accountCount]);
+
                                         lstAccount[accountCount].Click();
                                         delay = CGlobal.user.GoLikeDelay1;
                                         bqInterface.UpdateAccount("Timer", delay.ToString());
@@ -320,12 +333,13 @@ namespace WebControl_V2.Class
                                             {
                                                 try
                                                 {
-                                                    bqInterface.UpdateProgress("Cong viec can lam lai..." + (j + 1).ToString() + "/" + ab.Count);
-                                                    CEventLog.Log.WriteEntry(linkAccount.User, "Cong viec can lam lai..." + (j + 1).ToString() + "/" + ab.Count);
+                                                    bqInterface.UpdateProgress("Cong viec can lam lai..." + (ab.Count - j).ToString() + "/" + ab.Count);
+                                                    CEventLog.Log.WriteEntry(linkAccount.User, "Cong viec can lam lai..." + (ab.Count - j).ToString() + "/" + ab.Count);
 
-                                                    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                                    js = (IJavaScriptExecutor)driver;
                                                     js.ExecuteScript("arguments[0].scrollIntoView(true);", cardRedo[j + offSet]);
-
+                                                    if (ab.Count - j > 3)
+                                                        offSet = 2;
                                                     //js.ExecuteScript("javascript:window.scrollBy(" + ab[j].Location.X.ToString() + "," + ab[j].Location.Y.ToString() + ")");
 
                                                     System.Threading.Thread.Sleep(1000);
@@ -343,8 +357,8 @@ namespace WebControl_V2.Class
                                                     bqInterface.UpdateAccount("Timer", delay.ToString());
                                                     System.Threading.Thread.Sleep(delay);
 
-                                                    bqInterface.UpdateProgress("Cong viec can lam lai...Dong Y - " + (j + 1).ToString() + "/" + ab.Count);
-                                                    CEventLog.Log.WriteEntry(linkAccount.User, "Cong viec can lam lai...Dong Y - " + (j + 1).ToString() + "/" + ab.Count);
+                                                    bqInterface.UpdateProgress("Cong viec can lam lai...Dong Y - " + (ab.Count - j).ToString() + "/" + ab.Count);
+                                                    CEventLog.Log.WriteEntry(linkAccount.User, "Cong viec can lam lai...Dong Y - " + (ab.Count - j).ToString() + "/" + ab.Count);
 
                                                     while (CGlobal._pauseJob)
                                                     {
@@ -365,8 +379,8 @@ namespace WebControl_V2.Class
                                                         }
                                                         System.Threading.Thread.Sleep(2000);
                                                     }
-                                                    bqInterface.UpdateProgress("Hoan thanh cong viec can lam lai..." + (j + 1).ToString() + "/" + ab.Count);
-                                                    CEventLog.Log.WriteEntry(linkAccount.User, "Hoan thanh cong viec can lam lai..." + (j + 1).ToString() + "/" + ab.Count);
+                                                    bqInterface.UpdateProgress("Hoan thanh cong viec can lam lai..." + (ab.Count - j).ToString() + "/" + ab.Count);
+                                                    CEventLog.Log.WriteEntry(linkAccount.User, "Hoan thanh cong viec can lam lai..." + (ab.Count - j).ToString() + "/" + ab.Count);
 
                                                     j--;
                                                 }

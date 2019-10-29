@@ -91,6 +91,7 @@
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.colAccount = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEnable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -525,6 +526,7 @@
             this.gridUser.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.gridUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colAccount,
             this.colUser,
             this.colPass,
             this.colEnable,
@@ -536,10 +538,10 @@
             this.gridUser.Name = "gridUser";
             this.gridUser.RowHeadersVisible = false;
             this.gridUser.RowHeadersWidth = 20;
-            this.gridUser.RowTemplate.Height = 35;
+            this.gridUser.RowTemplate.Height = 27;
             this.gridUser.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gridUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridUser.Size = new System.Drawing.Size(425, 135);
+            this.gridUser.Size = new System.Drawing.Size(425, 138);
             this.gridUser.TabIndex = 3;
             // 
             // lblFaceAccount
@@ -586,7 +588,7 @@
             // 
             this.lblRedo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.lblRedo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRedo.Location = new System.Drawing.Point(332, 40);
+            this.lblRedo.Location = new System.Drawing.Point(332, 39);
             this.lblRedo.Name = "lblRedo";
             this.lblRedo.Size = new System.Drawing.Size(85, 20);
             this.lblRedo.TabIndex = 16;
@@ -596,7 +598,7 @@
             // 
             this.lblCheck.BackColor = System.Drawing.Color.Lime;
             this.lblCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheck.Location = new System.Drawing.Point(211, 40);
+            this.lblCheck.Location = new System.Drawing.Point(211, 39);
             this.lblCheck.Name = "lblCheck";
             this.lblCheck.Size = new System.Drawing.Size(85, 20);
             this.lblCheck.TabIndex = 15;
@@ -606,7 +608,7 @@
             // 
             this.lblMoney.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.lblMoney.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoney.Location = new System.Drawing.Point(77, 40);
+            this.lblMoney.Location = new System.Drawing.Point(77, 39);
             this.lblMoney.Name = "lblMoney";
             this.lblMoney.Size = new System.Drawing.Size(85, 20);
             this.lblMoney.TabIndex = 14;
@@ -616,7 +618,7 @@
             // 
             this.label13.BackColor = System.Drawing.SystemColors.Control;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(332, 19);
+            this.label13.Location = new System.Drawing.Point(332, 18);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(85, 20);
             this.label13.TabIndex = 13;
@@ -627,7 +629,7 @@
             // 
             this.label12.BackColor = System.Drawing.SystemColors.Control;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(211, 19);
+            this.label12.Location = new System.Drawing.Point(211, 18);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(85, 20);
             this.label12.TabIndex = 12;
@@ -638,7 +640,7 @@
             // 
             this.label11.BackColor = System.Drawing.SystemColors.Control;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(77, 19);
+            this.label11.Location = new System.Drawing.Point(77, 18);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(85, 20);
             this.label11.TabIndex = 11;
@@ -653,9 +655,9 @@
             this.panel3.Controls.Add(this.btnFollow);
             this.panel3.Controls.Add(this.btnShareArticle);
             this.panel3.Controls.Add(this.btnLikeArticle);
-            this.panel3.Location = new System.Drawing.Point(44, 56);
+            this.panel3.Location = new System.Drawing.Point(44, 50);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(419, 55);
+            this.panel3.Size = new System.Drawing.Size(419, 64);
             this.panel3.TabIndex = 1;
             // 
             // label14
@@ -670,9 +672,9 @@
             // 
             // btnReview
             // 
-            this.btnReview.Location = new System.Drawing.Point(9, 48);
+            this.btnReview.Location = new System.Drawing.Point(32, 39);
             this.btnReview.Name = "btnReview";
-            this.btnReview.Size = new System.Drawing.Size(97, 24);
+            this.btnReview.Size = new System.Drawing.Size(86, 24);
             this.btnReview.TabIndex = 4;
             this.btnReview.Text = "Danh Gia";
             this.btnReview.UseVisualStyleBackColor = true;
@@ -680,7 +682,7 @@
             // 
             // btnLikeFanPage
             // 
-            this.btnLikeFanPage.Location = new System.Drawing.Point(166, 18);
+            this.btnLikeFanPage.Location = new System.Drawing.Point(166, 16);
             this.btnLikeFanPage.Name = "btnLikeFanPage";
             this.btnLikeFanPage.Size = new System.Drawing.Size(86, 24);
             this.btnLikeFanPage.TabIndex = 3;
@@ -690,7 +692,7 @@
             // 
             // btnFollow
             // 
-            this.btnFollow.Location = new System.Drawing.Point(288, 18);
+            this.btnFollow.Location = new System.Drawing.Point(288, 16);
             this.btnFollow.Name = "btnFollow";
             this.btnFollow.Size = new System.Drawing.Size(85, 24);
             this.btnFollow.TabIndex = 2;
@@ -700,9 +702,9 @@
             // 
             // btnShareArticle
             // 
-            this.btnShareArticle.Location = new System.Drawing.Point(215, 48);
+            this.btnShareArticle.Location = new System.Drawing.Point(166, 39);
             this.btnShareArticle.Name = "btnShareArticle";
-            this.btnShareArticle.Size = new System.Drawing.Size(97, 24);
+            this.btnShareArticle.Size = new System.Drawing.Size(86, 24);
             this.btnShareArticle.TabIndex = 1;
             this.btnShareArticle.Text = "Share Bai";
             this.btnShareArticle.UseVisualStyleBackColor = true;
@@ -710,7 +712,7 @@
             // 
             // btnLikeArticle
             // 
-            this.btnLikeArticle.Location = new System.Drawing.Point(32, 18);
+            this.btnLikeArticle.Location = new System.Drawing.Point(32, 16);
             this.btnLikeArticle.Name = "btnLikeArticle";
             this.btnLikeArticle.Size = new System.Drawing.Size(86, 24);
             this.btnLikeArticle.TabIndex = 0;
@@ -774,6 +776,16 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // colAccount
+            // 
+            this.colAccount.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.colAccount.HeaderText = "Tài khoản";
+            this.colAccount.Items.AddRange(new object[] {
+            "Facebook",
+            "Instagram"});
+            this.colAccount.Name = "colAccount";
+            this.colAccount.Width = 75;
+            // 
             // colUser
             // 
             this.colUser.HeaderText = "Tên";
@@ -786,24 +798,25 @@
             // 
             this.colPass.HeaderText = "Mật khẩu";
             this.colPass.Name = "colPass";
+            this.colPass.Width = 80;
             // 
             // colEnable
             // 
             this.colEnable.HeaderText = "Làm việc";
             this.colEnable.Name = "colEnable";
-            this.colEnable.Width = 70;
+            this.colEnable.Width = 50;
             // 
             // colJobCount
             // 
             this.colJobCount.HeaderText = "Số lượt GoLike";
             this.colJobCount.Name = "colJobCount";
-            this.colJobCount.Width = 70;
+            this.colJobCount.Width = 55;
             // 
             // colFaceCount
             // 
-            this.colFaceCount.HeaderText = "Số lượt Face";
+            this.colFaceCount.HeaderText = "Số lượt FB/In";
             this.colFaceCount.Name = "colFaceCount";
-            this.colFaceCount.Width = 70;
+            this.colFaceCount.Width = 65;
             // 
             // frmMain
             // 
@@ -900,6 +913,7 @@
         private System.Windows.Forms.Label lblJobSuccess;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.DataGridViewComboBoxColumn colAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPass;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colEnable;

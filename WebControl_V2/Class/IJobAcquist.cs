@@ -11,5 +11,29 @@ namespace WebControl_V2.Class
     {
         void DoJob(bqService service);
         void Exit();
+
+        bool LikeArticel
+        {
+            set;get; 
+        }
+        bool LikePage
+        {
+            set;
+            get; 
+        }
+        bool FollowPage
+        {
+            set;
+            get; 
+        }
+        CLinkAccount LinkAccount
+        {
+            set;
+            get; 
+        }
+        IUpdateInterface UpdateGUI
+        {
+            set;
+        }
     }
 }

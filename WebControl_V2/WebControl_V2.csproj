@@ -63,11 +63,15 @@
   <ItemGroup>
     <Compile Include="Class\bqChromeService.cs" />
     <Compile Include="Class\bqService.cs" />
+    <Compile Include="Class\CEventLog.cs" />
     <Compile Include="Class\CGlobal.cs" />
     <Compile Include="Class\CGoLike.cs" />
+    <Compile Include="Class\CGoLikeInst.cs" />
     <Compile Include="Class\CLinkAccount.cs" />
+    <Compile Include="Class\CLogReport.cs" />
     <Compile Include="Class\CUserAccount.cs" />
     <Compile Include="Class\IJobAcquist.cs" />
+    <Compile Include="Class\ILogFile.cs" />
     <Compile Include="Class\IUpdateInterface.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>

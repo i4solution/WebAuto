@@ -23,7 +23,7 @@ namespace WebControl_V2
     {
         ArrayList jobLoad = new ArrayList();
         bqService test;
-        CGoLike goLike;
+        IJobAcquist goLike;
         int timeCountDown = 0;
         string currentProfile = "";
         public frmMain()
@@ -70,7 +70,12 @@ namespace WebControl_V2
                             gridUser.Rows.Clear();
                             foreach (CLinkAccount ac in CGlobal.user.linkAccount.Values)
                             {
-                                gridUser.Rows.Add(new object[] { ac.User, ac.Password, ac.EnableJob, ac.JobCount.ToString(), ac.JobCountFB.ToString() });
+                                string t = "";
+                                if (ac.Type == "facebook")
+                                    t = "Facebook";
+                                else
+                                    t = ac.Type;
+                                gridUser.Rows.Add(new object[] { t, ac.User, ac.Password, ac.EnableJob, ac.JobCount.ToString(), ac.JobCountFB.ToString() });
                             }
                         }
                         //btnDefaultProfile.Enabled = true;
@@ -193,16 +198,20 @@ namespace WebControl_V2
                     {
                         lblCountDown.Text = value;
                     }
-                    else if (id == "facebook")
+                    else if (id.ToLower() == "facebook")
                     {
-                        lblFaceAccount.Text = "Tai khoan Face: " + value;
+                        lblFaceAccount.Text = "Tai khoan Facebook: " + value;
+                    }
+                    else if (id.ToLower() == "instagram")
+                    {
+                        lblFaceAccount.Text = "Tai khoan Instagram: " + value;
                     }
                 });
             }
         }
         void gridUser_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (gridUser.Columns[e.ColumnIndex].Index == 1)
+            if (gridUser.Columns[e.ColumnIndex].Name == "colPass")
             {
                 gridUser.Rows[e.RowIndex].Tag = e.Value;
                 e.Value = new String('\u25CF', e.Value.ToString().Length);
@@ -211,7 +220,7 @@ namespace WebControl_V2
 
         void gridUser_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (gridUser.CurrentCell.ColumnIndex == 1)//select target column
+            if (gridUser.CurrentCell.OwningColumn.Name == "colPass")//select target column
             {
                 TextBox textBox = e.Control as TextBox;
                 if (textBox != null)
@@ -290,8 +299,8 @@ namespace WebControl_V2
                     }
                     if ((bool)(r.Cells["colEnable"].Value) == true)
                     {
-                        CGlobal.user.ReadJobCount("facebook", r.Cells["colUser"].Value.ToString());
-                        CGlobal.user.ReadJobCountFB("facebook", r.Cells["colUser"].Value.ToString());
+                        CGlobal.user.ReadJobCount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString());
+                        CGlobal.user.ReadJobCountFB(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString());
                         if (r.Cells["colJobCount"].Value.ToString().Contains("/"))
                         {
                             r.Cells["colJobCount"].Value = CGlobal.user.ReadJobCount("facebook", r.Cells["colUser"].Value.ToString());
@@ -300,18 +309,18 @@ namespace WebControl_V2
                         {
                             r.Cells["colFaceCount"].Value = CGlobal.user.ReadJobCountFB("facebook", r.Cells["colUser"].Value.ToString());
                         }
-                        if (CGlobal.user.addLinkAccount("facebook", r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value)) == false)
+                        if (CGlobal.user.addLinkAccount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value)) == false)
                         {
-                            CGlobal.user.ResetJobCount("facebook", r.Cells["colUser"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()));
-                            CGlobal.user.ResetJobCountFB("facebook", r.Cells["colUser"].Value.ToString(), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()));
-                            CGlobal.user.ResetJobEnable("facebook", r.Cells["colUser"].Value.ToString(), true);
+                            CGlobal.user.ResetJobCount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()));
+                            CGlobal.user.ResetJobCountFB(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()));
+                            CGlobal.user.ResetJobEnable(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), true);
                         }
                     }
                     else
                     {
-                        if (CGlobal.user.addLinkAccount("facebook", r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value)) == false)
+                        if (CGlobal.user.addLinkAccount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value)) == false)
                         {
-                            CGlobal.user.ResetJobEnable("facebook", r.Cells["colUser"].Value.ToString(), false);
+                            CGlobal.user.ResetJobEnable(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), false);
                         }
                     }
                 }
@@ -349,6 +358,12 @@ namespace WebControl_V2
                     test.Start();
 
                     //test.GotoURL("https://app.golike.net");
+                    if (CGlobal.user.linkAccount[id].Type == "Facebook")
+                    {                        
+                        goLike = new CGoLike();                       
+                    }
+                    else if (CGlobal.user.linkAccount[id].Type == "Instagram")
+                        goLike = new CGoLikeInst();
 
                     goLike.LinkAccount = CGlobal.user.linkAccount[id];
                     goLike.UpdateGUI = this;
@@ -419,7 +434,7 @@ namespace WebControl_V2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            gridUser.Rows.Add(new object[] { "-1", "asyn", "0" });
+            gridUser.Rows.Add(new object[] { "Facebook", "-1", "asyn", false, "0", "0" });
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -433,14 +448,16 @@ namespace WebControl_V2
             CUserAccount user = new CUserAccount(txtUserName.Text, txtPassword.Text);
             foreach (DataGridViewRow r in gridUser.Rows)
             {
-                if (r.Cells[0].Value != null && r.Cells[1].Value != null && r.Cells[2].Value != null && r.Cells[4].Value != null)
+                if (r.Cells["colUser"].Value != null && r.Cells["colPass"].Value != null && r.Cells["colJobCount"].Value != null && r.Cells["colFaceCount"].Value != null)
                 {
-                    if (r.Cells[0].Value.ToString() == "-1" || r.Cells[2].Value.ToString() == "0" || r.Cells[4].Value.ToString() == "0")
+                    int job = 0;
+                    if (r.Cells["colUser"].Value.ToString() == "-1" || r.Cells["colUser"].Value.ToString() == "" || r.Cells["colPass"].Value.ToString() == "" ||
+                        Int32.TryParse(r.Cells["colJobCount"].Value.ToString(), out job) == false || Int32.TryParse(r.Cells["colFaceCount"].Value.ToString(), out job) == false)
                     {
                         MessageBox.Show(this, "Hay kiem tra lai tai khoan FB", "Web Auto - Sai du lieu", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
-                    user.addLinkAccount("facebook", r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value));
+                    user.addLinkAccount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value));
                 }
             }
             try
@@ -513,7 +530,12 @@ namespace WebControl_V2
                         gridUser.Rows.Clear();
                         foreach (CLinkAccount ac in CGlobal.user.linkAccount.Values)
                         {
-                            gridUser.Rows.Add(new object[] { ac.User, ac.Password, ac.EnableJob, ac.JobCount.ToString(), ac.JobCountFB.ToString() });
+                            string t = "";
+                            if (ac.Type == "facebook")
+                                t = "Facebook";
+                            else
+                                t = ac.Type;
+                            gridUser.Rows.Add(new object[] {t, ac.User, ac.Password, ac.EnableJob, ac.JobCount.ToString(), ac.JobCountFB.ToString() });
                         }
                     }
                     currentProfile = file;
