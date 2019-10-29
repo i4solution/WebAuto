@@ -31,6 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.lblJobFault = new System.Windows.Forms.Label();
+            this.lblJobSuccess = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.lblCountDown = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -64,12 +69,9 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.gridUser = new System.Windows.Forms.DataGridView();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colJobCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEnable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.lblFaceAccount = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chkEnableRedo = new System.Windows.Forms.CheckBox();
             this.lblRedo = new System.Windows.Forms.Label();
             this.lblCheck = new System.Windows.Forms.Label();
             this.lblMoney = new System.Windows.Forms.Label();
@@ -89,7 +91,11 @@
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.chkEnableRedo = new System.Windows.Forms.CheckBox();
+            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEnable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colJobCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFaceCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridJobReport)).BeginInit();
             this.panel4.SuspendLayout();
@@ -103,6 +109,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label21);
+            this.panel1.Controls.Add(this.label20);
+            this.panel1.Controls.Add(this.label19);
+            this.panel1.Controls.Add(this.lblJobFault);
+            this.panel1.Controls.Add(this.lblJobSuccess);
             this.panel1.Controls.Add(this.label15);
             this.panel1.Controls.Add(this.lblCountDown);
             this.panel1.Controls.Add(this.label10);
@@ -117,16 +128,66 @@
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.gridJob);
-            this.panel1.Location = new System.Drawing.Point(88, 1);
+            this.panel1.Location = new System.Drawing.Point(7, 1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(840, 475);
+            this.panel1.Size = new System.Drawing.Size(917, 482);
             this.panel1.TabIndex = 0;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.label21.Location = new System.Drawing.Point(298, 253);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(49, 13);
+            this.label21.TabIndex = 21;
+            this.label21.Text = "Thất bại:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.label20.Location = new System.Drawing.Point(183, 253);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(68, 13);
+            this.label20.TabIndex = 20;
+            this.label20.Text = "Thành công:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.label19.Location = new System.Drawing.Point(279, 252);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(9, 13);
+            this.label19.TabIndex = 19;
+            this.label19.Text = "|";
+            // 
+            // lblJobFault
+            // 
+            this.lblJobFault.AutoSize = true;
+            this.lblJobFault.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.lblJobFault.Location = new System.Drawing.Point(349, 253);
+            this.lblJobFault.Name = "lblJobFault";
+            this.lblJobFault.Size = new System.Drawing.Size(13, 13);
+            this.lblJobFault.TabIndex = 18;
+            this.lblJobFault.Text = "0";
+            // 
+            // lblJobSuccess
+            // 
+            this.lblJobSuccess.AutoSize = true;
+            this.lblJobSuccess.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.lblJobSuccess.Location = new System.Drawing.Point(250, 253);
+            this.lblJobSuccess.Name = "lblJobSuccess";
+            this.lblJobSuccess.Size = new System.Drawing.Size(13, 13);
+            this.lblJobSuccess.TabIndex = 17;
+            this.lblJobSuccess.Text = "0";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.SystemColors.Control;
-            this.label15.Location = new System.Drawing.Point(735, 430);
+            this.label15.Location = new System.Drawing.Point(821, 449);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(89, 13);
             this.label15.TabIndex = 16;
@@ -136,7 +197,7 @@
             // 
             this.lblCountDown.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblCountDown.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblCountDown.Location = new System.Drawing.Point(736, 445);
+            this.lblCountDown.Location = new System.Drawing.Point(822, 464);
             this.lblCountDown.Name = "lblCountDown";
             this.lblCountDown.Size = new System.Drawing.Size(88, 13);
             this.lblCountDown.TabIndex = 15;
@@ -150,7 +211,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(392, 13);
             this.label10.TabIndex = 14;
-            this.label10.Text = "Danh sách công việc đã xong:";
+            this.label10.Text = "Danh sách công việc đã xong >>>>";
             // 
             // label9
             // 
@@ -208,7 +269,7 @@
             this.lblProgress.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProgress.ForeColor = System.Drawing.Color.Black;
-            this.lblProgress.Location = new System.Drawing.Point(398, 442);
+            this.lblProgress.Location = new System.Drawing.Point(398, 461);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(15, 16);
             this.lblProgress.TabIndex = 11;
@@ -251,7 +312,7 @@
             // btnRun
             // 
             this.btnRun.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRun.Location = new System.Drawing.Point(741, 5);
+            this.btnRun.Location = new System.Drawing.Point(820, 5);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(88, 32);
             this.btnRun.TabIndex = 6;
@@ -273,14 +334,14 @@
             this.panel4.Controls.Add(this.lblFaceAccount);
             this.panel4.Location = new System.Drawing.Point(402, 159);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(429, 249);
+            this.panel4.Size = new System.Drawing.Size(507, 283);
             this.panel4.TabIndex = 5;
             // 
             // btnDefaultProfile
             // 
             this.btnDefaultProfile.Enabled = false;
             this.btnDefaultProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDefaultProfile.Location = new System.Drawing.Point(1, 211);
+            this.btnDefaultProfile.Location = new System.Drawing.Point(1, 243);
             this.btnDefaultProfile.Name = "btnDefaultProfile";
             this.btnDefaultProfile.Size = new System.Drawing.Size(110, 33);
             this.btnDefaultProfile.TabIndex = 12;
@@ -295,9 +356,9 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.txtFBDelay1);
-            this.groupBox2.Location = new System.Drawing.Point(215, 130);
+            this.groupBox2.Location = new System.Drawing.Point(251, 162);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(207, 75);
+            this.groupBox2.Size = new System.Drawing.Size(251, 75);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thời gian đợi FB";
@@ -358,9 +419,9 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtGolikeDelay1);
-            this.groupBox1.Location = new System.Drawing.Point(2, 130);
+            this.groupBox1.Location = new System.Drawing.Point(2, 162);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(206, 75);
+            this.groupBox1.Size = new System.Drawing.Size(242, 75);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thời gian đợi GOLIKE";
@@ -369,17 +430,17 @@
             // 
             this.label17.AutoSize = true;
             this.label17.BackColor = System.Drawing.SystemColors.Control;
-            this.label17.Location = new System.Drawing.Point(135, 22);
+            this.label17.Location = new System.Drawing.Point(134, 22);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(58, 13);
+            this.label17.Size = new System.Drawing.Size(64, 13);
             this.label17.TabIndex = 14;
-            this.label17.Text = "(100-1800)";
+            this.label17.Text = "(1000-5000)";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(118, 22);
+            this.label2.Location = new System.Drawing.Point(117, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(13, 13);
             this.label2.TabIndex = 13;
@@ -417,7 +478,7 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(327, 211);
+            this.btnSave.Location = new System.Drawing.Point(405, 243);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(97, 33);
             this.btnSave.TabIndex = 8;
@@ -428,7 +489,7 @@
             // btnLoad
             // 
             this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoad.Location = new System.Drawing.Point(224, 211);
+            this.btnLoad.Location = new System.Drawing.Point(302, 243);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(97, 33);
             this.btnLoad.TabIndex = 7;
@@ -439,9 +500,9 @@
             // btnRemove
             // 
             this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.Location = new System.Drawing.Point(339, 60);
+            this.btnRemove.Location = new System.Drawing.Point(427, 61);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(83, 31);
+            this.btnRemove.Size = new System.Drawing.Size(77, 31);
             this.btnRemove.TabIndex = 6;
             this.btnRemove.Text = "Xóa";
             this.btnRemove.UseVisualStyleBackColor = true;
@@ -450,9 +511,9 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(339, 18);
+            this.btnAdd.Location = new System.Drawing.Point(427, 19);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(83, 31);
+            this.btnAdd.Size = new System.Drawing.Size(77, 31);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -464,12 +525,13 @@
             this.gridUser.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.gridUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewImageColumn1,
-            this.dataGridViewTextBoxColumn1,
+            this.colUser,
+            this.colPass,
+            this.colEnable,
             this.colJobCount,
-            this.colEnable});
+            this.colFaceCount});
             this.gridUser.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.gridUser.Location = new System.Drawing.Point(1, 18);
+            this.gridUser.Location = new System.Drawing.Point(1, 20);
             this.gridUser.MultiSelect = false;
             this.gridUser.Name = "gridUser";
             this.gridUser.RowHeadersVisible = false;
@@ -477,41 +539,17 @@
             this.gridUser.RowTemplate.Height = 35;
             this.gridUser.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gridUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridUser.Size = new System.Drawing.Size(334, 106);
+            this.gridUser.Size = new System.Drawing.Size(425, 135);
             this.gridUser.TabIndex = 3;
-            // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.HeaderText = "Ten";
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewImageColumn1.Width = 90;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Mat khau";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // colJobCount
-            // 
-            this.colJobCount.HeaderText = "So luot";
-            this.colJobCount.Name = "colJobCount";
-            this.colJobCount.Width = 70;
-            // 
-            // colEnable
-            // 
-            this.colEnable.HeaderText = "Làm việc";
-            this.colEnable.Name = "colEnable";
-            this.colEnable.Width = 70;
             // 
             // lblFaceAccount
             // 
             this.lblFaceAccount.AutoSize = true;
             this.lblFaceAccount.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblFaceAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFaceAccount.Location = new System.Drawing.Point(1, -1);
             this.lblFaceAccount.Name = "lblFaceAccount";
-            this.lblFaceAccount.Size = new System.Drawing.Size(82, 13);
+            this.lblFaceAccount.Size = new System.Drawing.Size(110, 18);
             this.lblFaceAccount.TabIndex = 4;
             this.lblFaceAccount.Text = "Tai khoan Face";
             // 
@@ -529,14 +567,26 @@
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(402, 41);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(429, 119);
+            this.panel2.Size = new System.Drawing.Size(507, 119);
             this.panel2.TabIndex = 2;
+            // 
+            // chkEnableRedo
+            // 
+            this.chkEnableRedo.AutoSize = true;
+            this.chkEnableRedo.Checked = true;
+            this.chkEnableRedo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkEnableRedo.Location = new System.Drawing.Point(331, 3);
+            this.chkEnableRedo.Name = "chkEnableRedo";
+            this.chkEnableRedo.Size = new System.Drawing.Size(67, 17);
+            this.chkEnableRedo.TabIndex = 17;
+            this.chkEnableRedo.Text = "Tự động";
+            this.chkEnableRedo.UseVisualStyleBackColor = true;
             // 
             // lblRedo
             // 
             this.lblRedo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.lblRedo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRedo.Location = new System.Drawing.Point(293, 40);
+            this.lblRedo.Location = new System.Drawing.Point(332, 40);
             this.lblRedo.Name = "lblRedo";
             this.lblRedo.Size = new System.Drawing.Size(85, 20);
             this.lblRedo.TabIndex = 16;
@@ -546,7 +596,7 @@
             // 
             this.lblCheck.BackColor = System.Drawing.Color.Lime;
             this.lblCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheck.Location = new System.Drawing.Point(172, 40);
+            this.lblCheck.Location = new System.Drawing.Point(211, 40);
             this.lblCheck.Name = "lblCheck";
             this.lblCheck.Size = new System.Drawing.Size(85, 20);
             this.lblCheck.TabIndex = 15;
@@ -556,7 +606,7 @@
             // 
             this.lblMoney.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.lblMoney.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoney.Location = new System.Drawing.Point(38, 40);
+            this.lblMoney.Location = new System.Drawing.Point(77, 40);
             this.lblMoney.Name = "lblMoney";
             this.lblMoney.Size = new System.Drawing.Size(85, 20);
             this.lblMoney.TabIndex = 14;
@@ -566,7 +616,7 @@
             // 
             this.label13.BackColor = System.Drawing.SystemColors.Control;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(293, 19);
+            this.label13.Location = new System.Drawing.Point(332, 19);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(85, 20);
             this.label13.TabIndex = 13;
@@ -577,7 +627,7 @@
             // 
             this.label12.BackColor = System.Drawing.SystemColors.Control;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(172, 19);
+            this.label12.Location = new System.Drawing.Point(211, 19);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(85, 20);
             this.label12.TabIndex = 12;
@@ -588,7 +638,7 @@
             // 
             this.label11.BackColor = System.Drawing.SystemColors.Control;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(38, 19);
+            this.label11.Location = new System.Drawing.Point(77, 19);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(85, 20);
             this.label11.TabIndex = 11;
@@ -603,7 +653,7 @@
             this.panel3.Controls.Add(this.btnFollow);
             this.panel3.Controls.Add(this.btnShareArticle);
             this.panel3.Controls.Add(this.btnLikeArticle);
-            this.panel3.Location = new System.Drawing.Point(5, 56);
+            this.panel3.Location = new System.Drawing.Point(44, 56);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(419, 55);
             this.panel3.TabIndex = 1;
@@ -724,27 +774,47 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // chkEnableRedo
+            // colUser
             // 
-            this.chkEnableRedo.AutoSize = true;
-            this.chkEnableRedo.Checked = true;
-            this.chkEnableRedo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkEnableRedo.Location = new System.Drawing.Point(293, 3);
-            this.chkEnableRedo.Name = "chkEnableRedo";
-            this.chkEnableRedo.Size = new System.Drawing.Size(67, 17);
-            this.chkEnableRedo.TabIndex = 17;
-            this.chkEnableRedo.Text = "Tự động";
-            this.chkEnableRedo.UseVisualStyleBackColor = true;
+            this.colUser.HeaderText = "Tên";
+            this.colUser.Name = "colUser";
+            this.colUser.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colUser.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colUser.Width = 90;
+            // 
+            // colPass
+            // 
+            this.colPass.HeaderText = "Mật khẩu";
+            this.colPass.Name = "colPass";
+            // 
+            // colEnable
+            // 
+            this.colEnable.HeaderText = "Làm việc";
+            this.colEnable.Name = "colEnable";
+            this.colEnable.Width = 70;
+            // 
+            // colJobCount
+            // 
+            this.colJobCount.HeaderText = "Số lượt GoLike";
+            this.colJobCount.Name = "colJobCount";
+            this.colJobCount.Width = 70;
+            // 
+            // colFaceCount
+            // 
+            this.colFaceCount.HeaderText = "Số lượt Face";
+            this.colFaceCount.Name = "colFaceCount";
+            this.colFaceCount.Width = 70;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(929, 475);
+            this.ClientSize = new System.Drawing.Size(929, 490);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Text = "WEB AUTO Ver 1.4.2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
@@ -819,16 +889,22 @@
         private System.Windows.Forms.Label lblCountDown;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewImageColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colJobCount;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colEnable;
         private System.Windows.Forms.Button btnDefaultProfile;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.CheckBox chkEnableRedo;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label lblJobFault;
+        private System.Windows.Forms.Label lblJobSuccess;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPass;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colEnable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colJobCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFaceCount;
     }
 }
 

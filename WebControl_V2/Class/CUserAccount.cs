@@ -19,12 +19,14 @@ namespace WebControl_V2.Class
         bool enableRedo = true;
         public Dictionary<string, CLinkAccount> linkAccount;
         string _obj;
+        Random random;
         public CUserAccount(string user, string pass)
         {
             username = user;
             password = pass;
             linkAccount = new Dictionary<string, CLinkAccount>();
             enableRedo = true;
+            random = new Random();
         }
         public string User
         {
@@ -42,7 +44,11 @@ namespace WebControl_V2.Class
         public int GoLikeDelay1
         {
             set { lickGoLikeDelay1 = value; }
-            get { return lickGoLikeDelay1 + ((new Random().Next(1, 10)) * 200); }
+            get {
+                if (random == null)
+                    random = new Random();
+                return lickGoLikeDelay1 + (random.Next(1, 5)) * 1000; 
+            }
 
         }
         public int InstricGoLikeDelay1
@@ -56,18 +62,22 @@ namespace WebControl_V2.Class
         public int FBDelay1
         {
             set { lickFBDelay1 = value; }
-            get { return lickFBDelay1 + ((new Random().Next(1, 10)) * 100); }
+            get { 
+                if (random == null)
+                    random = new Random();
+                return lickFBDelay1 + (random.Next(1, 10)) * 100; 
+            }
         }
         public bool EnableRedoJob
         {
             get { return enableRedo; }
             set { enableRedo = value; }
         }
-        public bool addLinkAccount (string type, string user, string pass, int count, bool enable)
+        public bool addLinkAccount (string type, string user, string pass, int count, int countFB, bool enable)
         {
             if (linkAccount.ContainsKey(type + "$" + user) == false)
             {
-                linkAccount.Add(type + "$" + user, new CLinkAccount(type, user, pass, count, enable));
+                linkAccount.Add(type + "$" + user, new CLinkAccount(type, user, pass, count, countFB, enable));
                 return true;
             }
             return false;
@@ -85,6 +95,23 @@ namespace WebControl_V2.Class
             if (linkAccount.ContainsKey(type + "$" + user) == true)
             {
                 linkAccount[type + "$" + user].JobCount = job;
+                return true;
+            }
+            return false;
+        }
+        public int ReadJobCountFB(string type, string user)
+        {
+            if (linkAccount.ContainsKey(type + "$" + user) == true)
+            {
+                return linkAccount[type + "$" + user].JobCountFB;
+            }
+            return -1;
+        }
+        public bool ResetJobCountFB(string type, string user, int job)
+        {
+            if (linkAccount.ContainsKey(type + "$" + user) == true)
+            {
+                linkAccount[type + "$" + user].JobCountFB = job;
                 return true;
             }
             return false;
