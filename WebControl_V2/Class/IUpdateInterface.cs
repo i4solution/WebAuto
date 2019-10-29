@@ -17,5 +17,6 @@ namespace WebControl_V2.Class
         void UpdateAccount(string id, string value);
 
         void UpdateAccountJob(string id, string settingJobCount, string jobCount);
+        void UpdateAccountJobFB(string id, string settingJobCount, string jobCount);
     }
 }
