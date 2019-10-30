@@ -290,7 +290,22 @@ namespace WebControl_V2.Class
                             
                             if (service.TryFindElement(By.CssSelector("div.col-7.pr-3"), out selectAccount))
                             {
-                                selectAccount.Click();
+                                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                js.ExecuteScript("arguments[0].scrollIntoView(true);", selectAccount);
+                                bqInterface.UpdateAccount("Timer", "1000");
+                                System.Threading.Thread.Sleep(1000);
+                                try
+                                {
+                                    selectAccount.Click();
+                                }
+                                catch (Exception p)
+                                {
+                                    bqInterface.UpdateProgress("Co van de khi lam lai Job ...");
+                                    CEventLog.Log.WriteEntry(linkAccount.User, "Cong viec can lam lai co su co.");
+                                    bqInterface.UpdateAccount("Timer", "2500");
+                                    System.Threading.Thread.Sleep(2500);
+                                    break;
+                                }
                                 bqInterface.UpdateAccount("Timer", "1000");
                                 System.Threading.Thread.Sleep(1000);
 
@@ -314,7 +329,6 @@ namespace WebControl_V2.Class
                                 {
                                     try
                                     {
-                                        IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                                         js.ExecuteScript("arguments[0].scrollIntoView(true);", lstAccount[accountCount]);
 
                                         lstAccount[accountCount].Click();
@@ -338,7 +352,7 @@ namespace WebControl_V2.Class
 
                                                     js = (IJavaScriptExecutor)driver;
                                                     js.ExecuteScript("arguments[0].scrollIntoView(true);", cardRedo[j + offSet]);
-                                                    if (ab.Count - j > 3)
+                                                    if (ab.Count - j > 3 && offSet >= -1)
                                                         offSet = -1;
                                                     //js.ExecuteScript("javascript:window.scrollBy(" + ab[j].Location.X.ToString() + "," + ab[j].Location.Y.ToString() + ")");
 

@@ -25,6 +25,7 @@ namespace WebControl_V2
         bqService test;
         IJobAcquist goLike;
         int timeCountDown = 0;
+        Task t1 = null;
         string currentProfile = "";
         public frmMain()
         {            
@@ -262,7 +263,11 @@ namespace WebControl_V2
                 CGlobal._pauseJob = false;
                 btnRun.Text = "Tạm ngưng";
                 UpdateProgress("");
-                return;
+                if (t1 != null)
+                {
+                    if (t1.Status == TaskStatus.Running)
+                        return;
+                }
             }
             if (txtUserName.Text == "" || txtPassword.Text == "")
             {
@@ -386,7 +391,7 @@ namespace WebControl_V2
                     timer1.Stop();
                 });
             };
-            Task t1 = new Task(action, "jobQB#1");
+            t1 = new Task(action, "jobQB#1");
             t1.Start();            
         }
 
