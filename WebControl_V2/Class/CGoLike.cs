@@ -339,7 +339,7 @@ namespace WebControl_V2.Class
                                                     js = (IJavaScriptExecutor)driver;
                                                     js.ExecuteScript("arguments[0].scrollIntoView(true);", cardRedo[j + offSet]);
                                                     if (ab.Count - j > 3)
-                                                        offSet = 2;
+                                                        offSet = -1;
                                                     //js.ExecuteScript("javascript:window.scrollBy(" + ab[j].Location.X.ToString() + "," + ab[j].Location.Y.ToString() + ")");
 
                                                     System.Threading.Thread.Sleep(1000);
@@ -386,8 +386,8 @@ namespace WebControl_V2.Class
                                                 }
                                                 catch (Exception s)
                                                 {
-                                                    offSet++;
-                                                    if (offSet >= 5)
+                                                    offSet--;
+                                                    if (offSet <= -5)
                                                         break;
                                                 }
                                             }

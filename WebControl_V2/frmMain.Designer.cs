@@ -816,7 +816,7 @@
             // 
             this.colFaceCount.HeaderText = "Số lượt FB/In";
             this.colFaceCount.Name = "colFaceCount";
-            this.colFaceCount.Width = 65;
+            this.colFaceCount.Width = 50;
             // 
             // frmMain
             // 
