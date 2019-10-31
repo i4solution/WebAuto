@@ -169,7 +169,10 @@ namespace WebControl_V2.Class
             delay = CGlobal.user.GoLikeDelay1;
             bqInterface.UpdateAccount("Timer", delay.ToString());
             System.Threading.Thread.Sleep(delay);
-            
+
+            //String zoomInJS = "document.body.style.transform='scale(0.8)'";
+            //IJavaScriptExecutor jsZ = (IJavaScriptExecutor)driver;
+            //jsZ.ExecuteScript(zoomInJS);
 
             System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> ab = driver.FindElements(By.CssSelector("input.form-control"));
             if (ab.Count > 1)
@@ -291,7 +294,7 @@ namespace WebControl_V2.Class
                             if (service.TryFindElement(By.CssSelector("div.col-7.pr-3"), out selectAccount))
                             {
                                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                                js.ExecuteScript("arguments[0].scrollIntoView(true);", selectAccount);
+                                js.ExecuteScript("arguments[0].scrollIntoView(false);", selectAccount);
                                 bqInterface.UpdateAccount("Timer", "1000");
                                 System.Threading.Thread.Sleep(1000);
                                 try
@@ -469,8 +472,19 @@ namespace WebControl_V2.Class
                     
                     //btn btn-xs btn-outline-light
                     //Click Facebook channel
+                    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                     ab = driver.FindElements(By.CssSelector("div.btn.btn-xs.btn-outline-light"));
-                    ab[1].Click();
+                    if (ab.Count >= 1)
+                    {                        
+                        js.ExecuteScript("arguments[0].scrollIntoView(true);", ab[1]);
+
+                        ab[1].Click();
+                    }
+                    else
+                    {
+                        bqInterface.UpdateProgress("Kiem tra lai tai khoan GoLike");
+                        break;
+                    }
                     delay = CGlobal.user.GoLikeDelay1;
                     bqInterface.UpdateAccount("Timer", delay.ToString());
                     System.Threading.Thread.Sleep(delay);
@@ -492,6 +506,8 @@ namespace WebControl_V2.Class
                     IWebElement selectAccount = null;
                     if (service.TryFindElement(By.CssSelector("div.col-7.pr-3"), out selectAccount))
                     {
+                        js.ExecuteScript("arguments[0].scrollIntoView(false);", selectAccount);
+
                         selectAccount.Click();
                         bqInterface.UpdateAccount("Timer", "4000");
                         System.Threading.Thread.Sleep(4000);
@@ -507,10 +523,11 @@ namespace WebControl_V2.Class
                                 string name = filterAccount[h].FindElement(By.TagName("span")).Text;
                                 if (name.Equals(faceName))
                                 {
+                                    //js.ExecuteScript("arguments[0].scrollIntoView(true);", filterAccount[h]);
                                     match = true;
-                                    filterAccount[h].Click();
-                                    bqInterface.UpdateAccount("Timer", "2500");
-                                    System.Threading.Thread.Sleep(2500);
+                                    //filterAccount[h].Click();
+                                    //bqInterface.UpdateAccount("Timer", "2500");
+                                    //System.Threading.Thread.Sleep(2500);
                                     
                                     break;
                                 }
@@ -518,8 +535,52 @@ namespace WebControl_V2.Class
                             }
                             if (match == false)
                             {
-                                bqInterface.UpdateProgress("Kiem tra lai tai khoan facebook trong GoLike");
+                                bqInterface.UpdateProgress("Kiem tra lai tai khoan facebook trong GoLike (1)");
                                 break;
+                            }
+                            else
+                            {
+                                //div content Face
+                                //Selected: div.card.shadow-200.mt-1.bg-b100
+                                //Unselect: div.card.shadow-200.mt-1
+                                if (service.TryFindElement(By.CssSelector("div.card.shadow-200.mt-1.bg-b100"), out selectAccount))
+                                {
+                                    string name = selectAccount.FindElement(By.TagName("span")).Text;
+                                    if (name != faceName)
+                                    {
+                                        match = false;
+                                        filterAccount = driver.FindElements(By.CssSelector("div.card.shadow-200.mt-1"));
+                                        if (filterAccount.Count > 0)
+                                        {
+                                            for (int h = 0; h < filterAccount.Count; h++)
+                                            {
+                                                name = filterAccount[h].FindElement(By.TagName("span")).Text;
+                                                if (name.Equals(faceName))
+                                                {                                                    
+                                                    js.ExecuteScript("arguments[0].scrollIntoView(true);", filterAccount[(h >= 2) ? h - 2 : h]);
+
+                                                    OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                                    action = action.MoveToElement(filterAccount[h]);
+                                                    action = action.Click(filterAccount[h]);
+                                                    action.Build().Perform();
+
+                                                    match = true;
+                                                    //filterAccount[h].Click();
+                                                    bqInterface.UpdateAccount("Timer", "2500");
+                                                    System.Threading.Thread.Sleep(2500);
+                                                    break;
+                                                }
+
+                                            }
+                                            if (match == false)
+                                            {
+                                                bqInterface.UpdateProgress("Kiem tra lai tai khoan facebook trong GoLike (2)");
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                }
                             }
                         }
                     } 
@@ -567,6 +628,7 @@ namespace WebControl_V2.Class
                         bqInterface.UpdateProgress("Khong tim thay facebook trong GoLike ?");
                         break;
                     }
+
                     filterJob[1].Click();
                     bqInterface.UpdateAccount("Timer", "5000");
                     System.Threading.Thread.Sleep(5000);
@@ -1400,7 +1462,7 @@ namespace WebControl_V2.Class
                                     //button.btn.btn-block.px-0.bg-button-1
                                     if (service.TryFindElement(By.CssSelector("button.btn.btn-block.px-0.bg-button-1"), out error))
                                     {
-                                        IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                        //IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                                         js.ExecuteScript("arguments[0].scrollIntoView();", error);
 
                                         delay = CGlobal.user.GoLikeDelay1;
@@ -1492,7 +1554,7 @@ namespace WebControl_V2.Class
                                 //button.btn.btn-block.px-0.bg-button-1
                                 if (service.TryFindElement(By.CssSelector("button.btn.btn-block.px-0.bg-button-1"), out error))
                                 {
-                                    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                    //IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                                     js.ExecuteScript("arguments[0].scrollIntoView();", error);
 
                                     delay = CGlobal.user.GoLikeDelay1;

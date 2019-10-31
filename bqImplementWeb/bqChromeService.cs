@@ -12,7 +12,7 @@ namespace bqImplementWeb
     public class bqChromeService : bqService
     {
         public override void Initialize()
-        {
+        {         
             if (drivePath == "")
                 service = ChromeDriverService.CreateDefaultService(Environment.CurrentDirectory);
             else
@@ -26,6 +26,8 @@ namespace bqImplementWeb
             DriverOptions option = new ChromeOptions();
             ((ChromeOptions)option).AddArguments("chrome.switches", "--disable-extensions");
             ((ChromeOptions)option).AddArguments("--disable-notifications");
+            ((ChromeOptions)option).AddArguments("--disable-gpu");
+            //((ChromeOptions)option).AddArguments("--headless"); 
             ((ChromeOptions)option).LeaveBrowserRunning = true;
             ((ChromeOptions)option).PageLoadStrategy = PageLoadStrategy.Normal;
             driver = new RemoteWebDriver(service.ServiceUrl, option);
