@@ -44,6 +44,9 @@ namespace WebControl_V2
             btnLikeFanPage.BackColor = Color.YellowGreen;
             btnFollow.BackColor = Color.YellowGreen;
 
+            gridUser.Columns["colFaceCount"].Visible = chkLinkCondition.Checked;
+            gridUser.Columns["colMaxLink"].Visible = chkLinkCondition.Checked;
+
             currentProfile = Properties.Settings.Default.DefaultProfile;
             if (currentProfile != "")
             {
@@ -67,7 +70,9 @@ namespace WebControl_V2
                             txtPassword.Text = CGlobal.user.Password;
                             txtGolikeDelay1.Text = CGlobal.user.InstricGoLikeDelay1.ToString();
                             txtFBDelay1.Text = CGlobal.user.InstricFBDelay1.ToString();
+                            txtFaultLimit.Text = CGlobal.user.LimitFault.ToString();
                             chkEnableRedo.Checked = CGlobal.user.EnableRedoJob;
+                            chkLinkCondition.Checked = CGlobal.user.CheckLinkCondition;
                             gridUser.Rows.Clear();
                             foreach (CLinkAccount ac in CGlobal.user.linkAccount.Values)
                             {
@@ -76,7 +81,7 @@ namespace WebControl_V2
                                     t = "Facebook";
                                 else
                                     t = ac.Type;
-                                gridUser.Rows.Add(new object[] { t, ac.User, ac.Password, ac.EnableJob, ac.JobCount.ToString(), ac.JobCountFB.ToString() });
+                                gridUser.Rows.Add(new object[] { t, ac.User, ac.Password, ac.EnableJob, ac.JobCount.ToString(), ac.JobCountMax.ToString(), ac.JobCountFB.ToString(), ac.JobCountFBMax.ToString(), ac.AccountStatus });
                             }
                         }
                         //btnDefaultProfile.Enabled = true;
@@ -207,6 +212,31 @@ namespace WebControl_V2
                     {
                         lblFaceAccount.Text = "Tai khoan Instagram: " + value;
                     }
+                    else
+                    {
+                        string[] v = value.Split('#');
+                        foreach (DataGridViewRow r in gridUser.Rows)
+                        {
+                            if (v[0] == "Status")
+                            {
+                                if (r.Cells["colUser"].Value.ToString() == id &&
+                                    r.Cells["colAccount"].Value.ToString() == v[1])
+                                {
+                                    r.Cells["colAccountStatus"].Value = v[2];
+                                    //r.Cells["colEnable"].Value = false;
+                                }
+                            } 
+                            else if (v[0] == "Uncheck")
+                            {
+                                if (r.Cells["colUser"].Value.ToString() == id &&
+                                    r.Cells["colAccount"].Value.ToString() == v[1])
+                                {
+                                    r.Cells["colAccountStatus"].Value = v[2];
+                                    r.Cells["colEnable"].Value = false;
+                                }
+                            }
+                        }
+                    }
                 });
             }
         }
@@ -283,11 +313,13 @@ namespace WebControl_V2
             {
                 CGlobal.user.GoLikeDelay1 = Int32.Parse(txtGolikeDelay1.Text);
                 CGlobal.user.FBDelay1 = Int32.Parse(txtFBDelay1.Text);
+                CGlobal.user.LimitFault = Int32.Parse(txtFaultLimit.Text);
                 CGlobal.user.EnableRedoJob = chkEnableRedo.Checked;
+                CGlobal.user.CheckLinkCondition = chkLinkCondition.Checked;
             }
             catch (Exception ii)
             {
-                MessageBox.Show(this, "Hãy kiểm tra lại thời gian.", "Web Auto - Sai dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(this, "Hãy kiểm tra lại giá trị nhập.", "Web Auto - Sai dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
             
@@ -297,7 +329,8 @@ namespace WebControl_V2
                 {
                     int job = 0;
                     if (r.Cells["colUser"].Value.ToString() == "-1" || r.Cells["colUser"].Value.ToString() == "" || r.Cells["colPass"].Value.ToString() == "" ||
-                        Int32.TryParse(r.Cells["colJobCount"].Value.ToString(),out job) == false || Int32.TryParse(r.Cells["colFaceCount"].Value.ToString(), out job) == false)
+                        Int32.TryParse(r.Cells["colJobCount"].Value.ToString(),out job) == false || Int32.TryParse(r.Cells["colFaceCount"].Value.ToString(), out job) == false ||
+                        Int32.TryParse(r.Cells["colMaxGoLike"].Value.ToString(), out job) == false || Int32.TryParse(r.Cells["colMaxLink"].Value.ToString(), out job) == false)
                     {
                         MessageBox.Show(this, "Hay kiem tra lai tai khoan FB", "Web Auto - Sai du lieu", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
@@ -314,7 +347,7 @@ namespace WebControl_V2
                         {
                             r.Cells["colFaceCount"].Value = CGlobal.user.ReadJobCountFB("facebook", r.Cells["colUser"].Value.ToString());
                         }
-                        if (CGlobal.user.addLinkAccount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value)) == false)
+                        if (CGlobal.user.addLinkAccount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value), Int32.Parse(r.Cells["colMaxGoLike"].Value.ToString()), Int32.Parse(r.Cells["colMaxLink"].Value.ToString())) == false)
                         {
                             CGlobal.user.ResetJobCount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()));
                             CGlobal.user.ResetJobCountFB(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()));
@@ -323,7 +356,7 @@ namespace WebControl_V2
                     }
                     else
                     {
-                        if (CGlobal.user.addLinkAccount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value)) == false)
+                        if (CGlobal.user.addLinkAccount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value), Int32.Parse(r.Cells["colMaxGoLike"].Value.ToString()), Int32.Parse(r.Cells["colMaxLink"].Value.ToString())) == false)
                         {
                             CGlobal.user.ResetJobEnable(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), false);
                         }
@@ -342,39 +375,109 @@ namespace WebControl_V2
                     btnLikeFanPage.Enabled = false;
                     chkEnableRedo.Enabled = false;
                     btnFollow.Enabled = false;
+                    chkInvisibleBrowser.Enabled = false;
+                    gridUser.Enabled = false;
                     timeCountDown = 0;
                     timer1.Start();
                 });
-                
-                foreach (string id in CGlobal.user.linkAccount.Keys)
+                while (true)
                 {
-                    if (CGlobal.user.linkAccount[id].EnableJob == false)
-                        continue;
-                    while (CGlobal._pauseJob)
+                    bool finish = true;
+                    foreach (string id in CGlobal.user.linkAccount.Keys)
                     {
-                        UpdateProgress("Tạm ngưng ..");
-                        System.Threading.Thread.Sleep(550);
-                        UpdateProgress("Tạm ngưng .....");
+                        if (CGlobal.user.LimitFault <= 0)
+                        {
+                            int limit = 0;
+                            if (Int32.TryParse(txtFaultLimit.Text, out limit))
+                            {
+                                CGlobal.user.LimitFault = limit;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Xem lại giá trị Chuyển TK sau lần thất bại.");
+                                finish = true;
+                                break;
+                            }
+                        }
+                        
+                        if (CGlobal.user.linkAccount[id].EnableJob == false)
+                            continue;
+                        if (CGlobal.user.CheckLinkCondition)
+                        {
+                            if (CGlobal.user.linkAccount[id].JobCountUp >= CGlobal.user.linkAccount[id].JobCount ||
+                                CGlobal.user.linkAccount[id].JobCountUpFB >= CGlobal.user.linkAccount[id].JobCountFB)
+                            {
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            if (CGlobal.user.linkAccount[id].JobCountUp >= CGlobal.user.linkAccount[id].JobCount /*||
+                                CGlobal.user.linkAccount[id].JobCountUpFB >= CGlobal.user.linkAccount[id].JobCountFB*/)
+                            {
+                                continue;
+                            }
+                        }
+
+                        while (CGlobal._pauseJob)
+                        {
+                            UpdateProgress("Tạm ngưng ..");
+                            System.Threading.Thread.Sleep(550);
+                            UpdateProgress("Tạm ngưng .....");
+                        }
+                        test = new bqChromeService();
+
+                        test.Initialize();
+
+                        test.Start(chkInvisibleBrowser.Checked);
+
+                        //test.GotoURL("https://app.golike.net");
+                        if (CGlobal.user.linkAccount[id].Type == "Facebook")
+                        {
+                            goLike = new CGoLike();
+                        }
+                        else if (CGlobal.user.linkAccount[id].Type == "Instagram")
+                            goLike = new CGoLikeInst();
+
+                        goLike.LinkAccount = CGlobal.user.linkAccount[id];
+                        goLike.UpdateGUI = this;
+
+                        goLike.DoJob(test);
+                        
+                        //goLike.DoJobTest(test);
+                        if (CGlobal.user.CheckLinkCondition)
+                        {
+                            if (CGlobal.user.linkAccount[id].JobCountUpMax >= CGlobal.user.linkAccount[id].JobCountMax)
+                            {
+                                CGlobal.user.linkAccount[id].JobCountUpMax = 0;
+                            }
+                            if (CGlobal.user.linkAccount[id].JobCountUpFBMax >= CGlobal.user.linkAccount[id].JobCountFBMax)
+                            {
+                                CGlobal.user.linkAccount[id].JobCountUpFBMax = 0;
+                            }
+                            if (CGlobal.user.linkAccount[id].JobCountUp < CGlobal.user.linkAccount[id].JobCount ||
+                                CGlobal.user.linkAccount[id].JobCountUpFB < CGlobal.user.linkAccount[id].JobCountFB)
+                            {
+                                finish = false;
+                            }
+                        }
+                        else
+                        {
+                            if (CGlobal.user.linkAccount[id].JobCountUpMax >= CGlobal.user.linkAccount[id].JobCountMax)
+                            {
+                                CGlobal.user.linkAccount[id].JobCountUpMax = 0;
+                            }
+                            if (CGlobal.user.linkAccount[id].JobCountUp < CGlobal.user.linkAccount[id].JobCount /*||
+                                CGlobal.user.linkAccount[id].JobCountUpFB < CGlobal.user.linkAccount[id].JobCountFB*/)
+                            {
+                                finish = false;
+                            }
+                        }
+
+                        test.Quit();
                     }
-                    test = new bqChromeService();
-
-                    test.Initialize();
-
-                    test.Start();
-
-                    //test.GotoURL("https://app.golike.net");
-                    if (CGlobal.user.linkAccount[id].Type == "Facebook")
-                    {                        
-                        goLike = new CGoLike();                       
-                    }
-                    else if (CGlobal.user.linkAccount[id].Type == "Instagram")
-                        goLike = new CGoLikeInst();
-
-                    goLike.LinkAccount = CGlobal.user.linkAccount[id];
-                    goLike.UpdateGUI = this;
-                    goLike.DoJob(test);
-
-                    test.Quit();
+                    if (finish)
+                        break;
                 }
                 this.Invoke((MethodInvoker)delegate
                 {
@@ -386,6 +489,8 @@ namespace WebControl_V2
                     btnLikeFanPage.Enabled = true;
                     chkEnableRedo.Enabled = true;
                     btnFollow.Enabled = true;
+                    chkInvisibleBrowser.Enabled = true;
+                    gridUser.Enabled = true;
                     timeCountDown = 0;
                     lblCountDown.Text = "0";
                     timer1.Stop();
@@ -439,7 +544,7 @@ namespace WebControl_V2
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            gridUser.Rows.Add(new object[] { "Facebook", "-1", "asyn", false, "0", "0" });
+            gridUser.Rows.Add(new object[] { "Facebook", "-1", "asyn", false, "0", "0", "0", "0", "" });
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -462,14 +567,16 @@ namespace WebControl_V2
                         MessageBox.Show(this, "Hay kiem tra lai tai khoan FB", "Web Auto - Sai du lieu", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         return;
                     }
-                    user.addLinkAccount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value));
+                    user.addLinkAccount(r.Cells["colAccount"].Value.ToString(), r.Cells["colUser"].Value.ToString(), r.Cells["colPass"].Value.ToString(), Int32.Parse(r.Cells["colJobCount"].Value.ToString()), Int32.Parse(r.Cells["colFaceCount"].Value.ToString()), (bool)(r.Cells["colEnable"].Value), Int32.Parse(r.Cells["colMaxGoLike"].Value.ToString()), Int32.Parse(r.Cells["colMaxLink"].Value.ToString()));
                 }
             }
             try
             {
                 user.GoLikeDelay1 = Int32.Parse(txtGolikeDelay1.Text);
                 user.FBDelay1 = Int32.Parse(txtFBDelay1.Text);
+                user.LimitFault = Int32.Parse(txtFaultLimit.Text);
                 user.EnableRedoJob = chkEnableRedo.Checked;
+                user.CheckLinkCondition = chkLinkCondition.Checked;
             }
             catch (Exception ii)
             {
@@ -531,7 +638,9 @@ namespace WebControl_V2
                         txtPassword.Text = CGlobal.user.Password;
                         txtGolikeDelay1.Text = CGlobal.user.InstricGoLikeDelay1.ToString();
                         txtFBDelay1.Text = CGlobal.user.InstricFBDelay1.ToString();
+                        txtFaultLimit.Text = CGlobal.user.LimitFault.ToString();
                         chkEnableRedo.Checked = CGlobal.user.EnableRedoJob;
+                        chkLinkCondition.Checked = CGlobal.user.CheckLinkCondition;
                         gridUser.Rows.Clear();
                         foreach (CLinkAccount ac in CGlobal.user.linkAccount.Values)
                         {
@@ -540,7 +649,7 @@ namespace WebControl_V2
                                 t = "Facebook";
                             else
                                 t = ac.Type;
-                            gridUser.Rows.Add(new object[] {t, ac.User, ac.Password, ac.EnableJob, ac.JobCount.ToString(), ac.JobCountFB.ToString() });
+                            gridUser.Rows.Add(new object[] { t, ac.User, ac.Password, ac.EnableJob, ac.JobCount.ToString(), ac.JobCountMax.ToString(), ac.JobCountFB.ToString(), ac.JobCountFBMax.ToString(), ac.AccountStatus });
                         }
                     }
                     currentProfile = file;
@@ -573,6 +682,14 @@ namespace WebControl_V2
                 Properties.Settings.Default.Save();
                 MessageBox.Show(this, "Cài đặt mở file khi khởi động Web Auto thành công.", "Web Auto - Thông tin", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void chkLinkCondition_CheckedChanged(object sender, EventArgs e)
+        {
+            gridUser.Columns["colFaceCount"].Visible = chkLinkCondition.Checked;
+            gridUser.Columns["colMaxLink"].Visible = chkLinkCondition.Checked;
+            if (CGlobal.user != null)
+                CGlobal.user.CheckLinkCondition = chkLinkCondition.Checked;
         }
     }
 }

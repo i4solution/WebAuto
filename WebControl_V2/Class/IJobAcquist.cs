@@ -10,6 +10,8 @@ namespace WebControl_V2.Class
     public interface IJobAcquist
     {
         void DoJob(bqService service);
+
+        void DoJobTest(bqService service);
         void Exit();
 
         bool LikeArticel

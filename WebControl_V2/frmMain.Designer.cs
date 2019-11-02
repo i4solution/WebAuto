@@ -31,9 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label23 = new System.Windows.Forms.Label();
+            this.chkInvisibleBrowser = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.lblJobFault = new System.Windows.Forms.Label();
             this.lblJobSuccess = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -53,12 +54,15 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnDefaultProfile = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkLinkCondition = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtFBDelay1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtFaultLimit = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -69,9 +73,17 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.gridUser = new System.Windows.Forms.DataGridView();
+            this.colAccount = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEnable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colJobCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaxGoLike = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFaceCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMaxLink = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAccountStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblFaceAccount = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.chkEnableRedo = new System.Windows.Forms.CheckBox();
             this.lblRedo = new System.Windows.Forms.Label();
             this.lblCheck = new System.Windows.Forms.Label();
             this.lblMoney = new System.Windows.Forms.Label();
@@ -86,17 +98,13 @@
             this.btnShareArticle = new System.Windows.Forms.Button();
             this.btnLikeArticle = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.chkEnableRedo = new System.Windows.Forms.CheckBox();
             this.gridJob = new System.Windows.Forms.DataGridView();
             this.colFile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label19 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.colAccount = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPass = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colEnable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colJobCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFaceCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridJobReport)).BeginInit();
             this.panel4.SuspendLayout();
@@ -110,9 +118,10 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label23);
+            this.panel1.Controls.Add(this.chkInvisibleBrowser);
             this.panel1.Controls.Add(this.label21);
             this.panel1.Controls.Add(this.label20);
-            this.panel1.Controls.Add(this.label19);
             this.panel1.Controls.Add(this.lblJobFault);
             this.panel1.Controls.Add(this.lblJobSuccess);
             this.panel1.Controls.Add(this.label15);
@@ -129,16 +138,38 @@
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.gridJob);
+            this.panel1.Controls.Add(this.label19);
             this.panel1.Location = new System.Drawing.Point(7, 1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(917, 482);
             this.panel1.TabIndex = 0;
             // 
+            // label23
+            // 
+            this.label23.BackColor = System.Drawing.SystemColors.Control;
+            this.label23.Location = new System.Drawing.Point(5, 64);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(89, 20);
+            this.label23.TabIndex = 23;
+            this.label23.Text = "Ẩn trình duyệt";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label23.Visible = false;
+            // 
+            // chkInvisibleBrowser
+            // 
+            this.chkInvisibleBrowser.AutoSize = true;
+            this.chkInvisibleBrowser.Location = new System.Drawing.Point(96, 68);
+            this.chkInvisibleBrowser.Name = "chkInvisibleBrowser";
+            this.chkInvisibleBrowser.Size = new System.Drawing.Size(15, 14);
+            this.chkInvisibleBrowser.TabIndex = 22;
+            this.chkInvisibleBrowser.UseVisualStyleBackColor = true;
+            this.chkInvisibleBrowser.Visible = false;
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
             this.label21.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.label21.Location = new System.Drawing.Point(298, 253);
+            this.label21.Location = new System.Drawing.Point(232, 319);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(49, 13);
             this.label21.TabIndex = 21;
@@ -148,27 +179,17 @@
             // 
             this.label20.AutoSize = true;
             this.label20.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.label20.Location = new System.Drawing.Point(183, 253);
+            this.label20.Location = new System.Drawing.Point(117, 319);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(68, 13);
             this.label20.TabIndex = 20;
             this.label20.Text = "Thành công:";
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.label19.Location = new System.Drawing.Point(279, 252);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(9, 13);
-            this.label19.TabIndex = 19;
-            this.label19.Text = "|";
-            // 
             // lblJobFault
             // 
             this.lblJobFault.AutoSize = true;
             this.lblJobFault.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.lblJobFault.Location = new System.Drawing.Point(349, 253);
+            this.lblJobFault.Location = new System.Drawing.Point(281, 319);
             this.lblJobFault.Name = "lblJobFault";
             this.lblJobFault.Size = new System.Drawing.Size(13, 13);
             this.lblJobFault.TabIndex = 18;
@@ -178,7 +199,7 @@
             // 
             this.lblJobSuccess.AutoSize = true;
             this.lblJobSuccess.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.lblJobSuccess.Location = new System.Drawing.Point(250, 253);
+            this.lblJobSuccess.Location = new System.Drawing.Point(182, 319);
             this.lblJobSuccess.Name = "lblJobSuccess";
             this.lblJobSuccess.Size = new System.Drawing.Size(13, 13);
             this.lblJobSuccess.TabIndex = 17;
@@ -188,7 +209,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.SystemColors.Control;
-            this.label15.Location = new System.Drawing.Point(821, 449);
+            this.label15.Location = new System.Drawing.Point(144, 447);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(89, 13);
             this.label15.TabIndex = 16;
@@ -198,9 +219,9 @@
             // 
             this.lblCountDown.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblCountDown.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblCountDown.Location = new System.Drawing.Point(822, 464);
+            this.lblCountDown.Location = new System.Drawing.Point(234, 447);
             this.lblCountDown.Name = "lblCountDown";
-            this.lblCountDown.Size = new System.Drawing.Size(88, 13);
+            this.lblCountDown.Size = new System.Drawing.Size(74, 13);
             this.lblCountDown.TabIndex = 15;
             this.lblCountDown.Text = "0";
             this.lblCountDown.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -208,18 +229,18 @@
             // label10
             // 
             this.label10.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.label10.Location = new System.Drawing.Point(0, 253);
+            this.label10.Location = new System.Drawing.Point(2, 304);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(392, 13);
+            this.label10.Size = new System.Drawing.Size(306, 13);
             this.label10.TabIndex = 14;
             this.label10.Text = "Danh sách công việc đã xong >>>>";
             // 
             // label9
             // 
             this.label9.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.label9.Location = new System.Drawing.Point(0, 4);
+            this.label9.Location = new System.Drawing.Point(2, 226);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(392, 13);
+            this.label9.Size = new System.Drawing.Size(306, 13);
             this.label9.TabIndex = 13;
             this.label9.Text = "Danh sách công việc:";
             // 
@@ -234,7 +255,7 @@
             this.dataGridViewTextBoxColumn4});
             this.gridJobReport.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.gridJobReport.GridColor = System.Drawing.SystemColors.HighlightText;
-            this.gridJobReport.Location = new System.Drawing.Point(0, 268);
+            this.gridJobReport.Location = new System.Drawing.Point(2, 336);
             this.gridJobReport.MultiSelect = false;
             this.gridJobReport.Name = "gridJobReport";
             this.gridJobReport.RowHeadersVisible = false;
@@ -242,7 +263,7 @@
             this.gridJobReport.RowTemplate.ReadOnly = true;
             this.gridJobReport.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gridJobReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridJobReport.Size = new System.Drawing.Size(392, 204);
+            this.gridJobReport.Size = new System.Drawing.Size(307, 109);
             this.gridJobReport.TabIndex = 12;
             // 
             // dataGridViewTextBoxColumn2
@@ -257,7 +278,6 @@
             // 
             this.dataGridViewTextBoxColumn3.HeaderText = "Thời gian";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 200;
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -266,56 +286,56 @@
             // 
             // lblProgress
             // 
-            this.lblProgress.AutoSize = true;
             this.lblProgress.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProgress.ForeColor = System.Drawing.Color.Black;
-            this.lblProgress.Location = new System.Drawing.Point(398, 461);
+            this.lblProgress.Location = new System.Drawing.Point(2, 461);
             this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(15, 16);
+            this.lblProgress.Size = new System.Drawing.Size(306, 16);
             this.lblProgress.TabIndex = 11;
             this.lblProgress.Text = "_";
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(645, 15);
+            this.txtPassword.Location = new System.Drawing.Point(95, 40);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(91, 20);
+            this.txtPassword.Size = new System.Drawing.Size(103, 20);
             this.txtPassword.TabIndex = 10;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(592, 19);
+            this.label4.Location = new System.Drawing.Point(5, 40);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.Size = new System.Drawing.Size(89, 20);
             this.label4.TabIndex = 9;
             this.label4.Text = "Mật khẩu:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtUserName
             // 
-            this.txtUserName.Location = new System.Drawing.Point(487, 16);
+            this.txtUserName.Location = new System.Drawing.Point(95, 15);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(100, 20);
+            this.txtUserName.Size = new System.Drawing.Size(103, 20);
             this.txtUserName.TabIndex = 8;
             // 
             // label3
             // 
             this.label3.BackColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(397, 19);
+            this.label3.Location = new System.Drawing.Point(5, 15);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 17);
+            this.label3.Size = new System.Drawing.Size(89, 20);
             this.label3.TabIndex = 7;
             this.label3.Text = "Tên đăng nhập:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnRun
             // 
             this.btnRun.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRun.Location = new System.Drawing.Point(820, 5);
+            this.btnRun.Location = new System.Drawing.Point(221, 15);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(88, 32);
+            this.btnRun.Size = new System.Drawing.Size(88, 46);
             this.btnRun.TabIndex = 6;
             this.btnRun.Text = "Làm việc";
             this.btnRun.UseVisualStyleBackColor = true;
@@ -333,18 +353,18 @@
             this.panel4.Controls.Add(this.btnAdd);
             this.panel4.Controls.Add(this.gridUser);
             this.panel4.Controls.Add(this.lblFaceAccount);
-            this.panel4.Location = new System.Drawing.Point(402, 159);
+            this.panel4.Location = new System.Drawing.Point(318, 17);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(507, 283);
+            this.panel4.Size = new System.Drawing.Size(593, 459);
             this.panel4.TabIndex = 5;
             // 
             // btnDefaultProfile
             // 
             this.btnDefaultProfile.Enabled = false;
             this.btnDefaultProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDefaultProfile.Location = new System.Drawing.Point(1, 243);
+            this.btnDefaultProfile.Location = new System.Drawing.Point(1, 427);
             this.btnDefaultProfile.Name = "btnDefaultProfile";
-            this.btnDefaultProfile.Size = new System.Drawing.Size(110, 33);
+            this.btnDefaultProfile.Size = new System.Drawing.Size(110, 25);
             this.btnDefaultProfile.TabIndex = 12;
             this.btnDefaultProfile.Text = "Mở mặc định";
             this.btnDefaultProfile.UseVisualStyleBackColor = true;
@@ -352,17 +372,29 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkLinkCondition);
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.txtFBDelay1);
-            this.groupBox2.Location = new System.Drawing.Point(251, 162);
+            this.groupBox2.Location = new System.Drawing.Point(327, 327);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(251, 75);
+            this.groupBox2.Size = new System.Drawing.Size(261, 94);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thời gian đợi FB";
+            // 
+            // chkLinkCondition
+            // 
+            this.chkLinkCondition.AutoSize = true;
+            this.chkLinkCondition.Location = new System.Drawing.Point(7, 62);
+            this.chkLinkCondition.Name = "chkLinkCondition";
+            this.chkLinkCondition.Size = new System.Drawing.Size(253, 17);
+            this.chkLinkCondition.TabIndex = 18;
+            this.chkLinkCondition.Text = "Thêm điều kiện ràng buộc Facebook/Instagram";
+            this.chkLinkCondition.UseVisualStyleBackColor = true;
+            this.chkLinkCondition.CheckedChanged += new System.EventHandler(this.chkLinkCondition_CheckedChanged);
             // 
             // label18
             // 
@@ -415,17 +447,38 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label22);
+            this.groupBox1.Controls.Add(this.txtFaultLimit);
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtGolikeDelay1);
-            this.groupBox1.Location = new System.Drawing.Point(2, 162);
+            this.groupBox1.Location = new System.Drawing.Point(2, 327);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(242, 75);
+            this.groupBox1.Size = new System.Drawing.Size(261, 94);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thời gian đợi GOLIKE";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.BackColor = System.Drawing.SystemColors.Control;
+            this.label22.Location = new System.Drawing.Point(6, 62);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(138, 13);
+            this.label22.TabIndex = 16;
+            this.label22.Text = "Chuyển TK sau lần thất bại:";
+            // 
+            // txtFaultLimit
+            // 
+            this.txtFaultLimit.Location = new System.Drawing.Point(163, 59);
+            this.txtFaultLimit.MaxLength = 5;
+            this.txtFaultLimit.Name = "txtFaultLimit";
+            this.txtFaultLimit.Size = new System.Drawing.Size(41, 20);
+            this.txtFaultLimit.TabIndex = 15;
+            this.txtFaultLimit.Text = "4";
             // 
             // label17
             // 
@@ -479,9 +532,9 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(405, 243);
+            this.btnSave.Location = new System.Drawing.Point(459, 427);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(97, 33);
+            this.btnSave.Size = new System.Drawing.Size(97, 25);
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Lưu File";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -490,9 +543,9 @@
             // btnLoad
             // 
             this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoad.Location = new System.Drawing.Point(302, 243);
+            this.btnLoad.Location = new System.Drawing.Point(356, 427);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(97, 33);
+            this.btnLoad.Size = new System.Drawing.Size(97, 25);
             this.btnLoad.TabIndex = 7;
             this.btnLoad.Text = "Mở File";
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -501,9 +554,9 @@
             // btnRemove
             // 
             this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.Location = new System.Drawing.Point(427, 61);
+            this.btnRemove.Location = new System.Drawing.Point(459, 5);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(77, 31);
+            this.btnRemove.Size = new System.Drawing.Size(97, 25);
             this.btnRemove.TabIndex = 6;
             this.btnRemove.Text = "Xóa";
             this.btnRemove.UseVisualStyleBackColor = true;
@@ -512,9 +565,9 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(427, 19);
+            this.btnAdd.Location = new System.Drawing.Point(356, 5);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(77, 31);
+            this.btnAdd.Size = new System.Drawing.Size(97, 25);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -531,9 +584,12 @@
             this.colPass,
             this.colEnable,
             this.colJobCount,
-            this.colFaceCount});
+            this.colMaxGoLike,
+            this.colFaceCount,
+            this.colMaxLink,
+            this.colAccountStatus});
             this.gridUser.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.gridUser.Location = new System.Drawing.Point(1, 20);
+            this.gridUser.Location = new System.Drawing.Point(1, 38);
             this.gridUser.MultiSelect = false;
             this.gridUser.Name = "gridUser";
             this.gridUser.RowHeadersVisible = false;
@@ -541,240 +597,8 @@
             this.gridUser.RowTemplate.Height = 27;
             this.gridUser.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gridUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridUser.Size = new System.Drawing.Size(425, 138);
+            this.gridUser.Size = new System.Drawing.Size(587, 283);
             this.gridUser.TabIndex = 3;
-            // 
-            // lblFaceAccount
-            // 
-            this.lblFaceAccount.AutoSize = true;
-            this.lblFaceAccount.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblFaceAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFaceAccount.Location = new System.Drawing.Point(1, -1);
-            this.lblFaceAccount.Name = "lblFaceAccount";
-            this.lblFaceAccount.Size = new System.Drawing.Size(110, 18);
-            this.lblFaceAccount.TabIndex = 4;
-            this.lblFaceAccount.Text = "Tai khoan Face";
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.chkEnableRedo);
-            this.panel2.Controls.Add(this.lblRedo);
-            this.panel2.Controls.Add(this.lblCheck);
-            this.panel2.Controls.Add(this.lblMoney);
-            this.panel2.Controls.Add(this.label13);
-            this.panel2.Controls.Add(this.label12);
-            this.panel2.Controls.Add(this.label11);
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(402, 41);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(507, 119);
-            this.panel2.TabIndex = 2;
-            // 
-            // chkEnableRedo
-            // 
-            this.chkEnableRedo.AutoSize = true;
-            this.chkEnableRedo.Checked = true;
-            this.chkEnableRedo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkEnableRedo.Location = new System.Drawing.Point(331, 3);
-            this.chkEnableRedo.Name = "chkEnableRedo";
-            this.chkEnableRedo.Size = new System.Drawing.Size(67, 17);
-            this.chkEnableRedo.TabIndex = 17;
-            this.chkEnableRedo.Text = "Tự động";
-            this.chkEnableRedo.UseVisualStyleBackColor = true;
-            // 
-            // lblRedo
-            // 
-            this.lblRedo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lblRedo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRedo.Location = new System.Drawing.Point(332, 39);
-            this.lblRedo.Name = "lblRedo";
-            this.lblRedo.Size = new System.Drawing.Size(85, 20);
-            this.lblRedo.TabIndex = 16;
-            this.lblRedo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblCheck
-            // 
-            this.lblCheck.BackColor = System.Drawing.Color.Lime;
-            this.lblCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCheck.Location = new System.Drawing.Point(211, 39);
-            this.lblCheck.Name = "lblCheck";
-            this.lblCheck.Size = new System.Drawing.Size(85, 20);
-            this.lblCheck.TabIndex = 15;
-            this.lblCheck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblMoney
-            // 
-            this.lblMoney.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.lblMoney.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoney.Location = new System.Drawing.Point(77, 39);
-            this.lblMoney.Name = "lblMoney";
-            this.lblMoney.Size = new System.Drawing.Size(85, 20);
-            this.lblMoney.TabIndex = 14;
-            this.lblMoney.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label13
-            // 
-            this.label13.BackColor = System.Drawing.SystemColors.Control;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(332, 18);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(85, 20);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "Cần làm lại";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label12
-            // 
-            this.label12.BackColor = System.Drawing.SystemColors.Control;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(211, 18);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(85, 20);
-            this.label12.TabIndex = 12;
-            this.label12.Text = "Chờ duyệt";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label11
-            // 
-            this.label11.BackColor = System.Drawing.SystemColors.Control;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(77, 18);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(85, 20);
-            this.label11.TabIndex = 11;
-            this.label11.Text = "Số dư";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.label14);
-            this.panel3.Controls.Add(this.btnReview);
-            this.panel3.Controls.Add(this.btnLikeFanPage);
-            this.panel3.Controls.Add(this.btnFollow);
-            this.panel3.Controls.Add(this.btnShareArticle);
-            this.panel3.Controls.Add(this.btnLikeArticle);
-            this.panel3.Location = new System.Drawing.Point(44, 50);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(419, 64);
-            this.panel3.TabIndex = 1;
-            // 
-            // label14
-            // 
-            this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(3, 11);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(409, 3);
-            this.label14.TabIndex = 15;
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnReview
-            // 
-            this.btnReview.Location = new System.Drawing.Point(32, 39);
-            this.btnReview.Name = "btnReview";
-            this.btnReview.Size = new System.Drawing.Size(86, 24);
-            this.btnReview.TabIndex = 4;
-            this.btnReview.Text = "Danh Gia";
-            this.btnReview.UseVisualStyleBackColor = true;
-            this.btnReview.Visible = false;
-            // 
-            // btnLikeFanPage
-            // 
-            this.btnLikeFanPage.Location = new System.Drawing.Point(166, 16);
-            this.btnLikeFanPage.Name = "btnLikeFanPage";
-            this.btnLikeFanPage.Size = new System.Drawing.Size(86, 24);
-            this.btnLikeFanPage.TabIndex = 3;
-            this.btnLikeFanPage.Text = "Like FanPage";
-            this.btnLikeFanPage.UseVisualStyleBackColor = true;
-            this.btnLikeFanPage.Click += new System.EventHandler(this.btnLikeFanPage_Click);
-            // 
-            // btnFollow
-            // 
-            this.btnFollow.Location = new System.Drawing.Point(288, 16);
-            this.btnFollow.Name = "btnFollow";
-            this.btnFollow.Size = new System.Drawing.Size(85, 24);
-            this.btnFollow.TabIndex = 2;
-            this.btnFollow.Text = "Theo Doi";
-            this.btnFollow.UseVisualStyleBackColor = true;
-            this.btnFollow.Click += new System.EventHandler(this.btnFollow_Click);
-            // 
-            // btnShareArticle
-            // 
-            this.btnShareArticle.Location = new System.Drawing.Point(166, 39);
-            this.btnShareArticle.Name = "btnShareArticle";
-            this.btnShareArticle.Size = new System.Drawing.Size(86, 24);
-            this.btnShareArticle.TabIndex = 1;
-            this.btnShareArticle.Text = "Share Bai";
-            this.btnShareArticle.UseVisualStyleBackColor = true;
-            this.btnShareArticle.Visible = false;
-            // 
-            // btnLikeArticle
-            // 
-            this.btnLikeArticle.Location = new System.Drawing.Point(32, 16);
-            this.btnLikeArticle.Name = "btnLikeArticle";
-            this.btnLikeArticle.Size = new System.Drawing.Size(86, 24);
-            this.btnLikeArticle.TabIndex = 0;
-            this.btnLikeArticle.Text = "Like Bai";
-            this.btnLikeArticle.UseVisualStyleBackColor = true;
-            this.btnLikeArticle.Click += new System.EventHandler(this.btnLikeArticle_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tai khoan GoLike";
-            // 
-            // gridJob
-            // 
-            this.gridJob.AllowUserToAddRows = false;
-            this.gridJob.BackgroundColor = System.Drawing.SystemColors.HighlightText;
-            this.gridJob.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridJob.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colFile,
-            this.colName,
-            this.colStatus});
-            this.gridJob.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.gridJob.GridColor = System.Drawing.SystemColors.HighlightText;
-            this.gridJob.Location = new System.Drawing.Point(0, 19);
-            this.gridJob.MultiSelect = false;
-            this.gridJob.Name = "gridJob";
-            this.gridJob.RowHeadersVisible = false;
-            this.gridJob.RowTemplate.Height = 35;
-            this.gridJob.RowTemplate.ReadOnly = true;
-            this.gridJob.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridJob.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.gridJob.Size = new System.Drawing.Size(392, 226);
-            this.gridJob.TabIndex = 1;
-            // 
-            // colFile
-            // 
-            this.colFile.HeaderText = "Công việc";
-            this.colFile.Name = "colFile";
-            this.colFile.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colFile.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colFile.Width = 70;
-            // 
-            // colName
-            // 
-            this.colName.HeaderText = "Chi tiết";
-            this.colName.Name = "colName";
-            this.colName.Width = 200;
-            // 
-            // colStatus
-            // 
-            this.colStatus.HeaderText = "Trạng thái";
-            this.colStatus.Name = "colStatus";
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // colAccount
             // 
@@ -808,20 +632,278 @@
             // 
             // colJobCount
             // 
-            this.colJobCount.HeaderText = "Số lượt GoLike";
+            this.colJobCount.HeaderText = "Số Job GoLike";
             this.colJobCount.Name = "colJobCount";
             this.colJobCount.Width = 55;
             // 
+            // colMaxGoLike
+            // 
+            this.colMaxGoLike.HeaderText = "Max Job GoLike";
+            this.colMaxGoLike.Name = "colMaxGoLike";
+            this.colMaxGoLike.Width = 55;
+            // 
             // colFaceCount
             // 
-            this.colFaceCount.HeaderText = "Số lượt FB/In";
+            this.colFaceCount.HeaderText = "Số lần FB/Ins";
             this.colFaceCount.Name = "colFaceCount";
             this.colFaceCount.Width = 50;
             // 
+            // colMaxLink
+            // 
+            this.colMaxLink.HeaderText = "Max lần FB/Ins";
+            this.colMaxLink.Name = "colMaxLink";
+            this.colMaxLink.Width = 55;
+            // 
+            // colAccountStatus
+            // 
+            this.colAccountStatus.HeaderText = "Trạng thái";
+            this.colAccountStatus.Name = "colAccountStatus";
+            this.colAccountStatus.Width = 55;
+            // 
+            // lblFaceAccount
+            // 
+            this.lblFaceAccount.AutoSize = true;
+            this.lblFaceAccount.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblFaceAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFaceAccount.Location = new System.Drawing.Point(1, -1);
+            this.lblFaceAccount.Name = "lblFaceAccount";
+            this.lblFaceAccount.Size = new System.Drawing.Size(123, 18);
+            this.lblFaceAccount.TabIndex = 4;
+            this.lblFaceAccount.Text = "Tài khoản liên kết";
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.lblRedo);
+            this.panel2.Controls.Add(this.lblCheck);
+            this.panel2.Controls.Add(this.lblMoney);
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.chkEnableRedo);
+            this.panel2.Location = new System.Drawing.Point(2, 85);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(307, 139);
+            this.panel2.TabIndex = 2;
+            // 
+            // lblRedo
+            // 
+            this.lblRedo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lblRedo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRedo.Location = new System.Drawing.Point(202, 39);
+            this.lblRedo.Name = "lblRedo";
+            this.lblRedo.Size = new System.Drawing.Size(85, 20);
+            this.lblRedo.TabIndex = 16;
+            this.lblRedo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCheck
+            // 
+            this.lblCheck.BackColor = System.Drawing.Color.Lime;
+            this.lblCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheck.Location = new System.Drawing.Point(105, 39);
+            this.lblCheck.Name = "lblCheck";
+            this.lblCheck.Size = new System.Drawing.Size(85, 20);
+            this.lblCheck.TabIndex = 15;
+            this.lblCheck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMoney
+            // 
+            this.lblMoney.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.lblMoney.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMoney.Location = new System.Drawing.Point(10, 39);
+            this.lblMoney.Name = "lblMoney";
+            this.lblMoney.Size = new System.Drawing.Size(85, 20);
+            this.lblMoney.TabIndex = 14;
+            this.lblMoney.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.BackColor = System.Drawing.SystemColors.Control;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(202, 18);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(85, 20);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "Cần làm lại";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            this.label12.BackColor = System.Drawing.SystemColors.Control;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(105, 18);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(85, 20);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "Chờ duyệt";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.BackColor = System.Drawing.SystemColors.Control;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(10, 18);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(85, 20);
+            this.label11.TabIndex = 11;
+            this.label11.Text = "Số dư";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label14);
+            this.panel3.Controls.Add(this.btnReview);
+            this.panel3.Controls.Add(this.btnLikeFanPage);
+            this.panel3.Controls.Add(this.btnFollow);
+            this.panel3.Controls.Add(this.btnShareArticle);
+            this.panel3.Controls.Add(this.btnLikeArticle);
+            this.panel3.Location = new System.Drawing.Point(4, 59);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(295, 64);
+            this.panel3.TabIndex = 1;
+            // 
+            // label14
+            // 
+            this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(3, 11);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(409, 3);
+            this.label14.TabIndex = 15;
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnReview
+            // 
+            this.btnReview.Location = new System.Drawing.Point(10, 39);
+            this.btnReview.Name = "btnReview";
+            this.btnReview.Size = new System.Drawing.Size(86, 24);
+            this.btnReview.TabIndex = 4;
+            this.btnReview.Text = "Danh Gia";
+            this.btnReview.UseVisualStyleBackColor = true;
+            this.btnReview.Visible = false;
+            // 
+            // btnLikeFanPage
+            // 
+            this.btnLikeFanPage.Location = new System.Drawing.Point(105, 16);
+            this.btnLikeFanPage.Name = "btnLikeFanPage";
+            this.btnLikeFanPage.Size = new System.Drawing.Size(86, 24);
+            this.btnLikeFanPage.TabIndex = 3;
+            this.btnLikeFanPage.Text = "Like FanPage";
+            this.btnLikeFanPage.UseVisualStyleBackColor = true;
+            this.btnLikeFanPage.Click += new System.EventHandler(this.btnLikeFanPage_Click);
+            // 
+            // btnFollow
+            // 
+            this.btnFollow.Location = new System.Drawing.Point(202, 16);
+            this.btnFollow.Name = "btnFollow";
+            this.btnFollow.Size = new System.Drawing.Size(85, 24);
+            this.btnFollow.TabIndex = 2;
+            this.btnFollow.Text = "Theo Doi";
+            this.btnFollow.UseVisualStyleBackColor = true;
+            this.btnFollow.Click += new System.EventHandler(this.btnFollow_Click);
+            // 
+            // btnShareArticle
+            // 
+            this.btnShareArticle.Location = new System.Drawing.Point(105, 39);
+            this.btnShareArticle.Name = "btnShareArticle";
+            this.btnShareArticle.Size = new System.Drawing.Size(86, 24);
+            this.btnShareArticle.TabIndex = 1;
+            this.btnShareArticle.Text = "Share Bai";
+            this.btnShareArticle.UseVisualStyleBackColor = true;
+            this.btnShareArticle.Visible = false;
+            // 
+            // btnLikeArticle
+            // 
+            this.btnLikeArticle.Location = new System.Drawing.Point(10, 16);
+            this.btnLikeArticle.Name = "btnLikeArticle";
+            this.btnLikeArticle.Size = new System.Drawing.Size(86, 24);
+            this.btnLikeArticle.TabIndex = 0;
+            this.btnLikeArticle.Text = "Like Bai";
+            this.btnLikeArticle.UseVisualStyleBackColor = true;
+            this.btnLikeArticle.Click += new System.EventHandler(this.btnLikeArticle_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Tai khoan GoLike";
+            // 
+            // chkEnableRedo
+            // 
+            this.chkEnableRedo.AutoSize = true;
+            this.chkEnableRedo.Checked = true;
+            this.chkEnableRedo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkEnableRedo.Location = new System.Drawing.Point(202, 2);
+            this.chkEnableRedo.Name = "chkEnableRedo";
+            this.chkEnableRedo.Size = new System.Drawing.Size(67, 17);
+            this.chkEnableRedo.TabIndex = 17;
+            this.chkEnableRedo.Text = "Tự động";
+            this.chkEnableRedo.UseVisualStyleBackColor = true;
+            // 
+            // gridJob
+            // 
+            this.gridJob.AllowUserToAddRows = false;
+            this.gridJob.BackgroundColor = System.Drawing.SystemColors.HighlightText;
+            this.gridJob.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridJob.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colFile,
+            this.colName,
+            this.colStatus});
+            this.gridJob.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.gridJob.GridColor = System.Drawing.SystemColors.HighlightText;
+            this.gridJob.Location = new System.Drawing.Point(2, 241);
+            this.gridJob.MultiSelect = false;
+            this.gridJob.Name = "gridJob";
+            this.gridJob.RowHeadersVisible = false;
+            this.gridJob.RowTemplate.Height = 35;
+            this.gridJob.RowTemplate.ReadOnly = true;
+            this.gridJob.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridJob.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.gridJob.Size = new System.Drawing.Size(307, 61);
+            this.gridJob.TabIndex = 1;
+            // 
+            // colFile
+            // 
+            this.colFile.HeaderText = "Công việc";
+            this.colFile.Name = "colFile";
+            this.colFile.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colFile.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colFile.Width = 70;
+            // 
+            // colName
+            // 
+            this.colName.HeaderText = "Chi tiết";
+            this.colName.Name = "colName";
+            // 
+            // colStatus
+            // 
+            this.colStatus.HeaderText = "Trạng thái";
+            this.colStatus.Name = "colStatus";
+            // 
+            // label19
+            // 
+            this.label19.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.label19.Location = new System.Drawing.Point(123, 318);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(186, 13);
+            this.label19.TabIndex = 19;
+            this.label19.Text = "|";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(929, 490);
             this.Controls.Add(this.panel1);
@@ -886,12 +968,6 @@
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFile;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.Label lblRedo;
         private System.Windows.Forms.Label lblCheck;
         private System.Windows.Forms.Label lblMoney;
@@ -913,12 +989,26 @@
         private System.Windows.Forms.Label lblJobSuccess;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFile;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.DataGridViewComboBoxColumn colAccount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPass;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colEnable;
         private System.Windows.Forms.DataGridViewTextBoxColumn colJobCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaxGoLike;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFaceCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMaxLink;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAccountStatus;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox txtFaultLimit;
+        private System.Windows.Forms.CheckBox chkLinkCondition;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.CheckBox chkInvisibleBrowser;
     }
 }
 

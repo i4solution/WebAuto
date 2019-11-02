@@ -55,6 +55,54 @@ namespace WebControl_V2.Class
         {
             _exit = true;
         }
+        public void DoJobTest(bqService service)
+        {
+            int jobFinish = 0;
+            while (true)
+            {
+                if ((jobFinish >= linkAccount.JobCount && linkAccount.JobCountUpFB >= linkAccount.JobCountFB) || _exit ||
+                    linkAccount.JobCountUpMax >= linkAccount.JobCountMax ||
+                    linkAccount.JobCountUpFBMax >= linkAccount.JobCountFBMax)
+                {
+                    break;
+                }
+                int r = new Random().Next(10, 20);
+                for (int i = 0; i < r; i++)
+                {
+                    if ((jobFinish >= linkAccount.JobCount && linkAccount.JobCountUpFB >= linkAccount.JobCountFB) || _exit ||
+                    linkAccount.JobCountUpMax >= linkAccount.JobCountMax ||
+                    linkAccount.JobCountUpFBMax >= linkAccount.JobCountFBMax)
+                    {
+                        break;
+                    }
+                    bqInterface.UpdateAccount("Timer", "2000");
+                    System.Threading.Thread.Sleep(2000);
+
+                    linkAccount.JobCountUp = jobFinish++;
+                    linkAccount.JobCountUpMax += 1;
+
+                    if (new Random().Next(1, 5) == 3)
+                        break;
+                    if ((CGlobal.user.LimitFault - new Random().Next(1, 5)) <= 0)
+                    {
+                        bqInterface.UpdateProgress("Số lần bị lỗi vượt quá giới hạn...");
+                        bqInterface.UpdateAccount("Timer", "5000");
+                        System.Threading.Thread.Sleep(5000);
+                        linkAccount.EnableJob = false;
+                        bqInterface.UpdateAccount(linkAccount.User, "Uncheck#" + linkAccount.Type + "#OVER");
+                        return;
+                    }
+
+                    bqInterface.UpdateJob(i, "DEMO", "Thanh Cong");
+                    bqInterface.UpdateAccountJob(linkAccount.User, linkAccount.JobCount.ToString(), jobFinish.ToString());
+                    int fbCount = linkAccount.JobCountFB;
+                    linkAccount.JobCountUpFB += 1;
+                    linkAccount.JobCountUpFBMax += 1;
+                    bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount.ToString(), linkAccount.JobCountUpFB.ToString());
+                    
+                }
+            }
+        }
         public void DoJob(bqService service)
         {
             driver = service.Driver();
@@ -69,7 +117,7 @@ namespace WebControl_V2.Class
             TimeSpan t = new TimeSpan(TimeSpan.TicksPerSecond * 120);
             WebDriverWait w = new WebDriverWait(driver, t);
             w.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
-            //service.Driver().Manage().Window.Minimize();
+            service.Driver().Manage().Window.Minimize();
 
             bqInterface.UpdateAccount("Timer", "7000");
             System.Threading.Thread.Sleep(7000);
@@ -158,13 +206,18 @@ namespace WebControl_V2.Class
 
             if (faceName == "")
             {
+
                 bqInterface.UpdateProgress("Facebook bi lỗi. Chuyển qua tài khoản kế tiếp...");
                 bqInterface.UpdateAccount("Timer", "5000");
                 System.Threading.Thread.Sleep(5000);
+                bqInterface.UpdateAccount(linkAccount.User, "Uncheck#" + linkAccount.Type + "#KHOA");
+                linkAccount.EnableJob = false;
                 return;
             }
+            else
+                bqInterface.UpdateAccount(linkAccount.User, "Status#" + linkAccount.Type + "#BT");
             service.GotoURL("https://app.golike.net");
-            //service.Driver().Manage().Window.Minimize();
+            service.Driver().Manage().Window.Minimize();
 
             delay = CGlobal.user.GoLikeDelay1;
             bqInterface.UpdateAccount("Timer", delay.ToString());
@@ -439,8 +492,26 @@ namespace WebControl_V2.Class
                     System.Threading.Thread.Sleep(270);
                 }
 
-                if (jobFinish >= linkAccount.JobCount || _exit)
-                    break;
+                if (CGlobal.user.CheckLinkCondition)
+                {
+                    if ((jobFinish >= linkAccount.JobCount && linkAccount.JobCountUpFB >= linkAccount.JobCountFB) || _exit ||
+                    linkAccount.JobCountUpMax >= linkAccount.JobCountMax ||
+                    linkAccount.JobCountUpFBMax >= linkAccount.JobCountFBMax)
+                    {
+
+                        break;
+                    }
+                }
+                else
+                {
+                    if ((jobFinish >= linkAccount.JobCount) || _exit ||
+                    linkAccount.JobCountUpMax >= linkAccount.JobCountMax
+                    )
+                    {
+
+                        break;
+                    }
+                }
 
                 //font-20 d-block mb-1 icon-wallet
                 ab = driver.FindElements(By.CssSelector("i.font-20.d-block.mb-1.icon-wallet"));
@@ -504,7 +575,19 @@ namespace WebControl_V2.Class
                     //div.col-7.pr-3
                     bqInterface.UpdateProgress("Chon facebook account.");
                     IWebElement selectAccount = null;
-                    if (service.TryFindElement(By.CssSelector("div.col-7.pr-3"), out selectAccount))
+                    //Compare default Facebook account selected
+                    bool needSelectAccount = false;
+                    if (service.TryFindElement(By.CssSelector("div.text-right"), out selectAccount))
+                    {//
+                        System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> filterElement = driver.FindElements(By.CssSelector("div.text-right"));
+                        selectAccount = filterElement[0].FindElement(By.CssSelector("span.d300.ml-1"));
+                        if (selectAccount != null)
+                        {
+                            if (selectAccount.Text != faceName)
+                                needSelectAccount = true;
+                        }
+                    }
+                    if (service.TryFindElement(By.CssSelector("div.col-7.pr-3"), out selectAccount) && needSelectAccount)
                     {
                         js.ExecuteScript("arguments[0].scrollIntoView(false);", selectAccount);
 
@@ -662,27 +745,35 @@ namespace WebControl_V2.Class
                     filterJob[5].Click();
                     bqInterface.UpdateAccount("Timer", "5000");
                     System.Threading.Thread.Sleep(5000);
-                    
 
-                    driver.Navigate().Back();
+                    if (needSelectAccount)
+                    {
+                        driver.Navigate().Back();
 
-                    bqInterface.UpdateAccount("Timer", "8000");
-                    System.Threading.Thread.Sleep(8000);
-                    
+                        bqInterface.UpdateAccount("Timer", "8000");
+                        System.Threading.Thread.Sleep(8000);
 
-                    driver.Navigate().Forward();
 
-                    bqInterface.UpdateAccount("Timer", "20000");
-                    System.Threading.Thread.Sleep(20000);
+                        driver.Navigate().Forward();
 
+                        bqInterface.UpdateAccount("Timer", "5000");
+                        System.Threading.Thread.Sleep(5000);
+                    }
                     //List of Job
+                    int timeOut = 0;
                     while (true)
                     {
+                        if (timeOut >= 60)
+                            break;
                         ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
                         if (ab.Count > 0)
                             break;
+                        bqInterface.UpdateAccount("Timer", "1000");
+                        System.Threading.Thread.Sleep(1000);
+                        timeOut++;
                     }
-                    
+                    if (timeOut >= 60)
+                        break;
 
                     if (ab.Count == 0)
                     {
@@ -690,12 +781,24 @@ namespace WebControl_V2.Class
                         //class i.material-icons.float-right.mt-1 mr-2.bg-gradient-1
                         if (service.TryFindElement(By.CssSelector("i.material-icons.float-right.mt-1.mr-2.bg-gradient-1"), out job))
                         {//Confirm OK to exit
-                            job.Click();
-                            bqInterface.UpdateAccount("Timer", "30000");
-                            System.Threading.Thread.Sleep(30000);
+                            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                            action = action.MoveToElement(job);
+                            action = action.Click(job);
+                            action.Build().Perform();
+                            //job.Click();
+                            bqInterface.UpdateAccount("Timer", "10000");
+                            System.Threading.Thread.Sleep(10000);
                             
                             //driver.Navigate().Refresh();
-                            ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+                            //ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+                            while (true)
+                            {
+                                ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+                                if (ab.Count > 0)
+                                    break;
+                                bqInterface.UpdateAccount("Timer", "1000");
+                                System.Threading.Thread.Sleep(1000);
+                            }
                         }
                     }
 
@@ -727,19 +830,41 @@ namespace WebControl_V2.Class
                             bqInterface.UpdateProgress("Tạm ngưng .....");
                             System.Threading.Thread.Sleep(270);
                         }
+                        if (CGlobal.user.CheckLinkCondition)
+                        {
+                            if ((jobFinish >= linkAccount.JobCount && linkAccount.JobCountUpFB >= linkAccount.JobCountFB) || _exit ||
+                            linkAccount.JobCountUpMax >= linkAccount.JobCountMax ||
+                            linkAccount.JobCountUpFBMax >= linkAccount.JobCountFBMax)
+                            {
 
-                        if (jobFinish >= linkAccount.JobCount || _exit)
-                            break;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (( jobFinish >= linkAccount.JobCount ) || _exit ||
+                            linkAccount.JobCountUpMax >= linkAccount.JobCountMax
+                            )
+                            {
+
+                                break;
+                            }
+                        }
                         try
                         {
-                            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
-                            action.MoveToElement(ab[i]).Perform();
+                            //OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                            //action.MoveToElement(ab[i]).Perform();
 
                             delay = CGlobal.user.GoLikeDelay1;
                             bqInterface.UpdateAccount("Timer", delay.ToString());
                             System.Threading.Thread.Sleep(delay);
 
-                            ab[i].Click();
+                            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                            action = action.MoveToElement(ab[i]);
+                            action = action.Click(ab[i]);
+                            action.Build().Perform();
+
+                            //ab[i].Click();
                         }
                         catch (Exception e)
                         {
@@ -749,8 +874,9 @@ namespace WebControl_V2.Class
                             ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
 
                             delay = CGlobal.user.GoLikeDelay1;
-                            bqInterface.UpdateAccount("Timer", delay.ToString());
-                            System.Threading.Thread.Sleep(delay);
+                            bqInterface.UpdateAccount("Timer", "1000");
+                            System.Threading.Thread.Sleep(1000);
+                            break;
                         }
 
                         bqInterface.UpdateAccount("Timer", "1000");
@@ -925,7 +1051,14 @@ namespace WebControl_V2.Class
                                 //catch (Exception ii)
                                 //{ }
                                 //End 
-                                follow.Click();
+                                try
+                                {
+                                    follow.Click();
+                                }
+                                catch (Exception ec)
+                                {
+                                    faceOK = false;
+                                }                                
 
                                 delay = CGlobal.user.FBDelay1;
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
@@ -964,7 +1097,14 @@ namespace WebControl_V2.Class
                                 //catch (Exception ii)
                                 //{ }
                                 //End 
-                                like.Click();
+                                try
+                                {
+                                    like.Click();
+                                }
+                                catch(Exception ec)
+                                {
+                                    faceOK = false;
+                                }
 
                                 delay = CGlobal.user.FBDelay1;
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
@@ -1389,13 +1529,18 @@ namespace WebControl_V2.Class
 
                             //Change back to first tab
                             driver.SwitchTo().Window(driver.WindowHandles.First());
-                            //service.Driver().Manage().Window.Minimize();
+                            service.Driver().Manage().Window.Minimize();
 
                             delay = CGlobal.user.GoLikeDelay1;
                             bqInterface.UpdateAccount("Timer", delay.ToString());
                             System.Threading.Thread.Sleep(delay);
 
-                            finish[2].Click();
+
+                            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                            action = action.MoveToElement(finish[2]);
+                            action = action.Click(finish[2]);
+                            action.Build().Perform();
+                            //finish[2].Click();
 
                             //bqInterface.UpdateAccount("Timer", CGlobal.user.GoLikeDelay1.ToString());
                             //System.Threading.Thread.Sleep(CGlobal.user.GoLikeDelay1);
@@ -1432,7 +1577,11 @@ namespace WebControl_V2.Class
                             
                             if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out confirm))
                             {
-                                confirm.Click();
+                                action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                action = action.MoveToElement(confirm);
+                                action = action.Click(confirm);
+                                action.Build().Perform();
+                                //confirm.Click();
                                 delay = CGlobal.user.GoLikeDelay1;
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
                                 System.Threading.Thread.Sleep(delay);
@@ -1469,7 +1618,11 @@ namespace WebControl_V2.Class
                                         bqInterface.UpdateAccount("Timer", delay.ToString());
                                         System.Threading.Thread.Sleep(delay);
 
-                                        error.Click();
+                                        action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                        action = action.MoveToElement(error);
+                                        action = action.Click(error);
+                                        action.Build().Perform();
+                                        //error.Click();
                                     }
                                     delay = CGlobal.user.GoLikeDelay1;
                                     bqInterface.UpdateAccount("Timer", delay.ToString());
@@ -1477,7 +1630,11 @@ namespace WebControl_V2.Class
 
                                     if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out confirm))
                                     {
-                                        confirm.Click();
+                                        action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                        action = action.MoveToElement(confirm);
+                                        action = action.Click(confirm);
+                                        action.Build().Perform();
+                                        //confirm.Click();
                                         delay = CGlobal.user.GoLikeDelay1;
                                         bqInterface.UpdateAccount("Timer", delay.ToString());
                                         System.Threading.Thread.Sleep(delay);
@@ -1506,17 +1663,26 @@ namespace WebControl_V2.Class
                                 System.Threading.Thread.Sleep(delay);
 
                                 bqInterface.UpdateJob(i, jobIDText, "That Bai");
+                                CGlobal.user.LimitFault--;
                                 //bqInterface.UpdateAccountJob(linkAccount.User, linkAccount.JobCount.ToString(), jobFinish.ToString());
                             }
                             else
                             {
                                 if (Int32.TryParse(txt, out jobFinish) == false)
                                     jobFinish++;
+
+                                linkAccount.JobCountUp = jobFinish;
+                                linkAccount.JobCountUpMax += 1;
+
                                 bqInterface.UpdateJob(i, jobIDText, "Thanh Cong");
                                 bqInterface.UpdateAccountJob(linkAccount.User, linkAccount.JobCount.ToString(), jobFinish.ToString());
-                                int fbCount = linkAccount.JobCountFB;
-                                linkAccount.JobCountFB += 1;
-                                bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount.ToString(), linkAccount.JobCountFB.ToString());
+                                if (CGlobal.user.CheckLinkCondition)
+                                {
+                                    int fbCount = linkAccount.JobCountFB;
+                                    linkAccount.JobCountUpFB += 1;
+                                    linkAccount.JobCountUpFBMax += 1;
+                                    bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount.ToString(), linkAccount.JobCountUpFB.ToString());
+                                }
                                 CEventLog.Log.WriteEntry(linkAccount.User, "Point#8 GOLIKE ACCEPT: ");
                             }
                             
@@ -1530,13 +1696,16 @@ namespace WebControl_V2.Class
                             //jobFinish++;
 
                             bqInterface.UpdateJob(i, jobIDText, "That bai");
-
-                            int fbCount = linkAccount.JobCountFB;
-                            linkAccount.JobCountFB += 1;
-                            bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount.ToString(), linkAccount.JobCountFB.ToString());
+                            if (CGlobal.user.CheckLinkCondition)
+                            {
+                                int fbCount = linkAccount.JobCountFB;
+                                linkAccount.JobCountUpFB += 1;
+                                linkAccount.JobCountUpFBMax += 1;
+                                bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount.ToString(), linkAccount.JobCountUpFB.ToString());
+                            }
 
                             driver.SwitchTo().Window(driver.WindowHandles.First());
-                            //service.Driver().Manage().Window.Minimize();
+                            service.Driver().Manage().Window.Minimize();
 
                             delay = CGlobal.user.GoLikeDelay1;
                             bqInterface.UpdateAccount("Timer", delay.ToString());
@@ -1561,7 +1730,11 @@ namespace WebControl_V2.Class
                                     bqInterface.UpdateAccount("Timer", delay.ToString());
                                     System.Threading.Thread.Sleep(delay);
 
-                                    error.Click();
+                                    OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                    action = action.MoveToElement(error);
+                                    action = action.Click(error);
+                                    action.Build().Perform();
+                                    //error.Click();
                                 }
                                 delay = CGlobal.user.GoLikeDelay1;
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
@@ -1570,7 +1743,11 @@ namespace WebControl_V2.Class
                                 IWebElement confirm = null;
                                 if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out confirm))
                                 {
-                                    confirm.Click();
+                                    OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                    action = action.MoveToElement(confirm);
+                                    action = action.Click(confirm);
+                                    action.Build().Perform();
+                                    //confirm.Click();
                                     delay = CGlobal.user.GoLikeDelay1;
                                     bqInterface.UpdateAccount("Timer", delay.ToString());
                                     System.Threading.Thread.Sleep(delay);
@@ -1597,12 +1774,21 @@ namespace WebControl_V2.Class
 
                         driver.SwitchTo().Window(driver.WindowHandles.Last()).Close();
                         driver.SwitchTo().Window(driver.WindowHandles.First());
-                        //service.Driver().Manage().Window.Minimize();
-
+                        service.Driver().Manage().Window.Minimize();
 
                         delay = CGlobal.user.FBDelay1;
                         bqInterface.UpdateAccount("Timer", delay.ToString());
                         System.Threading.Thread.Sleep(delay);
+
+                        if (CGlobal.user.LimitFault <= 0)
+                        {
+                            bqInterface.UpdateProgress("Số lần bị lỗi vượt quá giới hạn...");
+                            bqInterface.UpdateAccount("Timer", "5000");
+                            System.Threading.Thread.Sleep(5000);
+                            linkAccount.EnableJob = false;
+                            bqInterface.UpdateAccount(linkAccount.User, "Uncheck#" + linkAccount.Type + "#OVER");
+                            return;
+                        }
 
                         driver.Navigate().Refresh();
 
@@ -1636,14 +1822,30 @@ namespace WebControl_V2.Class
                                 //class i.material-icons.float-right.mt-1 mr-2.bg-gradient-1
                                 if (service.TryFindElement(By.CssSelector("i.material-icons.float-right.mt-1.mr-2.bg-gradient-1"), out job))
                                 {//Confirm OK to exit
-                                    job.Click();
-                                    bqInterface.UpdateAccount("Timer", "20000");
-                                    System.Threading.Thread.Sleep(20000);
-                                    
+                                    OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                    action = action.MoveToElement(job);
+                                    action = action.Click(job);
+                                    action.Build().Perform();
 
-                                    ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
-                                    if (ab.Count == 0)
-                                        break;                                    
+                                    //job.Click();
+                                    bqInterface.UpdateAccount("Timer", "5000");
+                                    System.Threading.Thread.Sleep(5000);
+
+                                    timeOut = 0;
+                                    while (true)
+                                    {
+                                        if (timeOut >= 60)
+                                            break;
+                                        ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+                                        if (ab.Count > 0)
+                                            break;
+                                        bqInterface.UpdateAccount("Timer", "1000");
+                                        System.Threading.Thread.Sleep(1000);
+                                        timeOut++;
+                                    }
+                                    //ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+                                    //if (ab.Count == 0)
+                                    //    break;                                    
                                 }
                             }
                             bqInterface.LoadJobs(ab);
@@ -1654,14 +1856,29 @@ namespace WebControl_V2.Class
                             //class i.material-icons.float-right.mt-1 mr-2.bg-gradient-1
                             if (service.TryFindElement(By.CssSelector("i.material-icons.float-right.mt-1.mr-2.bg-gradient-1"), out job))
                             {//Confirm OK to exit
-                                job.Click();
-                                bqInterface.UpdateAccount("Timer", "20000");
-                                System.Threading.Thread.Sleep(20000);
-                               
+                                OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                action = action.MoveToElement(job);
+                                action = action.Click(job);
+                                action.Build().Perform();
+                                //job.Click();
+                                bqInterface.UpdateAccount("Timer", "5000");
+                                System.Threading.Thread.Sleep(5000);
 
-                                ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
-                                if (ab.Count == 0)
-                                    break;
+                                timeOut = 0;
+                                while (true)
+                                {
+                                    if (timeOut >= 60)
+                                        break;
+                                    ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+                                    if (ab.Count > 0)
+                                        break;
+                                    bqInterface.UpdateAccount("Timer", "1000");
+                                    System.Threading.Thread.Sleep(1000);
+                                    timeOut++;
+                                }
+                                //ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+                                //if (ab.Count == 0)
+                                //    break;
                                 bqInterface.LoadJobs(ab);
                             }
                         }

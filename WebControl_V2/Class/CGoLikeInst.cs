@@ -55,6 +55,10 @@ namespace WebControl_V2.Class
         {
             _exit = true;
         }
+        public void DoJobTest(bqService service)
+        {
+
+        }
         public void DoJob(bqService service)
         {
             driver = service.Driver();

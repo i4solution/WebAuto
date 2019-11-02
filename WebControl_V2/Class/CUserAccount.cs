@@ -16,7 +16,9 @@ namespace WebControl_V2.Class
         string password = "";
         int lickGoLikeDelay1 = 4000;
         int lickFBDelay1 = 7000;
+        int limitFault = 4;
         bool enableRedo = true;
+        bool checkLinkCount = false;
         public Dictionary<string, CLinkAccount> linkAccount;
         string _obj;
         Random random;
@@ -40,6 +42,11 @@ namespace WebControl_V2.Class
         public string Password
         {
             get { return password; }
+        }
+        public int LimitFault
+        {
+            set { limitFault = value; }
+            get { return limitFault; }
         }
         public int GoLikeDelay1
         {
@@ -73,11 +80,16 @@ namespace WebControl_V2.Class
             get { return enableRedo; }
             set { enableRedo = value; }
         }
-        public bool addLinkAccount (string type, string user, string pass, int count, int countFB, bool enable)
+        public bool CheckLinkCondition
+        {
+            get { return checkLinkCount; }
+            set { checkLinkCount = value; }
+        }
+        public bool addLinkAccount (string type, string user, string pass, int count, int countFB, bool enable, int countMax, int countFBMax)
         {
             if (linkAccount.ContainsKey(type + "$" + user) == false)
             {
-                linkAccount.Add(type + "$" + user, new CLinkAccount(type, user, pass, count, countFB, enable));
+                linkAccount.Add(type + "$" + user, new CLinkAccount(type, user, pass, count, countFB, enable, countMax, countFBMax));
                 return true;
             }
             return false;

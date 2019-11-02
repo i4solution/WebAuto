@@ -25,7 +25,7 @@ namespace bqImplementWeb
         }
         public abstract void Initialize();
 
-        public abstract void Start();
+        public abstract void Start(bool visible);
 
         public void Quit()
         {

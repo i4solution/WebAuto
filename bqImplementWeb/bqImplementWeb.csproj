@@ -49,12 +49,6 @@
     <Compile Include="bqService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WebControl_V2\WebControl_V2.csproj">
-      <Project>{d7e71f81-2b9a-4158-ad09-e1588a591cb1}</Project>
-      <Name>WebControl_V2</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
