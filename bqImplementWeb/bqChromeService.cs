@@ -27,7 +27,7 @@ namespace bqImplementWeb
             DriverOptions option = new ChromeOptions();
             ((ChromeOptions)option).AddArguments("chrome.switches", "--disable-extensions");
             ((ChromeOptions)option).AddArguments("--disable-notifications");
-            ((ChromeOptions)option).AddArguments("--disable-gpu");
+            //((ChromeOptions)option).AddArguments("--disable-gpu");
             ((ChromeOptions)option).AddArguments("window-size=1024x600");
             ((ChromeOptions)option).AddArguments(@"user-agent={" + user_agent + "}");
             if (visible == true)

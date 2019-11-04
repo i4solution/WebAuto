@@ -898,7 +898,12 @@ namespace WebControl_V2.Class
                             //continue;
                             if (service.TryFindElement(By.CssSelector("i.material-icons.float-right.mt-1.mr-2.bg-gradient-1"), out job))
                             {//Confirm OK to exit
-                                job.Click();
+                                OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                action = action.MoveToElement(job);
+                                action = action.Click(job);
+                                action.Build().Perform();
+
+                                //job.Click();
                                 bqInterface.UpdateAccount("Timer", "30000");
                                 System.Threading.Thread.Sleep(30000);
 
@@ -1042,7 +1047,33 @@ namespace WebControl_V2.Class
                                     bqInterface.UpdateProgress("Tạm ngưng .....");
                                     System.Threading.Thread.Sleep(270);
                                 }
-
+                                IWebElement window = null;
+                                if (service.TryFindElement(By.CssSelector("button._4jy0._4jy4._4jy1._51sy selected._42ft"), out window))
+                                {
+                                    System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> windows = driver.FindElements(By.CssSelector("button._271k _271m _1qjd _7tvm _7tv2 _7tv4"));
+                                    if (windows.Count > 0)
+                                    {
+                                        try
+                                        {
+                                            windows[0].Click();
+                                        }
+                                        catch (Exception ec)
+                                        {
+                                            faceOK = false;
+                                        }                                        
+                                    }
+                                }
+                                else
+                                {
+                                    try
+                                    {
+                                        follow.Click();
+                                    }
+                                    catch (Exception ec)
+                                    {
+                                        faceOK = false;
+                                    }
+                                }
                                 //try
                                 //{
                                 //    IAlert a = driver.SwitchTo().Alert();
@@ -1050,15 +1081,7 @@ namespace WebControl_V2.Class
                                 //}
                                 //catch (Exception ii)
                                 //{ }
-                                //End 
-                                try
-                                {
-                                    follow.Click();
-                                }
-                                catch (Exception ec)
-                                {
-                                    faceOK = false;
-                                }                                
+                                //End                                                                 
 
                                 delay = CGlobal.user.FBDelay1;
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
@@ -1077,9 +1100,9 @@ namespace WebControl_V2.Class
                             if (service.TryFindElement(By.CssSelector("Button.likeButton._4jy0._4jy4._517h._51sy._42ft"), out like))
                             {
                                 //Waiting alert facebook
-                                bqInterface.UpdateAccount("Timer", "3000");
-                                System.Threading.Thread.Sleep(3000);
-                               
+                                delay = CGlobal.user.FBDelay1;
+                                bqInterface.UpdateAccount("Timer", delay.ToString());
+                                System.Threading.Thread.Sleep(delay);                               
 
                                 while (CGlobal._pauseJob)
                                 {
@@ -1089,6 +1112,36 @@ namespace WebControl_V2.Class
                                     System.Threading.Thread.Sleep(270);
                                 }
 
+                                //Sometime Facebook popup window
+                                //button._271k _271m _1qjd _7tvm _7tv2 _7tv4
+                                // 0 : Like Page | 1 : Huy
+                                IWebElement window = null;
+                                if (service.TryFindElement(By.CssSelector("button._271k._271m._1qjd._7tvm._7tv2._7tv4"), out window))
+                                {
+                                    System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> windows = driver.FindElements(By.CssSelector("button._271k _271m _1qjd _7tvm _7tv2 _7tv4"));
+                                    if (windows.Count > 0)
+                                    {
+                                        try
+                                        {
+                                            windows[0].Click();
+                                        }
+                                        catch (Exception ec)
+                                        {
+                                            faceOK = false;
+                                        }                                        
+                                    }
+                                }
+                                else
+                                {
+                                    try
+                                    {
+                                        like.Click();
+                                    }
+                                    catch (Exception ec)
+                                    {
+                                        faceOK = false;
+                                    }
+                                }
                                 //try
                                 //{
                                 //    IAlert a = driver.SwitchTo().Alert();
@@ -1097,14 +1150,7 @@ namespace WebControl_V2.Class
                                 //catch (Exception ii)
                                 //{ }
                                 //End 
-                                try
-                                {
-                                    like.Click();
-                                }
-                                catch(Exception ec)
-                                {
-                                    faceOK = false;
-                                }
+                                
 
                                 delay = CGlobal.user.FBDelay1;
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
@@ -1159,6 +1205,15 @@ namespace WebControl_V2.Class
                                     action.MoveToElement(likeArticel[0]).Perform();
                                     bqInterface.UpdateAccount("Timer", "3000");
                                     System.Threading.Thread.Sleep(3000);
+                                    bool needClick = true;
+                                    //if (value.Contains("LIKE") && likeArticel[0].Text.ToLower() == "thích")
+                                    //    needClick = false;
+                                    //else if (value.Contains("LOVE") && likeArticel[0].Text.ToLower() == "yêu thích")
+                                    //    needClick = false;
+                                    //else if (value.Contains("HAHA") && likeArticel[0].Text.ToLower() == "haha")
+                                    //    needClick = false;
+                                    //else if (value.Contains("WOW") && likeArticel[0].Text.ToLower() == "wow")
+                                    //    needClick = false;
 
                                     //if (value.Contains("LIKE"))
                                     //    likeArticel[0].Click();                                    
@@ -1169,15 +1224,38 @@ namespace WebControl_V2.Class
                                     //    likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
                                     //    likeArticel[2].Click();
                                     //}
-                                    likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
-                                    if (value.Contains("LIKE"))
-                                        likeArticel[0].Click();
-                                    else if (value.Contains("LOVE"))
-                                        likeArticel[1].Click();
-                                    else if (value.Contains("HAHA"))
-                                        likeArticel[2].Click();
-                                    else if (value.Contains("WOW"))
-                                        likeArticel[3].Click();
+                                    if (needClick)
+                                    {
+                                        likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
+                                        if (value.Contains("LIKE"))
+                                        {
+                                            if (likeArticel[0].Displayed)
+                                                likeArticel[0].Click();
+                                            else if (likeArticel[6].Displayed)
+                                                likeArticel[6].Click();
+                                        }
+                                        else if (value.Contains("LOVE"))
+                                        {
+                                            if (likeArticel[1].Displayed)
+                                                likeArticel[1].Click();
+                                            else if (likeArticel[7].Displayed)
+                                                likeArticel[7].Click();
+                                        }
+                                        else if (value.Contains("HAHA"))
+                                        {
+                                            if (likeArticel[2].Displayed)
+                                                likeArticel[2].Click();
+                                            else if (likeArticel[8].Displayed)
+                                                likeArticel[8].Click();
+                                        }
+                                        else if (value.Contains("WOW"))
+                                        {
+                                            if (likeArticel[3].Displayed)
+                                                likeArticel[3].Click();
+                                            else if (likeArticel[9].Displayed)
+                                                likeArticel[9].Click();
+                                        } 
+                                    }                                    
                                 }
                                 catch (Exception ii)
                                 {
@@ -1194,17 +1272,49 @@ namespace WebControl_V2.Class
                                         bqInterface.UpdateAccount("Timer", "3000");
                                         System.Threading.Thread.Sleep(3000);
 
+                                        bool needClick = true;
+                                        //if (value.Contains("LIKE") && likeArticel[1].Text.ToLower() == "thích")
+                                        //    needClick = false;
+                                        //else if (value.Contains("LOVE") && likeArticel[1].Text.ToLower() == "yêu thích")
+                                        //    needClick = false;
+                                        //else if (value.Contains("HAHA") && likeArticel[1].Text.ToLower() == "haha")
+                                        //    needClick = false;
+                                        //else if (value.Contains("WOW") && likeArticel[1].Text.ToLower() == "wow")
+                                        //    needClick = false;
+
                                         //likeArticel[1].Click();
-                                        likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
-                                        if (value.Contains("LIKE"))
-                                            likeArticel[0].Click();
-                                        else if (value.Contains("LOVE"))
-                                            likeArticel[1].Click();
-                                        else if (value.Contains("HAHA"))
-                                            likeArticel[2].Click();
-                                        else if (value.Contains("WOW"))
-                                            likeArticel[3].Click();
-                                        
+                                        if (needClick)
+                                        {
+                                            likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
+                                            if (value.Contains("LIKE"))
+                                            {
+                                                if (likeArticel[0].Displayed)
+                                                    likeArticel[0].Click();
+                                                else if (likeArticel[6].Displayed)
+                                                    likeArticel[6].Click();
+                                            }
+                                            else if (value.Contains("LOVE"))
+                                            {
+                                                if (likeArticel[1].Displayed)
+                                                    likeArticel[1].Click();
+                                                else if (likeArticel[7].Displayed)
+                                                    likeArticel[7].Click();
+                                            }
+                                            else if (value.Contains("HAHA"))
+                                            {
+                                                if (likeArticel[2].Displayed)
+                                                    likeArticel[2].Click();
+                                                else if (likeArticel[8].Displayed)
+                                                    likeArticel[8].Click();
+                                            }
+                                            else if (value.Contains("WOW"))
+                                            {
+                                                if (likeArticel[3].Displayed)
+                                                    likeArticel[3].Click();
+                                                else if (likeArticel[9].Displayed)
+                                                    likeArticel[9].Click();
+                                            } 
+                                        }                                        
                                         ok = true;
                                     }
                                     catch (Exception j)
@@ -1222,17 +1332,49 @@ namespace WebControl_V2.Class
                                             bqInterface.UpdateAccount("Timer", "3000");
                                             System.Threading.Thread.Sleep(3000);
 
-                                            //likeArticel[2].Click();
-                                            likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
-                                            if (value.Contains("LIKE"))
-                                                likeArticel[0].Click();
-                                            else if (value.Contains("LOVE"))
-                                                likeArticel[1].Click();
-                                            else if (value.Contains("HAHA"))
-                                                likeArticel[2].Click();
-                                            else if (value.Contains("WOW"))
-                                                likeArticel[3].Click();
+                                            bool needClick = true;
+                                            //if (value.Contains("LIKE") && likeArticel[2].Text.ToLower() == "thích")
+                                            //    needClick = false;
+                                            //else if (value.Contains("LOVE") && likeArticel[2].Text.ToLower() == "yêu thích")
+                                            //    needClick = false;
+                                            //else if (value.Contains("HAHA") && likeArticel[2].Text.ToLower() == "haha")
+                                            //    needClick = false;
+                                            //else if (value.Contains("WOW") && likeArticel[2].Text.ToLower() == "wow")
+                                            //    needClick = false;
 
+                                            //likeArticel[2].Click();
+                                            if (needClick)
+                                            {
+                                                likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
+                                                if (value.Contains("LIKE"))
+                                                {
+                                                    if (likeArticel[0].Displayed)
+                                                        likeArticel[0].Click();
+                                                    else if (likeArticel[6].Displayed)
+                                                        likeArticel[6].Click();
+                                                }
+                                                else if (value.Contains("LOVE"))
+                                                {
+                                                    if (likeArticel[1].Displayed)
+                                                        likeArticel[1].Click();
+                                                    else if (likeArticel[7].Displayed)
+                                                        likeArticel[7].Click();
+                                                }
+                                                else if (value.Contains("HAHA"))
+                                                {
+                                                    if (likeArticel[2].Displayed)
+                                                        likeArticel[2].Click();
+                                                    else if (likeArticel[8].Displayed)
+                                                        likeArticel[8].Click();
+                                                }
+                                                else if (value.Contains("WOW"))
+                                                {
+                                                    if (likeArticel[3].Displayed)
+                                                        likeArticel[3].Click();
+                                                    else if (likeArticel[9].Displayed)
+                                                        likeArticel[9].Click();
+                                                } 
+                                            }                                          
                                             ok = true;
                                         }
                                         catch (Exception j)
@@ -1251,16 +1393,49 @@ namespace WebControl_V2.Class
                                             bqInterface.UpdateAccount("Timer", "3000");
                                             System.Threading.Thread.Sleep(3000);
 
+                                            bool needClick = true;
+                                            //if (value.Contains("LIKE") && likeArticel[3].Text.ToLower() == "thích")
+                                            //    needClick = false;
+                                            //else if (value.Contains("LOVE") && likeArticel[3].Text.ToLower() == "yêu thích")
+                                            //    needClick = false;
+                                            //else if (value.Contains("HAHA") && likeArticel[3].Text.ToLower() == "haha")
+                                            //    needClick = false;
+                                            //else if (value.Contains("WOW") && likeArticel[3].Text.ToLower() == "wow")
+                                            //    needClick = false;
+
                                             //likeArticel[3].Click();
-                                            likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
-                                            if (value.Contains("LIKE"))
-                                                likeArticel[0].Click();
-                                            else if (value.Contains("LOVE"))
-                                                likeArticel[1].Click();
-                                            else if (value.Contains("HAHA"))
-                                                likeArticel[2].Click();
-                                            else if (value.Contains("WOW"))
-                                                likeArticel[3].Click();
+                                            if (needClick)
+                                            {
+                                                likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
+                                                if (value.Contains("LIKE"))
+                                                {
+                                                    if (likeArticel[0].Displayed)
+                                                        likeArticel[0].Click();
+                                                    else if (likeArticel[6].Displayed)
+                                                        likeArticel[6].Click();
+                                                }
+                                                else if (value.Contains("LOVE"))
+                                                {
+                                                    if (likeArticel[1].Displayed)
+                                                        likeArticel[1].Click();
+                                                    else if (likeArticel[7].Displayed)
+                                                        likeArticel[7].Click();
+                                                }
+                                                else if (value.Contains("HAHA"))
+                                                {
+                                                    if (likeArticel[2].Displayed)
+                                                        likeArticel[2].Click();
+                                                    else if (likeArticel[8].Displayed)
+                                                        likeArticel[8].Click();
+                                                }
+                                                else if (value.Contains("WOW"))
+                                                {
+                                                    if (likeArticel[3].Displayed)
+                                                        likeArticel[3].Click();
+                                                    else if (likeArticel[9].Displayed)
+                                                        likeArticel[9].Click();
+                                                }                                              
+                                            }
                                             ok = true;
                                         }
                                         catch (Exception j)
@@ -1299,16 +1474,49 @@ namespace WebControl_V2.Class
                                     bqInterface.UpdateAccount("Timer", "3000");
                                     System.Threading.Thread.Sleep(3000);
 
-                                    //likeArticel[1].Click();               
-                                    likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
-                                    if (value.Contains("LIKE"))
-                                        likeArticel[0].Click();
-                                    else if (value.Contains("LOVE"))
-                                        likeArticel[1].Click();
-                                    else if (value.Contains("HAHA"))
-                                        likeArticel[2].Click();
-                                    else if (value.Contains("WOW"))
-                                        likeArticel[3].Click();
+                                    bool needClick = true;
+                                    //if (value.Contains("LIKE") && likeArticel[1].Text.ToLower() == "thích")
+                                    //    needClick = false;
+                                    //else if (value.Contains("LOVE") && likeArticel[1].Text.ToLower() == "yêu thích")
+                                    //    needClick = false;
+                                    //else if (value.Contains("HAHA") && likeArticel[1].Text.ToLower() == "haha")
+                                    //    needClick = false;
+                                    //else if (value.Contains("WOW") && likeArticel[1].Text.ToLower() == "wow")
+                                    //    needClick = false;
+
+                                    //likeArticel[1].Click();    
+                                    if (needClick)
+                                    {
+                                        likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
+                                        if (value.Contains("LIKE"))
+                                        {
+                                            if (likeArticel[0].Displayed)
+                                                likeArticel[0].Click();
+                                            else if (likeArticel[6].Displayed)
+                                                likeArticel[6].Click();
+                                        }
+                                        else if (value.Contains("LOVE"))
+                                        {
+                                            if (likeArticel[1].Displayed)
+                                                likeArticel[1].Click();
+                                            else if (likeArticel[7].Displayed)
+                                                likeArticel[7].Click();
+                                        }
+                                        else if (value.Contains("HAHA"))
+                                        {
+                                            if (likeArticel[2].Displayed)
+                                                likeArticel[2].Click();
+                                            else if (likeArticel[8].Displayed)
+                                                likeArticel[8].Click();
+                                        }
+                                        else if (value.Contains("WOW"))
+                                        {
+                                            if (likeArticel[3].Displayed)
+                                                likeArticel[3].Click();
+                                            else if (likeArticel[9].Displayed)
+                                                likeArticel[9].Click();
+                                        } 
+                                    }                                    
                                 }
                                 catch (Exception ii)
                                 {
@@ -1325,16 +1533,49 @@ namespace WebControl_V2.Class
                                         bqInterface.UpdateAccount("Timer", "3000");
                                         System.Threading.Thread.Sleep(3000);
 
-                                        //likeArticel[0].Click();                                    
-                                        likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
-                                        if (value.Contains("LIKE"))
-                                            likeArticel[0].Click();
-                                        else if (value.Contains("LOVE"))
-                                            likeArticel[1].Click();
-                                        else if (value.Contains("HAHA"))
-                                            likeArticel[2].Click();
-                                        else if (value.Contains("WOW"))
-                                            likeArticel[3].Click();
+                                        bool needClick = true;
+                                        //if (value.Contains("LIKE") && likeArticel[0].Text.ToLower() == "thích")
+                                        //    needClick = false;
+                                        //else if (value.Contains("LOVE") && likeArticel[0].Text.ToLower() == "yêu thích")
+                                        //    needClick = false;
+                                        //else if (value.Contains("HAHA") && likeArticel[0].Text.ToLower() == "haha")
+                                        //    needClick = false;
+                                        //else if (value.Contains("WOW") && likeArticel[0].Text.ToLower() == "wow")
+                                        //    needClick = false;
+
+                                        //likeArticel[0].Click();  
+                                        if (needClick)
+                                        {
+                                            likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
+                                            if (value.Contains("LIKE"))
+                                            {
+                                                if (likeArticel[0].Displayed)
+                                                    likeArticel[0].Click();
+                                                else if (likeArticel[6].Displayed)
+                                                    likeArticel[6].Click();
+                                            }
+                                            else if (value.Contains("LOVE"))
+                                            {
+                                                if (likeArticel[1].Displayed)
+                                                    likeArticel[1].Click();
+                                                else if (likeArticel[7].Displayed)
+                                                    likeArticel[7].Click();
+                                            }
+                                            else if (value.Contains("HAHA"))
+                                            {
+                                                if (likeArticel[2].Displayed)
+                                                    likeArticel[2].Click();
+                                                else if (likeArticel[8].Displayed)
+                                                    likeArticel[8].Click();
+                                            }
+                                            else if (value.Contains("WOW"))
+                                            {
+                                                if (likeArticel[3].Displayed)
+                                                    likeArticel[3].Click();
+                                                else if (likeArticel[9].Displayed)
+                                                    likeArticel[9].Click();
+                                            } 
+                                        }                                        
                                         ok = true;
                                     }
                                     catch (Exception j)
@@ -1352,16 +1593,49 @@ namespace WebControl_V2.Class
                                             bqInterface.UpdateAccount("Timer", "3000");
                                             System.Threading.Thread.Sleep(3000);
 
-                                            //likeArticel[1].Click();                                            
-                                            likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
-                                            if (value.Contains("LIKE"))
-                                                likeArticel[0].Click();
-                                            else if (value.Contains("LOVE"))
-                                                likeArticel[1].Click();
-                                            else if (value.Contains("HAHA"))
-                                                likeArticel[2].Click();
-                                            else if (value.Contains("WOW"))
-                                                likeArticel[3].Click();
+                                            bool needClick = true;
+                                            //if (value.Contains("LIKE") && likeArticel[1].Text.ToLower() == "thích")
+                                            //    needClick = false;
+                                            //else if (value.Contains("LOVE") && likeArticel[1].Text.ToLower() == "yêu thích")
+                                            //    needClick = false;
+                                            //else if (value.Contains("HAHA") && likeArticel[1].Text.ToLower() == "haha")
+                                            //    needClick = false;
+                                            //else if (value.Contains("WOW") && likeArticel[1].Text.ToLower() == "wow")
+                                            //    needClick = false;
+
+                                            //likeArticel[1].Click();       
+                                            if (needClick)
+                                            {
+                                                likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
+                                                if (value.Contains("LIKE"))
+                                                {
+                                                    if (likeArticel[0].Displayed)
+                                                        likeArticel[0].Click();
+                                                    else if (likeArticel[6].Displayed)
+                                                        likeArticel[6].Click();
+                                                }                                                    
+                                                else if (value.Contains("LOVE"))
+                                                {
+                                                    if (likeArticel[1].Displayed)
+                                                        likeArticel[1].Click();
+                                                    else if (likeArticel[7].Displayed)
+                                                        likeArticel[7].Click();
+                                                } 
+                                                else if (value.Contains("HAHA"))
+                                                {
+                                                    if (likeArticel[2].Displayed)
+                                                        likeArticel[2].Click();
+                                                    else if (likeArticel[8].Displayed)
+                                                        likeArticel[8].Click();
+                                                } 
+                                                else if (value.Contains("WOW"))
+                                                {
+                                                    if (likeArticel[3].Displayed)
+                                                        likeArticel[3].Click();
+                                                    else if (likeArticel[9].Displayed)
+                                                        likeArticel[9].Click();
+                                                } 
+                                            }                                            
                                             ok = true;
                                         }
                                         catch (Exception j)
@@ -1380,16 +1654,110 @@ namespace WebControl_V2.Class
                                             bqInterface.UpdateAccount("Timer", "3000");
                                             System.Threading.Thread.Sleep(3000);
 
-                                            //likeArticel[2].Click();                                            
-                                            likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
-                                            if (value.Contains("LIKE"))
-                                                likeArticel[0].Click();
-                                            else if (value.Contains("LOVE"))
-                                                likeArticel[1].Click();
-                                            else if (value.Contains("HAHA"))
-                                                likeArticel[2].Click();
-                                            else if (value.Contains("WOW"))
-                                                likeArticel[3].Click();
+                                            bool needClick = true;
+                                            //if (value.Contains("LIKE") && likeArticel[2].Text.ToLower() == "thích")
+                                            //    needClick = false;
+                                            //else if (value.Contains("LOVE") && likeArticel[2].Text.ToLower() == "yêu thích")
+                                            //    needClick = false;
+                                            //else if (value.Contains("HAHA") && likeArticel[2].Text.ToLower() == "haha")
+                                            //    needClick = false;
+                                            //else if (value.Contains("WOW") && likeArticel[2].Text.ToLower() == "wow")
+                                            //    needClick = false;
+
+                                            //likeArticel[2].Click();   
+                                            if (needClick)
+                                            {
+                                                likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
+                                                if (value.Contains("LIKE"))
+                                                {
+                                                    if (likeArticel[0].Displayed)
+                                                        likeArticel[0].Click();
+                                                    else if (likeArticel[6].Displayed)
+                                                        likeArticel[6].Click();
+                                                }
+                                                else if (value.Contains("LOVE"))
+                                                {
+                                                    if (likeArticel[1].Displayed)
+                                                        likeArticel[1].Click();
+                                                    else if (likeArticel[7].Displayed)
+                                                        likeArticel[7].Click();
+                                                }
+                                                else if (value.Contains("HAHA"))
+                                                {
+                                                    if (likeArticel[2].Displayed)
+                                                        likeArticel[2].Click();
+                                                    else if (likeArticel[8].Displayed)
+                                                        likeArticel[8].Click();
+                                                }
+                                                else if (value.Contains("WOW"))
+                                                {
+                                                    if (likeArticel[3].Displayed)
+                                                        likeArticel[3].Click();
+                                                    else if (likeArticel[9].Displayed)
+                                                        likeArticel[9].Click();
+                                                } 
+                                            }                                            
+                                            ok = true;
+                                        }
+                                        catch (Exception j)
+                                        {
+                                            faceOK = false;
+                                        }
+                                    }
+                                    if (ok == false)
+                                    {
+                                        try
+                                        {
+                                            System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> likeArticel = driver.FindElements(By.CssSelector("a._6a-y._3l2t._18vj"));
+
+                                            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                            action.MoveToElement(likeArticel[8]).Perform();
+                                            bqInterface.UpdateAccount("Timer", "3000");
+                                            System.Threading.Thread.Sleep(3000);
+
+                                            bool needClick = true;
+                                            //if (value.Contains("LIKE") && likeArticel[2].Text.ToLower() == "thích")
+                                            //    needClick = false;
+                                            //else if (value.Contains("LOVE") && likeArticel[2].Text.ToLower() == "yêu thích")
+                                            //    needClick = false;
+                                            //else if (value.Contains("HAHA") && likeArticel[2].Text.ToLower() == "haha")
+                                            //    needClick = false;
+                                            //else if (value.Contains("WOW") && likeArticel[2].Text.ToLower() == "wow")
+                                            //    needClick = false;
+
+                                            //likeArticel[2].Click();   
+                                            if (needClick)
+                                            {
+                                                likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
+                                                if (value.Contains("LIKE"))
+                                                {
+                                                    if (likeArticel[0].Displayed)
+                                                        likeArticel[0].Click();
+                                                    else if (likeArticel[6].Displayed)
+                                                        likeArticel[6].Click();
+                                                }
+                                                else if (value.Contains("LOVE"))
+                                                {
+                                                    if (likeArticel[1].Displayed)
+                                                        likeArticel[1].Click();
+                                                    else if (likeArticel[7].Displayed)
+                                                        likeArticel[7].Click();
+                                                }
+                                                else if (value.Contains("HAHA"))
+                                                {
+                                                    if (likeArticel[2].Displayed)
+                                                        likeArticel[2].Click();
+                                                    else if (likeArticel[8].Displayed)
+                                                        likeArticel[8].Click();
+                                                }
+                                                else if (value.Contains("WOW"))
+                                                {
+                                                    if (likeArticel[3].Displayed)
+                                                        likeArticel[3].Click();
+                                                    else if (likeArticel[9].Displayed)
+                                                        likeArticel[9].Click();
+                                                } 
+                                            }                                           
                                             ok = true;
                                         }
                                         catch (Exception j)
@@ -1437,16 +1805,49 @@ namespace WebControl_V2.Class
                                     bqInterface.UpdateAccount("Timer", "3000");
                                     System.Threading.Thread.Sleep(3000);
 
+                                    bool needClick = true;
+                                    //if (value.Contains("LIKE") && likeArticel[2].Text.ToLower() == "thích")
+                                    //    needClick = false;
+                                    //else if (value.Contains("LOVE") && likeArticel[2].Text.ToLower() == "yêu thích")
+                                    //    needClick = false;
+                                    //else if (value.Contains("HAHA") && likeArticel[2].Text.ToLower() == "haha")
+                                    //    needClick = false;
+                                    //else if (value.Contains("WOW") && likeArticel[2].Text.ToLower() == "wow")
+                                    //    needClick = false;
+
                                     //likeArticel[1].Click();
-                                    likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
-                                    if (value.Contains("LIKE"))
-                                        likeArticel[0].Click();
-                                    else if (value.Contains("LOVE"))
-                                        likeArticel[1].Click();
-                                    else if (value.Contains("HAHA"))
-                                        likeArticel[2].Click();
-                                    else if (value.Contains("WOW"))
-                                        likeArticel[3].Click();
+                                    if (needClick)
+                                    {
+                                        likeArticel = driver.FindElements(By.CssSelector("span._iuw"));
+                                        if (value.Contains("LIKE"))
+                                        {
+                                            if (likeArticel[0].Displayed)
+                                                likeArticel[0].Click();
+                                            else if (likeArticel[6].Displayed)
+                                                likeArticel[6].Click();
+                                        }
+                                        else if (value.Contains("LOVE"))
+                                        {
+                                            if (likeArticel[1].Displayed)
+                                                likeArticel[1].Click();
+                                            else if (likeArticel[7].Displayed)
+                                                likeArticel[7].Click();
+                                        }
+                                        else if (value.Contains("HAHA"))
+                                        {
+                                            if (likeArticel[2].Displayed)
+                                                likeArticel[2].Click();
+                                            else if (likeArticel[8].Displayed)
+                                                likeArticel[8].Click();
+                                        }
+                                        else if (value.Contains("WOW"))
+                                        {
+                                            if (likeArticel[3].Displayed)
+                                                likeArticel[3].Click();
+                                            else if (likeArticel[9].Displayed)
+                                                likeArticel[9].Click();
+                                        } 
+                                    }
                                 }
                                 catch (Exception ii)
                                 {
@@ -1585,7 +1986,7 @@ namespace WebControl_V2.Class
                                 delay = CGlobal.user.GoLikeDelay1;
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
                                 System.Threading.Thread.Sleep(delay);
-                                
+                                CEventLog.Log.WriteEntry(linkAccount.User, "Point#8.1 GOLIKE : Click Confirm button");
                             }
                             if (isArticelFull == true)
                             {
@@ -1810,7 +2211,7 @@ namespace WebControl_V2.Class
                             bqInterface.UpdateAccount("Timer", delay.ToString());
                             System.Threading.Thread.Sleep(delay);
                         }
-
+                        timeOut = 0;
                         IWebElement check = null;
                         if (service.TryFindElement(By.CssSelector("div.card.mb-2"), out check))
                         {
@@ -1882,7 +2283,11 @@ namespace WebControl_V2.Class
                                 bqInterface.LoadJobs(ab);
                             }
                         }
-
+                        if (timeOut >= 60)
+                        {
+                            CEventLog.Log.WriteEntry(linkAccount.User, "Point#GOLIKE End: Cannot load job");
+                            break;
+                        }
                     }
                     bqInterface.UpdateProgress("Xong viec :)");
                     Console.WriteLine("COMPLETE ==>> ");
