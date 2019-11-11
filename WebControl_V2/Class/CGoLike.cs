@@ -408,6 +408,7 @@ namespace WebControl_V2.Class
                                         if (ab != null)
                                         {
                                             int offSet = 0;
+                                            int falseCount = 0;
                                             for (int j = ab.Count - 1; j >= 0; )
                                             {
                                                 try
@@ -475,7 +476,7 @@ namespace WebControl_V2.Class
                                                 catch (Exception s)
                                                 {
                                                     offSet--;
-                                                    if (offSet <= -5)
+                                                    if (falseCount++ >= 5)
                                                         break;
                                                 }
                                             }
@@ -906,11 +907,16 @@ namespace WebControl_V2.Class
                         {//GoLike display Message Box "Job Da Du So Luong"
                             if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out info))
                             {//Confirm OK to exit
-                                info.Click();
+                                OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                action = action.MoveToElement(info);
+                                action = action.Click(info);
+                                action.Build().Perform();
+
+                                //info.Click();
                                 delay = CGlobal.user.GoLikeDelay1;
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
                                 System.Threading.Thread.Sleep(delay);
-                                
+                                CEventLog.Log.WriteEntry(linkAccount.User, "Point#1.1 : Job finished adv");
                             }
                             //i++;
                             //continue;
@@ -922,11 +928,31 @@ namespace WebControl_V2.Class
                                 action.Build().Perform();
 
                                 //job.Click();
-                                bqInterface.UpdateAccount("Timer", "30000");
-                                System.Threading.Thread.Sleep(30000);
+                                bqInterface.UpdateAccount("Timer", "2000");
+                                System.Threading.Thread.Sleep(2000);
 
+                                int timeOut1 = 0;
+                                while (true)
+                                {
+                                    if (timeOut1 >= 60)
+                                        break;
+                                    ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+                                    if (ab.Count > 0)
+                                        break;
+                                    bqInterface.UpdateAccount("Timer", "1000");
+                                    System.Threading.Thread.Sleep(1000);
+                                    timeOut1++;
+                                }
+
+                                if (ab.Count == 0)
+                                {
+                                    CEventLog.Log.WriteEntry(linkAccount.User, "Point#1.2 : Cannot reload job");
+                                    break;
+                                }
                                 //driver.Navigate().Refresh();
-                                ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+                                //ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+
+                                CEventLog.Log.WriteEntry(linkAccount.User, "Point#1.3: Job Reload OK");
                             }
                             i = 0;
                             continue;
