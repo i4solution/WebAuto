@@ -2140,15 +2140,15 @@ namespace WebControl_V2.Class
 
                                         }
                                     }
-                                    if (service.TryFindElement(By.CssSelector("a.row.align-items-center"), out error))
-                                    {//GoLike cannot back to Job list page
-                                        driver.Navigate().Back();
+                                    //if (service.TryFindElement(By.CssSelector("a.row.align-items-center"), out error))
+                                    //{//GoLike cannot back to Job list page
+                                    //    driver.Navigate().Back();
 
-                                        delay = CGlobal.user.GoLikeDelay1;
-                                        bqInterface.UpdateAccount("Timer", delay.ToString());
-                                        System.Threading.Thread.Sleep(delay);
+                                    //    delay = CGlobal.user.GoLikeDelay1;
+                                    //    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                    //    System.Threading.Thread.Sleep(delay);
 
-                                    }
+                                    //}
                                     while (CGlobal._pauseJob)
                                     {
                                         bqInterface.UpdateProgress("Tạm ngưng ..");
@@ -2301,7 +2301,7 @@ namespace WebControl_V2.Class
                             return;
                         }
 
-                        driver.Navigate().Refresh();
+                        //driver.Navigate().Refresh();
 
                         bqInterface.UpdateProgress("...");
 
@@ -2312,9 +2312,11 @@ namespace WebControl_V2.Class
                             bqInterface.UpdateProgress("Tạm ngưng .....");
                             System.Threading.Thread.Sleep(270);
                         }
-                        
+                        bool IconFreshJob = true;
                         if (service.TryFindElement(By.CssSelector("i.material-icons.float-right.mt-1.mr-2.bg-gradient-1"), out job) == false)
                         {
+                            CEventLog.Log.WriteEntry(linkAccount.User, "Point#GOLIKE Job: Cannot Back Job List");
+                            IconFreshJob = false;
                             driver.Navigate().Back();
 
                             delay = CGlobal.user.FBDelay1;
@@ -2323,7 +2325,7 @@ namespace WebControl_V2.Class
                         }
                         timeOut = 0;
                         IWebElement check = null;
-                        if (service.TryFindElement(By.CssSelector("div.card.mb-2"), out check))
+                        if (service.TryFindElement(By.CssSelector("div.card.mb-2"), out check) && IconFreshJob)
                         {
                             ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
                             i = 0;
