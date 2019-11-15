@@ -42,6 +42,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bqImplementWeb\bin\Debug\bqImplementWeb.dll</HintPath>
     </Reference>
+    <Reference Include="bqInet">
+      <HintPath>..\bqInet\bin\Debug\bqInet.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\bqInet\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Selenium.WebDriverBackedSelenium, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriverBackedSelenium.3.141.0\lib\net35\Selenium.WebDriverBackedSelenium.dll</HintPath>
       <Private>True</Private>
@@ -74,16 +80,27 @@
     <Compile Include="Class\IJobAcquist.cs" />
     <Compile Include="Class\ILogFile.cs" />
     <Compile Include="Class\IUpdateInterface.cs" />
+    <Compile Include="Class\Register\CBqRegisterPresenter.cs" />
+    <Compile Include="Class\Register\IRegister.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRegister.Designer.cs">
+      <DependentUpon>frmRegister.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRegister.resx">
+      <DependentUpon>frmRegister.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -115,6 +132,7 @@
   <ItemGroup>
     <Content Include="logo 48x48.ico" />
     <Content Include="logo.ico" />
+    <None Include="Resources\rect286-3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -890,7 +890,7 @@ namespace WebControl_V2.Class
                     
 
                     bqInterface.LoadJobs(ab);
-
+                    int JobFinishedError = 0;
                     for (int i = 0; i < ab.Count; )
                     {
                         while (CGlobal._pauseJob)
@@ -968,9 +968,18 @@ namespace WebControl_V2.Class
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
                                 System.Threading.Thread.Sleep(delay);
                                 CEventLog.Log.WriteEntry(linkAccount.User, "Point#1.1 : Job finished adv");
+                                JobFinishedError++;
                             }
-                            //i++;
-                            //continue;
+                            if (JobFinishedError <= 5)
+                            {
+                                i++;                                
+                                continue;
+                            }
+                            else
+                            {
+                                JobFinishedError = 0;
+                            }
+  
                             if (service.TryFindElement(By.CssSelector("i.material-icons.float-right.mt-1.mr-2.bg-gradient-1"), out job))
                             {//Confirm OK to exit
                                 OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
@@ -2167,8 +2176,9 @@ namespace WebControl_V2.Class
                                 }
                                 else
                                 {
-                                    if (Int32.TryParse(txt, out jobFinish) == false)
-                                        jobFinish++;
+                                    int goLikeJob = 0;
+                                    if (Int32.TryParse(txt, out goLikeJob) == true)
+                                        jobFinish = goLikeJob;
 
                                     linkAccount.JobCountUp = jobFinish;
                                     linkAccount.JobCountUpMax += 1;

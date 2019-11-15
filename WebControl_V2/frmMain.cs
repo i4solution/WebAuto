@@ -28,17 +28,45 @@ namespace WebControl_V2
         Task t1 = null;
         string currentProfile = "";
         public frmMain()
-        {            
+        {
             goLike = new CGoLike();
-
+            CGlobal._registerPresenter = new CBqRegisterPresenter();
+            CGlobal._session = new CSession();
+            CGlobal._session.sessionTimeOut += new EventHandler(OnSessionTimeOut);
+            CGlobal._session.sessionTrigger += new EventHandler(OnSessionTrigger);
             CEventLog.Log.EnableLog = true;
 
             InitializeComponent();
         }
+        private void OnSessionTrigger(object sender, EventArgs e)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                if (CGlobal._session.Username != "")
+                    this.Text = CGlobal.ver;
+                else
+                    this.Text = CGlobal.ver + " - Hãy đăng ký để ủng hộ sản phẩm";
+            });
+            
 
+        }
+        private void OnSessionTimeOut(object sender, EventArgs e)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                if (CGlobal._session.Username != "")
+                    this.Text = CGlobal.ver;
+                else
+                    this.Text = CGlobal.ver + " - Hãy đăng ký để ủng hộ sản phẩm";
+            });
+
+        }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            this.Text = CGlobal.ver;
+            if (CGlobal._session.Username != "")
+                this.Text = CGlobal.ver; 
+            else
+                this.Text = CGlobal.ver + " - Hãy đăng ký để ủng hộ sản phẩm";
 
             btnLikeArticle.BackColor = Color.YellowGreen;
             btnLikeFanPage.BackColor = Color.YellowGreen;
@@ -394,13 +422,13 @@ namespace WebControl_V2
                             }
                             else
                             {
-                                MessageBox.Show("Xem lại giá trị Chuyển TK sau lần thất bại.");
+                                MessageBox.Show("Xem lại giá trị Chuyển TK sau số lần thất bại.");
                                 finish = true;
                                 break;
                             }
                         }
-                        
-                        if (CGlobal.user.linkAccount[id].EnableJob == false)
+
+                        if (CGlobal.user.linkAccount[id].EnableJob == false && CGlobal.user.EnableRedoJob == false)
                             continue;
                         if (CGlobal.user.CheckLinkCondition)
                         {
@@ -690,6 +718,11 @@ namespace WebControl_V2
             gridUser.Columns["colMaxLink"].Visible = chkLinkCondition.Checked;
             if (CGlobal.user != null)
                 CGlobal.user.CheckLinkCondition = chkLinkCondition.Checked;
+        }
+
+        private void btnRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CGlobal._registerPresenter.Show();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace WebControl_V2.Class
         public static CUserAccount user;
         public static bool _pauseJob;
         public static string _logPath = "";
-        
+        public static CBqRegisterPresenter _registerPresenter;
+        public static CSession _session;
     }
 }
