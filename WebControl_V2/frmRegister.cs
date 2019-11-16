@@ -34,7 +34,7 @@ namespace WebControl_V2
                 lblInfo.Text = "THÀNH CÔNG";
                 lblInfo.ForeColor = Color.LawnGreen;
                 lblInfo.Visible = true;
-                CGlobal._session.CreateSession(txtUserName.Text, 5);
+                CGlobal._session.CreateSession(txtUserName.Text, 4320);
             }
             else if (status == "FAIL")
             {
@@ -74,18 +74,26 @@ namespace WebControl_V2
         }
         bool IsPhoneNumber(string number)
         {
+            //Regex validator = new Regex("^[3-9][0-9]{9}$");
+
+            //return validator.Match(number).Success;
             return true;
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            bool acceptData = true;
             if (txtUserName.Text == "")
             {
                 lblUserError.Visible = true;
+                acceptData = false;
             }
             if (txtPassword.Text == "")
             {
                 lblPassError.Visible = true;
+                acceptData = false;
             }
+            if (acceptData == false)
+                return;
             LoginArgs arg = new LoginArgs();
             arg.username = txtUserName.Text;
             arg.pass = txtPassword.Text;
@@ -94,22 +102,29 @@ namespace WebControl_V2
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
+            bool acceptData = true;
             if (txtUserName.Text == "")
             {
                 lblUserError.Visible = true;
+                acceptData = false;
             }
             if (txtPassword.Text == "")
             {
                 lblPassError.Visible = true;
+                acceptData = false;
             }
             if (IsValidEmail(txtEmail.Text) == false)
             {
                 lblEmailError.Visible = true;
+                acceptData = false;
             }
             if (IsPhoneNumber(txtPhone.Text) == false)
             {
                 lblPhoneError.Visible = true;
+                acceptData = false;
             }
+            if (acceptData == false)
+                return;
             LoginArgs arg = new LoginArgs();
             arg.username = txtUserName.Text;
             arg.pass = txtPassword.Text;
@@ -136,6 +151,12 @@ namespace WebControl_V2
         private void txtPhone_Enter(object sender, EventArgs e)
         {
             lblPhoneError.Visible = false;
+        }
+
+        private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar) == false && (Keys)(e.KeyChar) != Keys.Back)
+                e.Handled = true;
         }
     }
 }

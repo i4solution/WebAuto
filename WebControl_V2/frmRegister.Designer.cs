@@ -29,7 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblInfo = new System.Windows.Forms.Label();
+            this.lblPhoneError = new System.Windows.Forms.Label();
+            this.lblEmailError = new System.Windows.Forms.Label();
+            this.lblPassError = new System.Windows.Forms.Label();
+            this.lblUserError = new System.Windows.Forms.Label();
             this.chkRegister = new System.Windows.Forms.CheckBox();
             this.picIcon = new System.Windows.Forms.PictureBox();
             this.chkRemember = new System.Windows.Forms.CheckBox();
@@ -44,11 +47,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.lblUserError = new System.Windows.Forms.Label();
-            this.lblPassError = new System.Windows.Forms.Label();
-            this.lblEmailError = new System.Windows.Forms.Label();
-            this.lblPhoneError = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             this.SuspendLayout();
@@ -80,19 +80,61 @@
             this.panel1.Size = new System.Drawing.Size(487, 256);
             this.panel1.TabIndex = 1;
             // 
-            // lblInfo
+            // lblPhoneError
             // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.BackColor = System.Drawing.SystemColors.Control;
-            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfo.ForeColor = System.Drawing.Color.Lime;
-            this.lblInfo.Location = new System.Drawing.Point(346, 143);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(138, 24);
-            this.lblInfo.TabIndex = 24;
-            this.lblInfo.Text = "THÀNH CÔNG";
-            this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblInfo.Visible = false;
+            this.lblPhoneError.AutoSize = true;
+            this.lblPhoneError.BackColor = System.Drawing.SystemColors.Control;
+            this.lblPhoneError.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhoneError.ForeColor = System.Drawing.Color.Red;
+            this.lblPhoneError.Location = new System.Drawing.Point(344, 141);
+            this.lblPhoneError.Name = "lblPhoneError";
+            this.lblPhoneError.Size = new System.Drawing.Size(19, 29);
+            this.lblPhoneError.TabIndex = 28;
+            this.lblPhoneError.Text = "!";
+            this.lblPhoneError.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPhoneError.Visible = false;
+            // 
+            // lblEmailError
+            // 
+            this.lblEmailError.AutoSize = true;
+            this.lblEmailError.BackColor = System.Drawing.SystemColors.Control;
+            this.lblEmailError.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmailError.ForeColor = System.Drawing.Color.Red;
+            this.lblEmailError.Location = new System.Drawing.Point(344, 107);
+            this.lblEmailError.Name = "lblEmailError";
+            this.lblEmailError.Size = new System.Drawing.Size(19, 29);
+            this.lblEmailError.TabIndex = 27;
+            this.lblEmailError.Text = "!";
+            this.lblEmailError.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblEmailError.Visible = false;
+            // 
+            // lblPassError
+            // 
+            this.lblPassError.AutoSize = true;
+            this.lblPassError.BackColor = System.Drawing.SystemColors.Control;
+            this.lblPassError.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassError.ForeColor = System.Drawing.Color.Red;
+            this.lblPassError.Location = new System.Drawing.Point(344, 49);
+            this.lblPassError.Name = "lblPassError";
+            this.lblPassError.Size = new System.Drawing.Size(19, 29);
+            this.lblPassError.TabIndex = 26;
+            this.lblPassError.Text = "!";
+            this.lblPassError.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPassError.Visible = false;
+            // 
+            // lblUserError
+            // 
+            this.lblUserError.AutoSize = true;
+            this.lblUserError.BackColor = System.Drawing.SystemColors.Control;
+            this.lblUserError.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserError.ForeColor = System.Drawing.Color.Red;
+            this.lblUserError.Location = new System.Drawing.Point(344, 16);
+            this.lblUserError.Name = "lblUserError";
+            this.lblUserError.Size = new System.Drawing.Size(19, 29);
+            this.lblUserError.TabIndex = 25;
+            this.lblUserError.Text = "!";
+            this.lblUserError.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblUserError.Visible = false;
             // 
             // chkRegister
             // 
@@ -163,12 +205,13 @@
             // 
             this.txtPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPhone.Location = new System.Drawing.Point(139, 144);
-            this.txtPhone.MaxLength = 15;
+            this.txtPhone.MaxLength = 13;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(201, 24);
             this.txtPhone.TabIndex = 18;
             this.txtPhone.Visible = false;
             this.txtPhone.Enter += new System.EventHandler(this.txtPhone_Enter);
+            this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPhone_KeyPress);
             // 
             // lblPhone
             // 
@@ -252,6 +295,20 @@
             this.label3.Text = "Tên đăng nhập:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.BackColor = System.Drawing.SystemColors.Control;
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.ForeColor = System.Drawing.Color.Lime;
+            this.lblInfo.Location = new System.Drawing.Point(346, 143);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(138, 24);
+            this.lblInfo.TabIndex = 24;
+            this.lblInfo.Text = "THÀNH CÔNG";
+            this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblInfo.Visible = false;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -263,62 +320,6 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Gọi hỗ trợ : 0974725345";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblUserError
-            // 
-            this.lblUserError.AutoSize = true;
-            this.lblUserError.BackColor = System.Drawing.SystemColors.Control;
-            this.lblUserError.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserError.ForeColor = System.Drawing.Color.Red;
-            this.lblUserError.Location = new System.Drawing.Point(344, 16);
-            this.lblUserError.Name = "lblUserError";
-            this.lblUserError.Size = new System.Drawing.Size(19, 29);
-            this.lblUserError.TabIndex = 25;
-            this.lblUserError.Text = "!";
-            this.lblUserError.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblUserError.Visible = false;
-            // 
-            // lblPassError
-            // 
-            this.lblPassError.AutoSize = true;
-            this.lblPassError.BackColor = System.Drawing.SystemColors.Control;
-            this.lblPassError.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassError.ForeColor = System.Drawing.Color.Red;
-            this.lblPassError.Location = new System.Drawing.Point(344, 49);
-            this.lblPassError.Name = "lblPassError";
-            this.lblPassError.Size = new System.Drawing.Size(19, 29);
-            this.lblPassError.TabIndex = 26;
-            this.lblPassError.Text = "!";
-            this.lblPassError.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblPassError.Visible = false;
-            // 
-            // lblEmailError
-            // 
-            this.lblEmailError.AutoSize = true;
-            this.lblEmailError.BackColor = System.Drawing.SystemColors.Control;
-            this.lblEmailError.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmailError.ForeColor = System.Drawing.Color.Red;
-            this.lblEmailError.Location = new System.Drawing.Point(344, 107);
-            this.lblEmailError.Name = "lblEmailError";
-            this.lblEmailError.Size = new System.Drawing.Size(19, 29);
-            this.lblEmailError.TabIndex = 27;
-            this.lblEmailError.Text = "!";
-            this.lblEmailError.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblEmailError.Visible = false;
-            // 
-            // lblPhoneError
-            // 
-            this.lblPhoneError.AutoSize = true;
-            this.lblPhoneError.BackColor = System.Drawing.SystemColors.Control;
-            this.lblPhoneError.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhoneError.ForeColor = System.Drawing.Color.Red;
-            this.lblPhoneError.Location = new System.Drawing.Point(344, 141);
-            this.lblPhoneError.Name = "lblPhoneError";
-            this.lblPhoneError.Size = new System.Drawing.Size(19, 29);
-            this.lblPhoneError.TabIndex = 28;
-            this.lblPhoneError.Text = "!";
-            this.lblPhoneError.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblPhoneError.Visible = false;
             // 
             // frmRegister
             // 

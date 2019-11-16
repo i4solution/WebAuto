@@ -52,6 +52,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnRun = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnRegister = new System.Windows.Forms.LinkLabel();
             this.btnDefaultProfile = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chkLinkCondition = new System.Windows.Forms.CheckBox();
@@ -105,7 +106,7 @@
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label19 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnRegister = new System.Windows.Forms.LinkLabel();
+            this.lblRegister = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridJobReport)).BeginInit();
             this.panel4.SuspendLayout();
@@ -119,6 +120,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblRegister);
             this.panel1.Controls.Add(this.label23);
             this.panel1.Controls.Add(this.chkInvisibleBrowser);
             this.panel1.Controls.Add(this.label21);
@@ -154,7 +156,6 @@
             this.label23.TabIndex = 23;
             this.label23.Text = "Ẩn trình duyệt";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label23.Visible = false;
             // 
             // chkInvisibleBrowser
             // 
@@ -164,7 +165,6 @@
             this.chkInvisibleBrowser.Size = new System.Drawing.Size(15, 14);
             this.chkInvisibleBrowser.TabIndex = 22;
             this.chkInvisibleBrowser.UseVisualStyleBackColor = true;
-            this.chkInvisibleBrowser.Visible = false;
             // 
             // label21
             // 
@@ -359,6 +359,18 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(593, 459);
             this.panel4.TabIndex = 5;
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.AutoSize = true;
+            this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegister.Location = new System.Drawing.Point(119, 431);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(137, 18);
+            this.btnRegister.TabIndex = 13;
+            this.btnRegister.TabStop = true;
+            this.btnRegister.Text = "Đăng nhập/Đăng ký";
+            this.btnRegister.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.btnRegister_LinkClicked);
             // 
             // btnDefaultProfile
             // 
@@ -903,17 +915,17 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnRegister
+            // lblRegister
             // 
-            this.btnRegister.AutoSize = true;
-            this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.Location = new System.Drawing.Point(119, 431);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(137, 18);
-            this.btnRegister.TabIndex = 13;
-            this.btnRegister.TabStop = true;
-            this.btnRegister.Text = "Đăng nhập/Đăng ký";
-            this.btnRegister.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.btnRegister_LinkClicked);
+            this.lblRegister.AutoSize = true;
+            this.lblRegister.BackColor = System.Drawing.Color.White;
+            this.lblRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRegister.ForeColor = System.Drawing.Color.Red;
+            this.lblRegister.Location = new System.Drawing.Point(441, 3);
+            this.lblRegister.Name = "lblRegister";
+            this.lblRegister.Size = new System.Drawing.Size(208, 13);
+            this.lblRegister.TabIndex = 24;
+            this.lblRegister.Text = "Hãy ủng hộ sản phẩm bằng cách Đăng ký";
             // 
             // frmMain
             // 
@@ -1024,6 +1036,7 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.CheckBox chkInvisibleBrowser;
         private System.Windows.Forms.LinkLabel btnRegister;
+        private System.Windows.Forms.Label lblRegister;
     }
 }
 

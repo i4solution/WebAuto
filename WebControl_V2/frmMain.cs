@@ -43,9 +43,11 @@ namespace WebControl_V2
             this.Invoke((MethodInvoker)delegate
             {
                 if (CGlobal._session.Username != "")
-                    this.Text = CGlobal.ver;
+                    //this.Text = CGlobal.ver;
+                    lblRegister.Visible = false;
                 else
-                    this.Text = CGlobal.ver + " - Hãy đăng ký để ủng hộ sản phẩm";
+                    //this.Text = CGlobal.ver + " - Hãy đăng ký để ủng hộ sản phẩm";
+                    lblRegister.Visible = true;
             });
             
 
@@ -55,18 +57,25 @@ namespace WebControl_V2
             this.Invoke((MethodInvoker)delegate
             {
                 if (CGlobal._session.Username != "")
-                    this.Text = CGlobal.ver;
+                    //this.Text = CGlobal.ver;
+                    lblRegister.Visible = false;
                 else
-                    this.Text = CGlobal.ver + " - Hãy đăng ký để ủng hộ sản phẩm";
+                    //this.Text = CGlobal.ver + " - Hãy đăng ký để ủng hộ sản phẩm";
+                    lblRegister.Visible = true;
             });
 
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            if (CGlobal._session.Username != "")
-                this.Text = CGlobal.ver; 
-            else
-                this.Text = CGlobal.ver + " - Hãy đăng ký để ủng hộ sản phẩm";
+            this.Invoke((MethodInvoker)delegate
+            {
+                if (CGlobal._session.Username != "")
+                    //this.Text = CGlobal.ver;
+                    lblRegister.Visible = false;
+                else
+                    //this.Text = CGlobal.ver + " - Hãy đăng ký để ủng hộ sản phẩm";
+                    lblRegister.Visible = true;
+            });
 
             btnLikeArticle.BackColor = Color.YellowGreen;
             btnLikeFanPage.BackColor = Color.YellowGreen;
@@ -428,7 +437,7 @@ namespace WebControl_V2
                             }
                         }
 
-                        if (CGlobal.user.linkAccount[id].EnableJob == false && CGlobal.user.EnableRedoJob == false)
+                        if (CGlobal.user.linkAccount[id].EnableJob == false /*&& CGlobal.user.EnableRedoJob == false*/)
                             continue;
                         if (CGlobal.user.CheckLinkCondition)
                         {
@@ -473,6 +482,7 @@ namespace WebControl_V2
                         goLike.DoJob(test);
                         
                         //goLike.DoJobTest(test);
+
                         if (CGlobal.user.CheckLinkCondition)
                         {
                             if (CGlobal.user.linkAccount[id].JobCountUpMax >= CGlobal.user.linkAccount[id].JobCountMax)

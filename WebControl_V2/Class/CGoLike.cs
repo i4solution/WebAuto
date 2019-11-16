@@ -60,30 +60,60 @@ namespace WebControl_V2.Class
             int jobFinish = 0;
             while (true)
             {
-                if ((jobFinish >= linkAccount.JobCount && linkAccount.JobCountUpFB >= linkAccount.JobCountFB) || _exit ||
-                    linkAccount.JobCountUpMax >= linkAccount.JobCountMax ||
-                    linkAccount.JobCountUpFBMax >= linkAccount.JobCountFBMax)
-                {
-                    break;
-                }
-                int r = new Random().Next(10, 20);
-                for (int i = 0; i < r; i++)
+                if (CGlobal.user.CheckLinkCondition)
                 {
                     if ((jobFinish >= linkAccount.JobCount && linkAccount.JobCountUpFB >= linkAccount.JobCountFB) || _exit ||
                     linkAccount.JobCountUpMax >= linkAccount.JobCountMax ||
                     linkAccount.JobCountUpFBMax >= linkAccount.JobCountFBMax)
                     {
+
                         break;
+                    }
+                }
+                else
+                {
+                    if ((jobFinish >= linkAccount.JobCount) || _exit ||
+                    linkAccount.JobCountUpMax >= linkAccount.JobCountMax
+                    )
+                    {
+
+                        break;
+                    }
+                }
+                if (linkAccount.EnableJob == false)
+                    return;
+                int r = new Random().Next(10, 20);
+                for (int i = 0; i < r; i++)
+                {
+                    if (CGlobal.user.CheckLinkCondition)
+                    {
+                        if ((jobFinish >= linkAccount.JobCount && linkAccount.JobCountUpFB >= linkAccount.JobCountFB) || _exit ||
+                        linkAccount.JobCountUpMax >= linkAccount.JobCountMax ||
+                        linkAccount.JobCountUpFBMax >= linkAccount.JobCountFBMax)
+                        {
+
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if ((jobFinish >= linkAccount.JobCount) || _exit ||
+                        linkAccount.JobCountUpMax >= linkAccount.JobCountMax
+                        )
+                        {
+
+                            break;
+                        }
                     }
                     bqInterface.UpdateAccount("Timer", "2000");
                     System.Threading.Thread.Sleep(2000);
-
-                    linkAccount.JobCountUp = jobFinish++;
+                    jobFinish++;
+                    linkAccount.JobCountUp = jobFinish;
                     linkAccount.JobCountUpMax += 1;
 
                     if (new Random().Next(1, 5) == 3)
-                        break;
-                    if ((CGlobal.user.LimitFault - new Random().Next(1, 5)) <= 0)
+                        CGlobal.user.LimitFault--;
+                    if (CGlobal.user.LimitFault <= 0)
                     {
                         bqInterface.UpdateProgress("Số lần bị lỗi vượt quá giới hạn...");
                         bqInterface.UpdateAccount("Timer", "5000");
@@ -111,7 +141,7 @@ namespace WebControl_V2.Class
             string jobIDText = "";
             string faceName = "";
             int delay = 0;
-
+            _exit = false;
             service.GotoURL("https://app.golike.net");
             service.Driver().Manage().Window.Minimize();
 
@@ -978,6 +1008,8 @@ namespace WebControl_V2.Class
                             else
                             {
                                 JobFinishedError = 0;
+                                _exit = true;
+                                break;
                             }
   
                             if (service.TryFindElement(By.CssSelector("i.material-icons.float-right.mt-1.mr-2.bg-gradient-1"), out job))
