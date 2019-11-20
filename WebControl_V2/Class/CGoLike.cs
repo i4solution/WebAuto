@@ -112,7 +112,20 @@ namespace WebControl_V2.Class
                     linkAccount.JobCountUpMax += 1;
 
                     if (new Random().Next(1, 5) == 3)
+                    {
                         CGlobal.user.LimitFault--;
+
+                        bqInterface.UpdateAccountJob(linkAccount.User, linkAccount.JobCount.ToString(), jobFinish.ToString());
+                        linkAccount.JobCountUpMax += 1;
+                        if (CGlobal.user.CheckLinkCondition)
+                        {
+                            int fbCount = linkAccount.JobCountFB;
+                            linkAccount.JobCountUpFB += 1;
+                            linkAccount.JobCountUpFBMax += 1;
+                            bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount.ToString(), linkAccount.JobCountUpFB.ToString());
+                        }
+                        bqInterface.UpdateJob(i, "DEMO", "That bai");
+                    }
                     if (CGlobal.user.LimitFault <= 0)
                     {
                         bqInterface.UpdateProgress("Số lần bị lỗi vượt quá giới hạn...");
@@ -125,10 +138,10 @@ namespace WebControl_V2.Class
 
                     bqInterface.UpdateJob(i, "DEMO", "Thanh Cong");
                     bqInterface.UpdateAccountJob(linkAccount.User, linkAccount.JobCount.ToString(), jobFinish.ToString());
-                    int fbCount = linkAccount.JobCountFB;
+                    int fbCount1 = linkAccount.JobCountFB;
                     linkAccount.JobCountUpFB += 1;
                     linkAccount.JobCountUpFBMax += 1;
-                    bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount.ToString(), linkAccount.JobCountUpFB.ToString());
+                    bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount1.ToString(), linkAccount.JobCountUpFB.ToString());
                     
                 }
             }
@@ -2204,6 +2217,16 @@ namespace WebControl_V2.Class
 
                                     bqInterface.UpdateJob(i, jobIDText, "That Bai");
                                     CGlobal.user.LimitFault--;
+
+                                    bqInterface.UpdateAccountJob(linkAccount.User, linkAccount.JobCount.ToString(), jobFinish.ToString());
+                                    linkAccount.JobCountUpMax += 1;
+                                    if (CGlobal.user.CheckLinkCondition)
+                                    {
+                                        int fbCount = linkAccount.JobCountFB;
+                                        linkAccount.JobCountUpFB += 1;
+                                        linkAccount.JobCountUpFBMax += 1;
+                                        bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount.ToString(), linkAccount.JobCountUpFB.ToString());
+                                    }
                                     //bqInterface.UpdateAccountJob(linkAccount.User, linkAccount.JobCount.ToString(), jobFinish.ToString());
                                 }
                                 else
@@ -2310,6 +2333,13 @@ namespace WebControl_V2.Class
                                     bqInterface.UpdateAccount("Timer", delay.ToString());
                                     System.Threading.Thread.Sleep(delay);
 
+                                }
+                                if (CGlobal.user.CheckLinkCondition)
+                                {
+                                    int fbCount = linkAccount.JobCountFB;
+                                    linkAccount.JobCountUpFB += 1;
+                                    linkAccount.JobCountUpFBMax += 1;
+                                    bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount.ToString(), linkAccount.JobCountUpFB.ToString());
                                 }
                                 while (CGlobal._pauseJob)
                                 {

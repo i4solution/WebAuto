@@ -100,6 +100,18 @@
 		}
 		$conn->close();
 	}
-
+	function CheckVersion()
+	{
+		$myfile = fopen("bq_update_ver.txt", "r") or die("Unable to open file!");
+		// Output one line until end-of-file
+		string $data="";
+		while(!feof($myfile)) {
+			$data = fgets($myfile);
+		}
+		fclose($myfile);
+		http_response_code(200);
+		echo json_encode(
+			array("message" => $data));
+	}
 	
 ?> 

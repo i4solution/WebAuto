@@ -113,6 +113,11 @@ namespace WebControl_V2
                 lblPassError.Visible = true;
                 acceptData = false;
             }
+            if (txtPhone.Text == "")
+            {
+                lblPhoneError.Visible = true;
+                acceptData = false;
+            }
             if (IsValidEmail(txtEmail.Text) == false)
             {
                 lblEmailError.Visible = true;

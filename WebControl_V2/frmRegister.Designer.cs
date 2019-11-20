@@ -318,7 +318,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(167, 18);
             this.label5.TabIndex = 18;
-            this.label5.Text = "Gọi hỗ trợ : 0974725345";
+            this.label5.Text = "Gọi hỗ trợ : 0976963229";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmRegister

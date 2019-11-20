@@ -16,7 +16,8 @@ namespace WebControl_V2
         {            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            frmMain main = new frmMain();
+            Application.Run(main);
         }
     }
 }

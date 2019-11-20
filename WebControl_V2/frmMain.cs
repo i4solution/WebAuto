@@ -67,6 +67,7 @@ namespace WebControl_V2
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
+            this.Text = CGlobal.ver;
             this.Invoke((MethodInvoker)delegate
             {
                 if (CGlobal._session.Username != "")
@@ -479,9 +480,9 @@ namespace WebControl_V2
                         goLike.LinkAccount = CGlobal.user.linkAccount[id];
                         goLike.UpdateGUI = this;
 
-                        goLike.DoJob(test);
+                        //goLike.DoJob(test);
                         
-                        //goLike.DoJobTest(test);
+                        goLike.DoJobTest(test);
 
                         if (CGlobal.user.CheckLinkCondition)
                         {
