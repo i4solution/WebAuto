@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblRegister = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.chkInvisibleBrowser = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -106,7 +107,6 @@
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label19 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lblRegister = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridJobReport)).BeginInit();
             this.panel4.SuspendLayout();
@@ -146,6 +146,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(917, 482);
             this.panel1.TabIndex = 0;
+            // 
+            // lblRegister
+            // 
+            this.lblRegister.AutoSize = true;
+            this.lblRegister.BackColor = System.Drawing.Color.White;
+            this.lblRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRegister.ForeColor = System.Drawing.Color.Red;
+            this.lblRegister.Location = new System.Drawing.Point(441, 3);
+            this.lblRegister.Name = "lblRegister";
+            this.lblRegister.Size = new System.Drawing.Size(208, 13);
+            this.lblRegister.TabIndex = 24;
+            this.lblRegister.Text = "Hãy ủng hộ sản phẩm bằng cách Đăng ký";
             // 
             // label23
             // 
@@ -914,18 +926,6 @@
             // 
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // lblRegister
-            // 
-            this.lblRegister.AutoSize = true;
-            this.lblRegister.BackColor = System.Drawing.Color.White;
-            this.lblRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRegister.ForeColor = System.Drawing.Color.Red;
-            this.lblRegister.Location = new System.Drawing.Point(441, 3);
-            this.lblRegister.Name = "lblRegister";
-            this.lblRegister.Size = new System.Drawing.Size(208, 13);
-            this.lblRegister.TabIndex = 24;
-            this.lblRegister.Text = "Hãy ủng hộ sản phẩm bằng cách Đăng ký";
             // 
             // frmMain
             // 

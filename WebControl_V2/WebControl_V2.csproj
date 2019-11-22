@@ -35,7 +35,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logo 48x48.ico</ApplicationIcon>
+    <ApplicationIcon>web_auto.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="bqImplementWeb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -130,6 +130,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="web_auto.ico" />
+    <None Include="Image\rect286-3.png" />
     <Content Include="logo 48x48.ico" />
     <Content Include="logo.ico" />
     <None Include="Resources\rect286-3.png" />

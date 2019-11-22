@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CbqCryt.cs" />
+    <Compile Include="CbqDownloader.cs" />
     <Compile Include="CbqInet.cs" />
     <Compile Include="CSupport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

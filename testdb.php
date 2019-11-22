@@ -19,6 +19,9 @@
 	else if ($endpoint == "create")
 	{
 		create();
+	}else if ($endpoint == "checkversion")
+	{
+		CheckVersion();
 	}
 	else{
 		//// set response code - 404 Not found
@@ -104,7 +107,7 @@
 	{
 		$myfile = fopen("bq_update_ver.txt", "r") or die("Unable to open file!");
 		// Output one line until end-of-file
-		string $data="";
+		$data="";
 		while(!feof($myfile)) {
 			$data = fgets($myfile);
 		}

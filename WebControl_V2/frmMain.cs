@@ -27,7 +27,8 @@ namespace WebControl_V2
         int timeCountDown = 0;
         Task t1 = null;
         string currentProfile = "";
-        public frmMain()
+        string _msg = "";
+        public frmMain(string msg)
         {
             goLike = new CGoLike();
             CGlobal._registerPresenter = new CBqRegisterPresenter();
@@ -37,6 +38,11 @@ namespace WebControl_V2
             CEventLog.Log.EnableLog = true;
 
             InitializeComponent();
+            if (msg != "")
+            {
+                _msg = msg;
+                this.Text = "Không có INTERNET";
+            }
         }
         private void OnSessionTrigger(object sender, EventArgs e)
         {
@@ -67,7 +73,8 @@ namespace WebControl_V2
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            this.Text = CGlobal.ver;
+            if (_msg == "")
+                this.Text = CGlobal.ver;
             this.Invoke((MethodInvoker)delegate
             {
                 if (CGlobal._session.Username != "")
@@ -480,9 +487,9 @@ namespace WebControl_V2
                         goLike.LinkAccount = CGlobal.user.linkAccount[id];
                         goLike.UpdateGUI = this;
 
-                        //goLike.DoJob(test);
+                        goLike.DoJob(test);
                         
-                        goLike.DoJobTest(test);
+                        //goLike.DoJobTest(test);
 
                         if (CGlobal.user.CheckLinkCondition)
                         {
