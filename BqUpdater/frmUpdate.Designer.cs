@@ -196,7 +196,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmUpdate";
             this.ShowIcon = false;
-            this.Text = "Web Auto - Update Tool";
+            this.Text = "Web Auto GoLike - Update Tool";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();

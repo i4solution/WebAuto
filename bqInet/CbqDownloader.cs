@@ -33,9 +33,9 @@ namespace bqInet
             {
                 //System.IO.Directory.CreateDirectory(Path.GetDirectoryName(_fullPathWhereToSave));
 
-                if (File.Exists(_fullPathWhereToSave + "\\WebControl_V2.exe"))
+                if (File.Exists(_fullPathWhereToSave + "\\WebControl_V2.bqt"))
                 {
-                    File.Delete(_fullPathWhereToSave + "\\WebControl_V2.exe");
+                    File.Delete(_fullPathWhereToSave + "\\WebControl_V2.bqt");
                 }
                 using (WebClient client = new WebClient())
                 {
@@ -66,7 +66,7 @@ namespace bqInet
                     //t1.Start();      
 
                     
-                    client.DownloadFileAsync(ur, _fullPathWhereToSave + "\\WebControl_V2.exe");
+                    client.DownloadFileAsync(ur, _fullPathWhereToSave + "\\WebControl_V2.bqt");
                    
                     //_semaphore.Wait(timeout);
                     //return _result && File.Exists(_fullPathWhereToSave);

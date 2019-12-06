@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using bqInet;
+using System.IO;
 
 namespace BqUpdater
 {
@@ -29,6 +30,10 @@ namespace BqUpdater
                     txtDetail.AppendText(news[i] + "\n");
             }
             lblCurrentVer.Text = _ver;
+            if (_ver == "")
+                btnUpdate.Text = "Tải về";
+            else
+                btnUpdate.Text = "Cập nhật";
         }
         public void SetCurrentVer(string ver)
         {
@@ -80,6 +85,12 @@ namespace BqUpdater
             {
                 lblInfo.Text = "THÀNH CÔNG";
                 lblInfo.Visible = true;
+                if (File.Exists(Environment.CurrentDirectory + "\\WebControl_V2.exe"))
+                {
+                    File.Delete(Environment.CurrentDirectory + "\\WebControl_V2.exe");
+                }
+                File.Move(Environment.CurrentDirectory + "\\WebControl_V2.bqt", Environment.CurrentDirectory + "\\WebControl_V2.exe");
+
                 System.Threading.Thread.Sleep(1000);
                 System.Diagnostics.Process.Start("WebControl_V2.exe", "no_update");
                 System.Threading.Thread.Sleep(1000);

@@ -28,6 +28,7 @@ namespace WebControl_V2
         Task t1 = null;
         string currentProfile = "";
         string _msg = "";
+        bool startDoJob = false;
         public frmMain(string msg)
         {
             goLike = new CGoLike();
@@ -117,6 +118,7 @@ namespace WebControl_V2
                             txtFBDelay1.Text = CGlobal.user.InstricFBDelay1.ToString();
                             txtFaultLimit.Text = CGlobal.user.LimitFault.ToString();
                             chkEnableRedo.Checked = CGlobal.user.EnableRedoJob;
+                            chkJobLessMoney.Checked = CGlobal.user.JobLessMoney;
                             chkLinkCondition.Checked = CGlobal.user.CheckLinkCondition;
                             gridUser.Rows.Clear();
                             foreach (CLinkAccount ac in CGlobal.user.linkAccount.Values)
@@ -195,6 +197,10 @@ namespace WebControl_V2
                     {
                         gridJob.Rows.Clear();
                         lblProgress.Text = "...";
+                    }
+                    if (text == "GoLike Bao Tri !!!")
+                    {
+                        startDoJob = false;
                     }
                 });
             }
@@ -353,6 +359,7 @@ namespace WebControl_V2
             {
                 CGlobal.user = new CUserAccount(txtUserName.Text, txtPassword.Text);
                 CGlobal.user.EnableRedoJob = chkEnableRedo.Checked;
+                CGlobal.user.JobLessMoney = chkJobLessMoney.Checked;
             }
             try
             {
@@ -360,6 +367,7 @@ namespace WebControl_V2
                 CGlobal.user.FBDelay1 = Int32.Parse(txtFBDelay1.Text);
                 CGlobal.user.LimitFault = Int32.Parse(txtFaultLimit.Text);
                 CGlobal.user.EnableRedoJob = chkEnableRedo.Checked;
+                CGlobal.user.JobLessMoney = chkJobLessMoney.Checked;
                 CGlobal.user.CheckLinkCondition = chkLinkCondition.Checked;
             }
             catch (Exception ii)
@@ -419,11 +427,14 @@ namespace WebControl_V2
                     btnLikeArticle.Enabled = false;
                     btnLikeFanPage.Enabled = false;
                     chkEnableRedo.Enabled = false;
+                    chkJobLessMoney.Enabled = false;
                     btnFollow.Enabled = false;
                     chkInvisibleBrowser.Enabled = false;
                     gridUser.Enabled = false;
                     timeCountDown = 0;
                     timer1.Start();
+                    startDoJob = true;
+                    lblProgress.Text = "Go ...";
                 });
                 while (true)
                 {
@@ -444,8 +455,9 @@ namespace WebControl_V2
                                 break;
                             }
                         }
-
-                        if (CGlobal.user.linkAccount[id].EnableJob == false /*&& CGlobal.user.EnableRedoJob == false*/)
+                        if (CGlobal.user.linkAccount[id].EnableJob == false)
+                            continue;
+                        if (CGlobal.user.linkAccount[id].EnableJob == false && CGlobal.user.EnableRedoJob == false)
                             continue;
                         if (CGlobal.user.CheckLinkCondition)
                         {
@@ -521,8 +533,10 @@ namespace WebControl_V2
                         }
 
                         test.Quit();
+                        if (startDoJob == false)
+                            break;
                     }
-                    if (finish)
+                    if (finish || startDoJob == false)
                         break;
                 }
                 this.Invoke((MethodInvoker)delegate
@@ -534,12 +548,14 @@ namespace WebControl_V2
                     btnLikeArticle.Enabled = true;
                     btnLikeFanPage.Enabled = true;
                     chkEnableRedo.Enabled = true;
+                    chkJobLessMoney.Enabled = true;
                     btnFollow.Enabled = true;
                     chkInvisibleBrowser.Enabled = true;
                     gridUser.Enabled = true;
                     timeCountDown = 0;
                     lblCountDown.Text = "0";
                     timer1.Stop();
+                    startDoJob = false;
                 });
             };
             t1 = new Task(action, "jobQB#1");
@@ -622,6 +638,7 @@ namespace WebControl_V2
                 user.FBDelay1 = Int32.Parse(txtFBDelay1.Text);
                 user.LimitFault = Int32.Parse(txtFaultLimit.Text);
                 user.EnableRedoJob = chkEnableRedo.Checked;
+                user.JobLessMoney = chkJobLessMoney.Checked;
                 user.CheckLinkCondition = chkLinkCondition.Checked;
             }
             catch (Exception ii)
@@ -686,6 +703,7 @@ namespace WebControl_V2
                         txtFBDelay1.Text = CGlobal.user.InstricFBDelay1.ToString();
                         txtFaultLimit.Text = CGlobal.user.LimitFault.ToString();
                         chkEnableRedo.Checked = CGlobal.user.EnableRedoJob;
+                        chkJobLessMoney.Checked = CGlobal.user.JobLessMoney;
                         chkLinkCondition.Checked = CGlobal.user.CheckLinkCondition;
                         gridUser.Rows.Clear();
                         foreach (CLinkAccount ac in CGlobal.user.linkAccount.Values)

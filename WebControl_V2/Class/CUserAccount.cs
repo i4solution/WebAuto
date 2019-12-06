@@ -19,9 +19,11 @@ namespace WebControl_V2.Class
         int limitFault = 4;
         bool enableRedo = true;
         bool checkLinkCount = false;
+        bool jobLessMoney = false;
         public Dictionary<string, CLinkAccount> linkAccount;
         string _obj;
         Random random;
+        List<string> logJobSession;
         public CUserAccount(string user, string pass)
         {
             username = user;
@@ -29,6 +31,7 @@ namespace WebControl_V2.Class
             linkAccount = new Dictionary<string, CLinkAccount>();
             enableRedo = true;
             random = new Random();
+            logJobSession = new List<string>();
         }
         public string User
         {
@@ -79,6 +82,11 @@ namespace WebControl_V2.Class
         {
             get { return enableRedo; }
             set { enableRedo = value; }
+        }
+        public bool JobLessMoney
+        {
+            get { return jobLessMoney; }
+            set { jobLessMoney = value; }
         }
         public bool CheckLinkCondition
         {
@@ -145,6 +153,26 @@ namespace WebControl_V2.Class
                 bf.Serialize(ms, this);
                 return Convert.ToBase64String(ms.GetBuffer());
             }
+        }
+        public bool CheckLogJob(string job)
+        {
+            if (logJobSession == null)
+                logJobSession = new List<string>();
+            if (logJobSession.Count > 0)
+            {
+                foreach (string jb in logJobSession)
+                {
+                    if (jb == job)
+                        return true;
+                }
+            }
+            return false;
+        }
+        public void AddLogJob(string id)
+        {
+            if (logJobSession == null)
+                logJobSession = new List<string>();
+            logJobSession.Add(id);
         }
         public CUserAccount Decode
         {

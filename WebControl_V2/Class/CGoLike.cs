@@ -20,12 +20,13 @@ namespace WebControl_V2.Class
         IWebDriver driver;
         CLinkAccount linkAccount;
         IUpdateInterface bqInterface;
+        
         public CGoLike()
         {
             _likeArticel = true;
             _likePage = true;
             _follow = true;
-            _exit = false;
+            _exit = false;            
         }
         public bool LikeArticel
         {
@@ -165,6 +166,15 @@ namespace WebControl_V2.Class
             //String zoomInJS = "document.body.style.transform='scale(0.8)'";
             //IJavaScriptExecutor jsZ = (IJavaScriptExecutor)driver;
             //jsZ.ExecuteScript(zoomInJS);
+
+            //GoLike Maintenance
+            //h4.mt-3.font-24.b200.maintenance
+            IWebElement maint = null;
+            if (service.TryFindElement(By.CssSelector("h4.mt-3.font-24.b200.maintenance"), out maint))
+            {
+                bqInterface.UpdateProgress("GoLike Bao Tri !!!");
+                return;
+            }
 
             System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> ab = driver.FindElements(By.CssSelector("input.form-control"));
             if (ab.Count > 1)
@@ -541,8 +551,8 @@ namespace WebControl_V2.Class
             {
                 System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> faceLogin = driver.FindElements(By.CssSelector("input.inputtext._55r1._6luy"));
                 faceLogin[0].SendKeys(linkAccount.User);
-                bqInterface.UpdateAccount("Timer", "1000");
-                System.Threading.Thread.Sleep(1000);
+                bqInterface.UpdateAccount("Timer", "2500");
+                System.Threading.Thread.Sleep(2500);
 
                 faceLogin[1].SendKeys(linkAccount.Password);
                 bqInterface.UpdateAccount("Timer", "2000");
@@ -681,6 +691,56 @@ namespace WebControl_V2.Class
                         bqInterface.UpdateProgress("Tạm ngưng .....");
                         System.Threading.Thread.Sleep(270);
                     }
+                    //If Facebook default LOCK. GOLIke will pop-up message "LOI"
+                    //div.swal2-popup.swal2-modal.swal2-show
+                    //Button OK: button.swal2-confirm.swal2-styled
+                    IWebElement faceEorror = null;
+                    if (service.TryFindElement(By.CssSelector("div.swal2-popup.swal2-modal.swal2-show"), out faceEorror))
+                    {
+                        if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out faceEorror))
+                        {//Confirm OK to exit
+                            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                            action = action.MoveToElement(faceEorror);
+                            action = action.Click(faceEorror);
+                            action.Build().Perform();
+
+                            bqInterface.UpdateProgress("Facebook CheckPoint .....");
+                            delay = CGlobal.user.GoLikeDelay1;
+                            bqInterface.UpdateAccount("Timer", delay.ToString());
+                            System.Threading.Thread.Sleep(delay);
+                        }
+                    }
+                    //// New update follow GoLike, choose less money job
+                    IWebElement jobLessMoney = null;
+                    if (service.TryFindElement(By.CssSelector("label.mt-1.vue-js-switch"), out jobLessMoney) && CGlobal.user.JobLessMoney)
+                    {
+                        if (jobLessMoney.Text == "TẮT")
+                        {
+                            OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                            action = action.MoveToElement(jobLessMoney);
+                            action = action.Click(jobLessMoney);
+                            action.Build().Perform();
+
+                            bqInterface.UpdateProgress("Job Less Money Select .....");
+                            delay = CGlobal.user.GoLikeDelay1;
+                            bqInterface.UpdateAccount("Timer", delay.ToString());
+                            System.Threading.Thread.Sleep(delay);
+
+                            if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out faceEorror))
+                            {//Confirm OK 
+                                action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                action = action.MoveToElement(faceEorror);
+                                action = action.Click(faceEorror);
+                                action.Build().Perform();
+
+                                bqInterface.UpdateProgress("Job Less Money Select ... OK");
+                                delay = 1500;
+                                bqInterface.UpdateAccount("Timer", delay.ToString());
+                                System.Threading.Thread.Sleep(1500);
+                            }
+                        }                        
+                    }
+                    ////END
 
                     //Choose FB account 
                     //div.col-8.pl-3.pr-0
@@ -700,11 +760,17 @@ namespace WebControl_V2.Class
                                 needSelectAccount = true;
                         }
                     }
+                    //needSelectAccount = true;
                     if (service.TryFindElement(By.CssSelector("div.col-7.pr-3"), out selectAccount) && needSelectAccount)
                     {
-                        js.ExecuteScript("arguments[0].scrollIntoView(false);", selectAccount);
+                        //js.ExecuteScript("arguments[0].scrollIntoView(false);", selectAccount);
 
-                        selectAccount.Click();
+                        //selectAccount.Click();
+                        OpenQA.Selenium.Interactions.Actions actionClick = new OpenQA.Selenium.Interactions.Actions(driver);
+                        actionClick = actionClick.MoveToElement(selectAccount);
+                        actionClick = actionClick.Click(selectAccount);
+                        actionClick.Build().Perform();
+
                         bqInterface.UpdateAccount("Timer", "4000");
                         System.Threading.Thread.Sleep(4000);
                         
@@ -816,7 +882,7 @@ namespace WebControl_V2.Class
                         filterJob[0].Click();
                         bqInterface.UpdateAccount("Timer", "3000");
                         System.Threading.Thread.Sleep(3000);
-                        
+
                         job.Click();
                     }
                     if (filterJob.Count == 0)
@@ -828,7 +894,7 @@ namespace WebControl_V2.Class
                     filterJob[1].Click();
                     bqInterface.UpdateAccount("Timer", "5000");
                     System.Threading.Thread.Sleep(5000);
-                    
+
                     job.Click();
 
                     if (FollowPage == false)
@@ -836,7 +902,7 @@ namespace WebControl_V2.Class
                         filterJob[2].Click();
                         bqInterface.UpdateAccount("Timer", "5000");
                         System.Threading.Thread.Sleep(5000);
-                        
+
                         job.Click();
                     }
 
@@ -845,14 +911,14 @@ namespace WebControl_V2.Class
                         filterJob[3].Click();
                         bqInterface.UpdateAccount("Timer", "5000");
                         System.Threading.Thread.Sleep(5000);
-                        
+
                         job.Click();
                     }
 
                     filterJob[4].Click();
                     bqInterface.UpdateAccount("Timer", "5000");
                     System.Threading.Thread.Sleep(5000);
-                    
+
                     job.Click();
 
                     filterJob[5].Click();
@@ -886,7 +952,9 @@ namespace WebControl_V2.Class
                         timeOut++;
                     }
                     if (timeOut >= 60)
+                    {
                         break;
+                    }
 
                     if (ab.Count == 0)
                     {
@@ -1071,8 +1139,86 @@ namespace WebControl_V2.Class
                         IWebElement jobID = null;
                         //Load Job ID   h6.font-id
                         if (service.TryFindElement(By.CssSelector("h6.font-id"), out jobID) == true)
-                        {
+                        {                            
                             jobIDText = jobID.Text; //TĂNG LIKE CHO FANPAGE
+                            System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> reportErr = driver.FindElements(By.CssSelector("div.card.card-job-detail"));
+                            if (CGlobal.user.CheckLogJob(jobIDText) == true)
+                            {
+                                //Update Follow GoLike (Ver 1.1)
+                                OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                action = action.MoveToElement(reportErr[3]);
+                                action = action.Click(reportErr[3]);
+                                action.Build().Perform();
+
+                                timeOut = 0;
+                                System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> reportList = null;
+                                while (true)
+                                {
+                                    if (timeOut >= 60)
+                                        break;
+                                    reportList = driver.FindElements(By.CssSelector("div.row.align-items-center.mt-2"));
+                                    if (reportList.Count > 0)
+                                        break;
+                                    bqInterface.UpdateAccount("Timer", "1000");
+                                    System.Threading.Thread.Sleep(1000);
+                                    timeOut++;
+                                }
+
+                                if (timeOut >= 60)
+                                {//There are have issue about GoLike
+
+                                }
+                                action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                action = action.MoveToElement(reportList[1]);
+                                action = action.Click(reportList[1]);
+                                action.Build().Perform();
+
+                                delay = CGlobal.user.GoLikeDelay1;
+                                bqInterface.UpdateAccount("Timer", delay.ToString());
+                                System.Threading.Thread.Sleep(delay);
+                                //Click on Button "Gui bao cao"
+                                //button.btn.btn-primary.btn-sm.form-control.mt-3
+                                IWebElement errorButton = null;
+                                if (service.TryFindElement(By.CssSelector("button.btn.btn-block.px-0.bg-button-1"), out errorButton))
+                                {
+                                    action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                    action = action.MoveToElement(errorButton);
+                                    action = action.Click(errorButton);
+                                    action.Build().Perform();
+
+                                    IWebElement confirm = null;
+                                    timeOut = 0;
+                                    while (true)
+                                    {
+                                        if (timeOut >= 60)
+                                            break;
+                                        if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out confirm))
+                                        {
+                                            action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                            action = action.MoveToElement(confirm);
+                                            action = action.Click(confirm);
+                                            action.Build().Perform();
+                                            //confirm.Click();
+                                            delay = CGlobal.user.GoLikeDelay1;
+                                            bqInterface.UpdateAccount("Timer", delay.ToString());
+                                            System.Threading.Thread.Sleep(delay);
+                                            break;
+                                        }
+                                        bqInterface.UpdateAccount("Timer", "1000");
+                                        System.Threading.Thread.Sleep(1000);
+                                        timeOut++;
+                                    }
+
+                                    if (timeOut >= 60)
+                                    {//There are have issue about GoLike
+
+                                    }
+                                }
+                                //End-Update Follow GoLike (Ver 1.1)
+                            }
+                            else
+                                CGlobal.user.AddLogJob(jobIDText);
+
                             bqInterface.UpdateJob(i, jobIDText, "Dang lam");
                         }
 
@@ -2089,8 +2235,8 @@ namespace WebControl_V2.Class
 
 
                                 OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
-                                action = action.MoveToElement(finish[2]);
-                                action = action.Click(finish[2]);
+                                action = action.MoveToElement(finish[1]);
+                                action = action.Click(finish[1]);
                                 action.Build().Perform();
                                 CEventLog.Log.WriteEntry(linkAccount.User, "Point#7 Hoan Thanh GoLike OK: ");
                                 //finish[2].Click();
@@ -2153,47 +2299,123 @@ namespace WebControl_V2.Class
 
                                     //driver.Navigate().Refresh();
 
-                                    IWebElement error = null;
-                                    if (service.TryFindElement(By.CssSelector("div.col-6.pl-0.pr-2"), out error))
-                                    {//found div "Bo qua"
-                                        delay = CGlobal.user.GoLikeDelay1;
-                                        bqInterface.UpdateAccount("Timer", delay.ToString());
-                                        System.Threading.Thread.Sleep(delay);
+                                    //Update Follow GoLike (Ver 1.1)
+                                    action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                    action = action.MoveToElement(finish[3]);
+                                    action = action.Click(finish[3]);
+                                    action.Build().Perform();
 
-                                        //found button "Bo qua"
-                                        //button.btn.btn-block.px-0.bg-button-1
-                                        if (service.TryFindElement(By.CssSelector("button.btn.btn-block.px-0.bg-button-1"), out error))
+                                    timeOut = 0;
+                                    System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> reportList = null;
+                                    while (true)
+                                    {
+                                        if (timeOut >= 60)
+                                            break;
+                                        reportList = driver.FindElements(By.CssSelector("div.row.align-items-center.mt-2"));
+                                        if (reportList.Count > 0)
+                                            break;
+                                        bqInterface.UpdateAccount("Timer", "1000");
+                                        System.Threading.Thread.Sleep(1000);
+                                        timeOut++;
+                                    }
+
+                                    if (timeOut >= 60)
+                                    {//There are have issue about GoLike
+
+                                    }
+                                    action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                    action = action.MoveToElement(reportList[0]);
+                                    action = action.Click(reportList[0]);
+                                    action.Build().Perform();
+
+                                    delay = CGlobal.user.GoLikeDelay1;
+                                    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                    System.Threading.Thread.Sleep(delay);
+                                    //Click on Button "Gui bao cao"
+                                    //button.btn.btn-primary.btn-sm.form-control.mt-3
+                                    IWebElement errorButton = null;
+                                    if (service.TryFindElement(By.CssSelector("button.btn.btn-block.px-0.bg-button-1"), out errorButton))
+                                    {
+                                        action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                        action = action.MoveToElement(errorButton);
+                                        action = action.Click(errorButton);
+                                        action.Build().Perform();
+
+                                        confirm = null;
+                                        timeOut = 0;
+                                        while (true)
                                         {
-                                            //IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                                            js.ExecuteScript("arguments[0].scrollIntoView();", error);
-
-                                            delay = CGlobal.user.GoLikeDelay1;
-                                            bqInterface.UpdateAccount("Timer", delay.ToString());
-                                            System.Threading.Thread.Sleep(delay);
-
-                                            action = new OpenQA.Selenium.Interactions.Actions(driver);
-                                            action = action.MoveToElement(error);
-                                            action = action.Click(error);
-                                            action.Build().Perform();
-                                            //error.Click();
+                                            if (timeOut >= 60)
+                                                break;
+                                            if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out confirm))
+                                            {
+                                                action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                                action = action.MoveToElement(confirm);
+                                                action = action.Click(confirm);
+                                                action.Build().Perform();
+                                                //confirm.Click();
+                                                delay = CGlobal.user.GoLikeDelay1;
+                                                bqInterface.UpdateAccount("Timer", delay.ToString());
+                                                System.Threading.Thread.Sleep(delay);
+                                                break;
+                                            }
+                                            bqInterface.UpdateAccount("Timer", "1000");
+                                            System.Threading.Thread.Sleep(1000);
+                                            timeOut++;
                                         }
-                                        delay = CGlobal.user.GoLikeDelay1;
-                                        bqInterface.UpdateAccount("Timer", delay.ToString());
-                                        System.Threading.Thread.Sleep(delay);
 
-                                        if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out confirm))
-                                        {
-                                            action = new OpenQA.Selenium.Interactions.Actions(driver);
-                                            action = action.MoveToElement(confirm);
-                                            action = action.Click(confirm);
-                                            action.Build().Perform();
-                                            //confirm.Click();
-                                            delay = CGlobal.user.GoLikeDelay1;
-                                            bqInterface.UpdateAccount("Timer", delay.ToString());
-                                            System.Threading.Thread.Sleep(delay);
+                                        if (timeOut >= 60)
+                                        {//There are have issue about GoLike
 
                                         }
                                     }
+
+                                    //End-Update Follow GoLike (Ver 1.1)
+
+                                    //Update Follow GoLike (Ver 1.0)
+                                    //IWebElement error = null;
+                                    //if (service.TryFindElement(By.CssSelector("div.col-6.pl-0.pr-2"), out error))
+                                    //{//found div "Bo qua"
+                                    //    delay = CGlobal.user.GoLikeDelay1;
+                                    //    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                    //    System.Threading.Thread.Sleep(delay);
+
+                                    //    //found button "Bo qua"
+                                    //    //button.btn.btn-block.px-0.bg-button-1
+                                    //    if (service.TryFindElement(By.CssSelector("button.btn.btn-block.px-0.bg-button-1"), out error))
+                                    //    {
+                                    //        //IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                    //        js.ExecuteScript("arguments[0].scrollIntoView();", error);
+
+                                    //        delay = CGlobal.user.GoLikeDelay1;
+                                    //        bqInterface.UpdateAccount("Timer", delay.ToString());
+                                    //        System.Threading.Thread.Sleep(delay);
+
+                                    //        action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                    //        action = action.MoveToElement(error);
+                                    //        action = action.Click(error);
+                                    //        action.Build().Perform();
+                                    //        //error.Click();
+                                    //    }
+                                    //    delay = CGlobal.user.GoLikeDelay1;
+                                    //    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                    //    System.Threading.Thread.Sleep(delay);
+
+                                    //    if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out confirm))
+                                    //    {
+                                    //        action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                    //        action = action.MoveToElement(confirm);
+                                    //        action = action.Click(confirm);
+                                    //        action.Build().Perform();
+                                    //        //confirm.Click();
+                                    //        delay = CGlobal.user.GoLikeDelay1;
+                                    //        bqInterface.UpdateAccount("Timer", delay.ToString());
+                                    //        System.Threading.Thread.Sleep(delay);
+
+                                    //    }
+                                    //}
+                                    ////END-Update Follow GoLike (Ver 1.0)
+
                                     //if (service.TryFindElement(By.CssSelector("a.row.align-items-center"), out error))
                                     //{//GoLike cannot back to Job list page
                                     //    driver.Navigate().Back();
@@ -2282,58 +2504,132 @@ namespace WebControl_V2.Class
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
                                 System.Threading.Thread.Sleep(delay);
 
+                                //Update Follow GoLike (Ver 1.1)
+                                OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                action = action.MoveToElement(finish[2]);
+                                action = action.Click(finish[2]);
+                                action.Build().Perform();
 
-                                IWebElement error = null;
-                                if (service.TryFindElement(By.CssSelector("div.col-6.pl-0.pr-2"), out error))
-                                {//found div "Bo qua"
-                                    delay = CGlobal.user.GoLikeDelay1;
-                                    bqInterface.UpdateAccount("Timer", delay.ToString());
-                                    System.Threading.Thread.Sleep(delay);
+                                timeOut = 0;
+                                System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> reportList = null;
+                                while (true)
+                                {
+                                    if (timeOut >= 60)
+                                        break;
+                                    reportList = driver.FindElements(By.CssSelector("div.row.align-items-center.mt-2"));
+                                    if (reportList.Count > 0)
+                                        break;
+                                    bqInterface.UpdateAccount("Timer", "1000");
+                                    System.Threading.Thread.Sleep(1000);
+                                    timeOut++;
+                                }
 
-                                    //found button "Bo qua"
-                                    //button.btn.btn-block.px-0.bg-button-1
-                                    if (service.TryFindElement(By.CssSelector("button.btn.btn-block.px-0.bg-button-1"), out error))
-                                    {
-                                        //IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                                        js.ExecuteScript("arguments[0].scrollIntoView();", error);
+                                if (timeOut >= 60)
+                                {//There are have issue about GoLike
 
-                                        delay = CGlobal.user.GoLikeDelay1;
-                                        bqInterface.UpdateAccount("Timer", delay.ToString());
-                                        System.Threading.Thread.Sleep(delay);
+                                }
+                                action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                action = action.MoveToElement(reportList[0]);
+                                action = action.Click(reportList[0]);
+                                action.Build().Perform();
 
-                                        OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
-                                        action = action.MoveToElement(error);
-                                        action = action.Click(error);
-                                        action.Build().Perform();
-                                        //error.Click();
-                                    }
-                                    delay = CGlobal.user.GoLikeDelay1;
-                                    bqInterface.UpdateAccount("Timer", delay.ToString());
-                                    System.Threading.Thread.Sleep(delay);
+                                delay = CGlobal.user.GoLikeDelay1;
+                                bqInterface.UpdateAccount("Timer", delay.ToString());
+                                System.Threading.Thread.Sleep(delay);
+                                //Click on Button "Gui bao cao"
+                                //button.btn.btn-primary.btn-sm.form-control.mt-3
+                                IWebElement errorButton = null;
+                                if (service.TryFindElement(By.CssSelector("button.btn.btn-block.px-0.bg-button-1"), out errorButton))
+                                {
+                                    action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                    action = action.MoveToElement(errorButton);
+                                    action = action.Click(errorButton);
+                                    action.Build().Perform();
 
                                     IWebElement confirm = null;
-                                    if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out confirm))
+                                    timeOut = 0;
+                                    while (true)
                                     {
-                                        OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
-                                        action = action.MoveToElement(confirm);
-                                        action = action.Click(confirm);
-                                        action.Build().Perform();
-                                        //confirm.Click();
-                                        delay = CGlobal.user.GoLikeDelay1;
-                                        bqInterface.UpdateAccount("Timer", delay.ToString());
-                                        System.Threading.Thread.Sleep(delay);
+                                        if (timeOut >= 60)
+                                            break;
+                                        if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out confirm))
+                                        {
+                                            action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                            action = action.MoveToElement(confirm);
+                                            action = action.Click(confirm);
+                                            action.Build().Perform();
+                                            //confirm.Click();
+                                            delay = CGlobal.user.GoLikeDelay1;
+                                            bqInterface.UpdateAccount("Timer", delay.ToString());
+                                            System.Threading.Thread.Sleep(delay);
+                                            break;
+                                        }
+                                        bqInterface.UpdateAccount("Timer", "1000");
+                                        System.Threading.Thread.Sleep(1000);
+                                        timeOut++;
+                                    }
+
+                                    if (timeOut >= 60)
+                                    {//There are have issue about GoLike
 
                                     }
                                 }
-                                if (service.TryFindElement(By.CssSelector("a.row.align-items-center"), out error))
-                                {
-                                    driver.Navigate().Back();
 
-                                    delay = CGlobal.user.GoLikeDelay1;
-                                    bqInterface.UpdateAccount("Timer", delay.ToString());
-                                    System.Threading.Thread.Sleep(delay);
+                                //End-Update Follow GoLike (Ver 1.1)
 
-                                }
+                                //Update Follow GoLike (Ver 1.0)
+                                IWebElement error = null;
+                                //if (service.TryFindElement(By.CssSelector("div.col-6.pl-0.pr-2"), out error))
+                                //{//found div "Bo qua"
+                                //    delay = CGlobal.user.GoLikeDelay1;
+                                //    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                //    System.Threading.Thread.Sleep(delay);
+
+                                //    //found button "Bo qua"
+                                //    //button.btn.btn-block.px-0.bg-button-1
+                                //    if (service.TryFindElement(By.CssSelector("button.btn.btn-block.px-0.bg-button-1"), out error))
+                                //    {
+                                //        //IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                //        js.ExecuteScript("arguments[0].scrollIntoView();", error);
+
+                                //        delay = CGlobal.user.GoLikeDelay1;
+                                //        bqInterface.UpdateAccount("Timer", delay.ToString());
+                                //        System.Threading.Thread.Sleep(delay);
+
+                                //        action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                //        action = action.MoveToElement(error);
+                                //        action = action.Click(error);
+                                //        action.Build().Perform();
+                                //        //error.Click();
+                                //    }
+                                //    delay = CGlobal.user.GoLikeDelay1;
+                                //    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                //    System.Threading.Thread.Sleep(delay);
+
+                                //    IWebElement confirm = null;
+                                //    if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out confirm))
+                                //    {
+                                //        action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                //        action = action.MoveToElement(confirm);
+                                //        action = action.Click(confirm);
+                                //        action.Build().Perform();
+                                //        //confirm.Click();
+                                //        delay = CGlobal.user.GoLikeDelay1;
+                                //        bqInterface.UpdateAccount("Timer", delay.ToString());
+                                //        System.Threading.Thread.Sleep(delay);
+
+                                //    }
+                                //}
+                                //End-Update Follow GoLike (Ver 1.0)
+                                //if (service.TryFindElement(By.CssSelector("a.row.align-items-center"), out error))
+                                //{
+                                //    driver.Navigate().Back();
+
+                                //    delay = CGlobal.user.GoLikeDelay1;
+                                //    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                //    System.Threading.Thread.Sleep(delay);
+
+                                //}
                                 if (CGlobal.user.CheckLinkCondition)
                                 {
                                     int fbCount = linkAccount.JobCountFB;

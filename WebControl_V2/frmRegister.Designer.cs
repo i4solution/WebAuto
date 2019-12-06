@@ -316,9 +316,9 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(1, 266);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(167, 18);
+            this.label5.Size = new System.Drawing.Size(87, 18);
             this.label5.TabIndex = 18;
-            this.label5.Text = "Gọi hỗ trợ : 0976963229";
+            this.label5.Text = "Gọi hỗ trợ : ";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmRegister

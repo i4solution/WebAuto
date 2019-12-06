@@ -107,6 +107,8 @@
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label19 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label24 = new System.Windows.Forms.Label();
+            this.chkJobLessMoney = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridJobReport)).BeginInit();
             this.panel4.SuspendLayout();
@@ -473,6 +475,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label24);
+            this.groupBox1.Controls.Add(this.chkJobLessMoney);
             this.groupBox1.Controls.Add(this.label22);
             this.groupBox1.Controls.Add(this.txtFaultLimit);
             this.groupBox1.Controls.Add(this.label17);
@@ -482,7 +486,7 @@
             this.groupBox1.Controls.Add(this.txtGolikeDelay1);
             this.groupBox1.Location = new System.Drawing.Point(2, 327);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(261, 94);
+            this.groupBox1.Size = new System.Drawing.Size(263, 94);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thời gian đợi GOLIKE";
@@ -491,7 +495,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.BackColor = System.Drawing.SystemColors.Control;
-            this.label22.Location = new System.Drawing.Point(6, 62);
+            this.label22.Location = new System.Drawing.Point(6, 73);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(138, 13);
             this.label22.TabIndex = 16;
@@ -499,7 +503,7 @@
             // 
             // txtFaultLimit
             // 
-            this.txtFaultLimit.Location = new System.Drawing.Point(163, 59);
+            this.txtFaultLimit.Location = new System.Drawing.Point(163, 70);
             this.txtFaultLimit.MaxLength = 5;
             this.txtFaultLimit.Name = "txtFaultLimit";
             this.txtFaultLimit.Size = new System.Drawing.Size(41, 20);
@@ -530,7 +534,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Location = new System.Drawing.Point(135, 42);
+            this.label7.Location = new System.Drawing.Point(196, 22);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 13);
             this.label7.TabIndex = 11;
@@ -927,6 +931,25 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label24
+            // 
+            this.label24.BackColor = System.Drawing.SystemColors.Control;
+            this.label24.Location = new System.Drawing.Point(6, 48);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(138, 13);
+            this.label24.TabIndex = 25;
+            this.label24.Text = "Job Ít tiền:";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chkJobLessMoney
+            // 
+            this.chkJobLessMoney.AutoSize = true;
+            this.chkJobLessMoney.Location = new System.Drawing.Point(163, 48);
+            this.chkJobLessMoney.Name = "chkJobLessMoney";
+            this.chkJobLessMoney.Size = new System.Drawing.Size(15, 14);
+            this.chkJobLessMoney.TabIndex = 24;
+            this.chkJobLessMoney.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1037,6 +1060,8 @@
         private System.Windows.Forms.CheckBox chkInvisibleBrowser;
         private System.Windows.Forms.LinkLabel btnRegister;
         private System.Windows.Forms.Label lblRegister;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.CheckBox chkJobLessMoney;
     }
 }
 
