@@ -651,7 +651,13 @@ namespace WebControl_V2.Class
                     //((IJavaScriptExecutor)driver).ExecuteScript("window.open();");
                     //driver.SwitchTo().Window(driver.WindowHandles.Last());
                     bqInterface.UpdateProgress("Kiem tien");
-                    ab[0].Click();
+
+                    OpenQA.Selenium.Interactions.Actions actionMoney = new OpenQA.Selenium.Interactions.Actions(driver);
+                    actionMoney = actionMoney.MoveToElement(ab[0]);
+                    actionMoney = actionMoney.Click(ab[0]);
+                    actionMoney.Build().Perform();
+
+                    //ab[0].Click();
 
                     //for (var i = 0; i < 10; i++)
                     //{
@@ -1139,10 +1145,16 @@ namespace WebControl_V2.Class
                         IWebElement jobID = null;
                         //Load Job ID   h6.font-id
                         if (service.TryFindElement(By.CssSelector("h6.font-id"), out jobID) == true)
-                        {                            
-                            jobIDText = jobID.Text; //TĂNG LIKE CHO FANPAGE
+                        {
+                            string jobInfo = "";
+                            jobIDText = jobID.Text; //Job ID
+                            System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> jobInfos = driver.FindElements(By.CssSelector("span.block-text"));
+                            if (jobInfos.Count >= 2)
+                            {
+                                jobInfo = jobInfos[1].Text;
+                            }
                             System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> reportErr = driver.FindElements(By.CssSelector("div.card.card-job-detail"));
-                            if (CGlobal.user.CheckLogJob(jobIDText) == true)
+                            if (CGlobal.user.CheckLogJob(jobIDText + "." + jobInfo) == true)
                             {
                                 //Update Follow GoLike (Ver 1.1)
                                 OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
