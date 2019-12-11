@@ -296,7 +296,8 @@ namespace WebControl_V2
             if (gridUser.Columns[e.ColumnIndex].Name == "colPass")
             {
                 gridUser.Rows[e.RowIndex].Tag = e.Value;
-                e.Value = new String('\u25CF', e.Value.ToString().Length);
+                if (btnShowPassword.Tag.ToString() == "Hide")
+                    e.Value = new String('\u25CF', e.Value.ToString().Length);
             }
         }
 
@@ -307,7 +308,12 @@ namespace WebControl_V2
                 TextBox textBox = e.Control as TextBox;
                 if (textBox != null)
                 {
-                    textBox.UseSystemPasswordChar = true;
+                    if (btnShowPassword.Tag.ToString() == "Hide")
+                        textBox.UseSystemPasswordChar = true;
+                    else
+                    {
+                        textBox.UseSystemPasswordChar = false;
+                    }
                 }
             }
             else
@@ -759,6 +765,28 @@ namespace WebControl_V2
         private void btnRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             CGlobal._registerPresenter.Show();
+        }
+
+        private void btnShowPassword_Click(object sender, EventArgs e)
+        {
+            if (btnShowPassword.Tag.ToString() == "Hide")
+            {
+                btnShowPassword.Tag = "Show";
+                btnShowPassword.Text = "Ẩn mật khẩu";
+                foreach (DataGridViewRow r in gridUser.Rows)
+                {
+                    gridUser.InvalidateCell(r.Cells["colPass"].ColumnIndex, r.Index);
+                }
+            }
+            else
+            {
+                btnShowPassword.Tag = "Hide";
+                btnShowPassword.Text = "Hiện mật khẩu";
+                foreach (DataGridViewRow r in gridUser.Rows)
+                {
+                    gridUser.InvalidateCell(r.Cells["colPass"].ColumnIndex, r.Index);
+                }
+            }
         }
     }
 }

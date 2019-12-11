@@ -63,6 +63,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtFBDelay1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.chkJobLessMoney = new System.Windows.Forms.CheckBox();
             this.label22 = new System.Windows.Forms.Label();
             this.txtFaultLimit = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -107,8 +109,7 @@
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label19 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label24 = new System.Windows.Forms.Label();
-            this.chkJobLessMoney = new System.Windows.Forms.CheckBox();
+            this.btnShowPassword = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridJobReport)).BeginInit();
             this.panel4.SuspendLayout();
@@ -170,6 +171,7 @@
             this.label23.TabIndex = 23;
             this.label23.Text = "Ẩn trình duyệt";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label23.Visible = false;
             // 
             // chkInvisibleBrowser
             // 
@@ -179,6 +181,7 @@
             this.chkInvisibleBrowser.Size = new System.Drawing.Size(15, 14);
             this.chkInvisibleBrowser.TabIndex = 22;
             this.chkInvisibleBrowser.UseVisualStyleBackColor = true;
+            this.chkInvisibleBrowser.Visible = false;
             // 
             // label21
             // 
@@ -359,6 +362,7 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.btnShowPassword);
             this.panel4.Controls.Add(this.btnRegister);
             this.panel4.Controls.Add(this.btnDefaultProfile);
             this.panel4.Controls.Add(this.groupBox2);
@@ -490,6 +494,25 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thời gian đợi GOLIKE";
+            // 
+            // label24
+            // 
+            this.label24.BackColor = System.Drawing.SystemColors.Control;
+            this.label24.Location = new System.Drawing.Point(6, 48);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(138, 13);
+            this.label24.TabIndex = 25;
+            this.label24.Text = "Job Ít tiền:";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // chkJobLessMoney
+            // 
+            this.chkJobLessMoney.AutoSize = true;
+            this.chkJobLessMoney.Location = new System.Drawing.Point(163, 48);
+            this.chkJobLessMoney.Name = "chkJobLessMoney";
+            this.chkJobLessMoney.Size = new System.Drawing.Size(15, 14);
+            this.chkJobLessMoney.TabIndex = 24;
+            this.chkJobLessMoney.UseVisualStyleBackColor = true;
             // 
             // label22
             // 
@@ -931,24 +954,17 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label24
+            // btnShowPassword
             // 
-            this.label24.BackColor = System.Drawing.SystemColors.Control;
-            this.label24.Location = new System.Drawing.Point(6, 48);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(138, 13);
-            this.label24.TabIndex = 25;
-            this.label24.Text = "Job Ít tiền:";
-            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // chkJobLessMoney
-            // 
-            this.chkJobLessMoney.AutoSize = true;
-            this.chkJobLessMoney.Location = new System.Drawing.Point(163, 48);
-            this.chkJobLessMoney.Name = "chkJobLessMoney";
-            this.chkJobLessMoney.Size = new System.Drawing.Size(15, 14);
-            this.chkJobLessMoney.TabIndex = 24;
-            this.chkJobLessMoney.UseVisualStyleBackColor = true;
+            this.btnShowPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowPassword.Location = new System.Drawing.Point(190, 5);
+            this.btnShowPassword.Name = "btnShowPassword";
+            this.btnShowPassword.Size = new System.Drawing.Size(112, 25);
+            this.btnShowPassword.TabIndex = 14;
+            this.btnShowPassword.Tag = "Hide";
+            this.btnShowPassword.Text = "Hiện mật khẩu";
+            this.btnShowPassword.UseVisualStyleBackColor = true;
+            this.btnShowPassword.Click += new System.EventHandler(this.btnShowPassword_Click);
             // 
             // frmMain
             // 
@@ -1062,6 +1078,7 @@
         private System.Windows.Forms.Label lblRegister;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.CheckBox chkJobLessMoney;
+        private System.Windows.Forms.Button btnShowPassword;
     }
 }
 

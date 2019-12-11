@@ -51,8 +51,7 @@ namespace BqUpdater
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (bqInet.CbqDownloader.DownloadFile(@"http://vuhoang8x.000webhostapp.com/Auto_Web/WebControl_V2.bqt", Environment.CurrentDirectory, WebClientDownloadProgressChanged, WebClientDownloadCompleted) == true)
-            {
-             
+            {             
                 //System.Threading.Thread.Sleep(1000);
                 //System.Diagnostics.Process.Start("WebControl_V2.exe", "no_update");
                 //System.Threading.Thread.Sleep(1000);

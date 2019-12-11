@@ -82,6 +82,7 @@ namespace WebControl_V2
         private void btnLogin_Click(object sender, EventArgs e)
         {
             bool acceptData = true;
+            lblInfo.Visible = false;
             if (txtUserName.Text == "")
             {
                 lblUserError.Visible = true;
