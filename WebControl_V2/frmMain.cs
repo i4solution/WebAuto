@@ -788,5 +788,29 @@ namespace WebControl_V2
                 }
             }
         }
+
+        private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkShowPassword.Checked)
+            {
+                btnShowPassword.Tag = "Show";
+                btnShowPassword.Text = "Ẩn mật khẩu";
+                chkShowPassword.Text = "* * *";
+                foreach (DataGridViewRow r in gridUser.Rows)
+                {
+                    gridUser.InvalidateCell(r.Cells["colPass"].ColumnIndex, r.Index);
+                }
+            }
+            else
+            {
+                btnShowPassword.Tag = "Hide";
+                btnShowPassword.Text = "Hiện mật khẩu";
+                chkShowPassword.Text = "a b c";
+                foreach (DataGridViewRow r in gridUser.Rows)
+                {
+                    gridUser.InvalidateCell(r.Cells["colPass"].ColumnIndex, r.Index);
+                }
+            }
+        }
     }
 }

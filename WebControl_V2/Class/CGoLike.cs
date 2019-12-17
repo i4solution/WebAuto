@@ -550,39 +550,46 @@ namespace WebControl_V2.Class
             else if (service.TryFindElement(By.CssSelector("button._42ft._4jy0._6lth._4jy6._4jy1.selected._51sy"), out loginButtonFB))
             {
                 System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> faceLogin = driver.FindElements(By.CssSelector("input.inputtext._55r1._6luy"));
-                faceLogin[0].SendKeys(linkAccount.User);
-                bqInterface.UpdateAccount("Timer", "2500");
-                System.Threading.Thread.Sleep(2500);
-
-                faceLogin[1].SendKeys(linkAccount.Password);
-                bqInterface.UpdateAccount("Timer", "2000");
-                System.Threading.Thread.Sleep(2000);
-
-
-                while (CGlobal._pauseJob)
+                if (faceLogin.Count == 0)
                 {
-                    bqInterface.UpdateProgress("Tạm ngưng ..");
-                    System.Threading.Thread.Sleep(270);
-                    bqInterface.UpdateProgress("Tạm ngưng .....");
-                    System.Threading.Thread.Sleep(270);
+                    faceLogin = driver.FindElements(By.CssSelector("input.inputtext _8n1_"));
                 }
-
-                loginButtonFB.Click();
-                bqInterface.UpdateAccount("Timer", "5000");
-                System.Threading.Thread.Sleep(5000);
-
-                //try
-                //{
-                //    IAlert a = driver.SwitchTo().Alert();
-                //    driver.SwitchTo().Alert().Accept();
-                //}
-                //catch (Exception ii)
-                //{ }
-                //To get facebook name : a._5afe
-                if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
+                if (faceLogin.Count > 1)
                 {
-                    faceName = loginButtonFB.GetAttribute("title");
-                    bqInterface.UpdateAccount("facebook", faceName);
+                    faceLogin[0].SendKeys(linkAccount.User);
+                    bqInterface.UpdateAccount("Timer", "2500");
+                    System.Threading.Thread.Sleep(2500);
+
+                    faceLogin[1].SendKeys(linkAccount.Password);
+                    bqInterface.UpdateAccount("Timer", "2000");
+                    System.Threading.Thread.Sleep(2000);
+
+
+                    while (CGlobal._pauseJob)
+                    {
+                        bqInterface.UpdateProgress("Tạm ngưng ..");
+                        System.Threading.Thread.Sleep(270);
+                        bqInterface.UpdateProgress("Tạm ngưng .....");
+                        System.Threading.Thread.Sleep(270);
+                    }
+
+                    loginButtonFB.Click();
+                    bqInterface.UpdateAccount("Timer", "5000");
+                    System.Threading.Thread.Sleep(5000);
+
+                    //try
+                    //{
+                    //    IAlert a = driver.SwitchTo().Alert();
+                    //    driver.SwitchTo().Alert().Accept();
+                    //}
+                    //catch (Exception ii)
+                    //{ }
+                    //To get facebook name : a._5afe
+                    if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
+                    {
+                        faceName = loginButtonFB.GetAttribute("title");
+                        bqInterface.UpdateAccount("facebook", faceName);
+                    }
                 }
             }
 
@@ -978,13 +985,20 @@ namespace WebControl_V2.Class
                             
                             //driver.Navigate().Refresh();
                             //ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
+                            timeOut = 0;
                             while (true)
                             {
+                                if (timeOut >= 60)
+                                    break;
                                 ab = driver.FindElements(By.CssSelector("div.card.mb-2"));
                                 if (ab.Count > 0)
                                     break;
                                 bqInterface.UpdateAccount("Timer", "1000");
                                 System.Threading.Thread.Sleep(1000);
+                            }
+                            if (timeOut >= 60)
+                            {
+                                break;
                             }
                         }
                     }
@@ -1042,9 +1056,9 @@ namespace WebControl_V2.Class
                             //OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
                             //action.MoveToElement(ab[i]).Perform();
 
-                            delay = CGlobal.user.GoLikeDelay1;
-                            bqInterface.UpdateAccount("Timer", delay.ToString());
-                            System.Threading.Thread.Sleep(delay);
+                            //delay = CGlobal.user.GoLikeDelay1;
+                            //bqInterface.UpdateAccount("Timer", delay.ToString());
+                            //System.Threading.Thread.Sleep(delay);
 
                             OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
                             action = action.MoveToElement(ab[i]);
@@ -2323,8 +2337,8 @@ namespace WebControl_V2.Class
 
                                     //Update Follow GoLike (Ver 1.1)
                                     action = new OpenQA.Selenium.Interactions.Actions(driver);
-                                    action = action.MoveToElement(finish[3]);
-                                    action = action.Click(finish[3]);
+                                    action = action.MoveToElement(finish[2]);
+                                    action = action.Click(finish[2]);
                                     action.Build().Perform();
 
                                     timeOut = 0;

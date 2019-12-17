@@ -1306,3 +1306,423 @@ dangky8007@gmail.com, 22/11/2019 9:47:03 PM
     Point#8 GOLIKE ACCEPT: 
 833821537, 10/12/2019 11:42:24 AM
     Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 11:35:28 AM
+    Bat dau ... [Job count on GoLike: 3]
+833821537, 12/12/2019 11:35:46 AM
+    Point#2 Job name: 
+833821537, 12/12/2019 11:36:09 AM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 11:36:23 AM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 11:36:30 AM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 11:36:46 AM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 11:36:46 AM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 11:36:55 AM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 11:37:11 AM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 11:37:32 AM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 11:37:52 AM
+    Point#2 Job name: 
+833821537, 12/12/2019 11:38:13 AM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 11:38:27 AM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 11:38:35 AM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 11:38:50 AM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 11:38:50 AM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 11:38:58 AM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 11:39:13 AM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 11:39:33 AM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 11:39:48 AM
+    Point#2 Job name: 
+833821537, 12/12/2019 11:40:12 AM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 11:40:30 AM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 11:40:37 AM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 11:40:53 AM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 11:40:53 AM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 11:41:00 AM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 11:41:14 AM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 11:41:39 AM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 11:41:56 AM
+    Point#2 Job name: 
+833821537, 12/12/2019 11:42:20 AM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 11:42:35 AM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 11:42:42 AM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 11:42:56 AM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 11:42:56 AM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 11:43:04 AM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 11:43:17 AM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 11:43:39 AM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 11:43:58 AM
+    Point#2 Job name: 
+833821537, 12/12/2019 11:44:22 AM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 11:44:36 AM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 11:44:44 AM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 11:44:58 AM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 11:44:58 AM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 11:45:06 AM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 11:45:20 AM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 11:45:40 AM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 11:45:54 AM
+    Point#2 Job name: 
+833821537, 12/12/2019 11:46:16 AM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 11:46:31 AM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 11:46:40 AM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 11:46:53 AM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 11:46:53 AM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 11:47:01 AM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 11:47:15 AM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 11:47:38 AM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 11:47:57 AM
+    Point#2 Job name: 
+833821537, 12/12/2019 11:48:21 AM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 11:48:35 AM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 11:48:41 AM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 11:48:57 AM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 11:48:57 AM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 11:49:05 AM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 11:49:19 AM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 11:49:37 AM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 11:49:55 AM
+    Point#2 Job name: 
+833821537, 12/12/2019 11:50:16 AM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 11:50:31 AM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 11:50:40 AM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 11:50:47 AM
+    Point#8 GOLIKE NOT ACCEPT: 
+833821537, 12/12/2019 11:50:56 AM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 11:51:01 AM
+       at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.PerformActions(IList`1 actionSequenceList)
+   at OpenQA.Selenium.Interactions.Actions.Perform()
+   at WebControl_V2.Class.CGoLike.DoJob(bqService service) in d:\Web Auto\WebAuto\WebControl_V2\Class\CGoLike.cs:line 2328
+833821537, 12/12/2019 11:51:09 AM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 11:51:22 AM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 11:51:46 AM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 11:52:04 AM
+    Point#2 Job name: 
+833821537, 12/12/2019 11:52:26 AM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 11:52:41 AM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 11:52:50 AM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 11:53:05 AM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 11:53:05 AM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 11:53:12 AM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 11:53:28 AM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 11:53:49 AM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 11:54:05 AM
+    Point#2 Job name: 
+833821537, 12/12/2019 11:54:27 AM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 11:54:38 AM
+    Point#9 FACEBOOK INVALID: 
+833821537, 12/12/2019 11:54:43 AM
+       at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.PerformActions(IList`1 actionSequenceList)
+   at OpenQA.Selenium.Interactions.Actions.Perform()
+   at WebControl_V2.Class.CGoLike.DoJob(bqService service) in d:\Web Auto\WebAuto\WebControl_V2\Class\CGoLike.cs:line 2536
+833821537, 12/12/2019 11:54:51 AM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 11:55:06 AM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 12:43:11 PM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 12:43:31 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 12:43:53 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 12:44:04 PM
+    Point#9 FACEBOOK INVALID: 
+833821537, 12/12/2019 12:44:11 PM
+       at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.PerformActions(IList`1 actionSequenceList)
+   at OpenQA.Selenium.Interactions.Actions.Perform()
+   at WebControl_V2.Class.CGoLike.DoJob(bqService service) in d:\Web Auto\WebAuto\WebControl_V2\Class\CGoLike.cs:line 2543
+833821537, 12/12/2019 12:44:19 PM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 12:44:34 PM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 12:44:57 PM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 12:45:16 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 12:45:39 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 12:45:55 PM
+    Point#9 FACEBOOK INVALID: 
+833821537, 12/12/2019 12:49:48 PM
+    Bat dau ... [Job count on GoLike: 8]
+833821537, 12/12/2019 12:50:08 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 12:51:05 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 12:51:25 PM
+    Point#9 FACEBOOK INVALID: 
+833821537, 12/12/2019 12:57:05 PM
+    Bat dau ... [Job count on GoLike: 7]
+833821537, 12/12/2019 12:57:23 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 12:57:47 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 12:58:01 PM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 12:58:08 PM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 12:58:24 PM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 12:58:24 PM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 12:58:32 PM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 1:03:13 PM
+    Bat dau ... [Job count on GoLike: 6]
+833821537, 12/12/2019 1:03:33 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 1:03:55 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 1:04:06 PM
+    Point#9 FACEBOOK INVALID: 
+833821537, 12/12/2019 1:04:41 PM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 1:04:57 PM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 1:05:21 PM
+    Bat dau ... [Job count on GoLike: 5]
+833821537, 12/12/2019 1:05:38 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 1:06:01 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 1:06:15 PM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 1:06:22 PM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 1:06:30 PM
+    Point#8 GOLIKE NOT ACCEPT: 
+833821537, 12/12/2019 1:06:45 PM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 1:07:26 PM
+       at OpenQA.Selenium.Remote.RemoteWebDriver.UnpackAndThrowOnError(Response errorResponse)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.Remote.RemoteWebDriver.PerformActions(IList`1 actionSequenceList)
+   at OpenQA.Selenium.Interactions.Actions.Perform()
+   at WebControl_V2.Class.CGoLike.DoJob(bqService service) in d:\Web Auto\WebAuto\WebControl_V2\Class\CGoLike.cs:line 2335
+833821537, 12/12/2019 1:07:34 PM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 1:07:47 PM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 1:08:08 PM
+    Bat dau ... [Job count on GoLike: 4]
+833821537, 12/12/2019 1:08:26 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 1:08:50 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 1:09:04 PM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 1:09:12 PM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 1:09:25 PM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 1:09:25 PM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 1:09:33 PM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 1:09:49 PM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 1:10:11 PM
+    Bat dau ... [Job count on GoLike: 3]
+833821537, 12/12/2019 1:10:31 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 1:10:54 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 1:11:09 PM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 1:11:15 PM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 1:11:30 PM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 1:11:30 PM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 1:11:38 PM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 1:11:54 PM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 1:12:17 PM
+    Bat dau ... [Job count on GoLike: 2]
+833821537, 12/12/2019 1:12:35 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 1:12:57 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 1:13:15 PM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 1:13:22 PM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 1:35:21 PM
+    Bat dau ... [Job count on GoLike: 3]
+833821537, 12/12/2019 1:35:25 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 1:35:49 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 1:35:59 PM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 1:36:08 PM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 1:36:15 PM
+    Point#8 GOLIKE NOT ACCEPT: 
+833821537, 12/12/2019 1:36:23 PM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 1:39:48 PM
+    Bat dau ... [Job count on GoLike: 3]
+833821537, 12/12/2019 1:39:52 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 1:40:16 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 1:40:26 PM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 1:40:32 PM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 1:40:39 PM
+    Point#8 GOLIKE NOT ACCEPT: 
+833821537, 12/12/2019 1:40:47 PM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 1:41:30 PM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 1:41:38 PM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 1:42:03 PM
+    Bat dau ... [Job count on GoLike: 2]
+833821537, 12/12/2019 1:42:07 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 1:42:28 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 1:42:42 PM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 1:42:50 PM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 1:43:05 PM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 1:43:05 PM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 1:43:13 PM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 1:43:22 PM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 1:43:40 PM
+    Bat dau ... [Job count on GoLike: 1]
+833821537, 12/12/2019 1:44:01 PM
+    Bat dau ... [Job count on GoLike: 4]
+833821537, 12/12/2019 1:44:05 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 1:44:29 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 1:44:43 PM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 1:44:51 PM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 1:45:06 PM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 1:45:06 PM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 1:45:14 PM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 1:45:21 PM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 1:45:45 PM
+    Bat dau ... [Job count on GoLike: 4]
+833821537, 12/12/2019 1:45:49 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 1:46:12 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 1:46:27 PM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 1:46:36 PM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 1:46:51 PM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 1:46:51 PM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 12/12/2019 1:46:59 PM
+    Point#GOLIKE Job: Cannot Back Job List
+833821537, 12/12/2019 1:47:07 PM
+    Point#1 : Cannot click on job
+833821537, 12/12/2019 1:47:27 PM
+    Bat dau ... [Job count on GoLike: 3]
+833821537, 12/12/2019 1:47:31 PM
+    Point#2 Job name: 
+833821537, 12/12/2019 1:47:53 PM
+    Point#5 TANG LIKE: 
+833821537, 12/12/2019 1:48:08 PM
+    Point#7 FACEBOOK OK: 
+833821537, 12/12/2019 1:48:15 PM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 12/12/2019 1:48:32 PM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 12/12/2019 1:48:32 PM
+    Point#8 GOLIKE ACCEPT: 

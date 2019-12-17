@@ -53,6 +53,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnRun = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnShowPassword = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.LinkLabel();
             this.btnDefaultProfile = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -109,7 +110,7 @@
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label19 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnShowPassword = new System.Windows.Forms.Button();
+            this.chkShowPassword = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridJobReport)).BeginInit();
             this.panel4.SuspendLayout();
@@ -362,6 +363,7 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.chkShowPassword);
             this.panel4.Controls.Add(this.btnShowPassword);
             this.panel4.Controls.Add(this.btnRegister);
             this.panel4.Controls.Add(this.btnDefaultProfile);
@@ -377,6 +379,19 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(593, 459);
             this.panel4.TabIndex = 5;
+            // 
+            // btnShowPassword
+            // 
+            this.btnShowPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowPassword.Location = new System.Drawing.Point(216, 5);
+            this.btnShowPassword.Name = "btnShowPassword";
+            this.btnShowPassword.Size = new System.Drawing.Size(112, 22);
+            this.btnShowPassword.TabIndex = 14;
+            this.btnShowPassword.Tag = "Hide";
+            this.btnShowPassword.Text = "Hiện mật khẩu";
+            this.btnShowPassword.UseVisualStyleBackColor = true;
+            this.btnShowPassword.Visible = false;
+            this.btnShowPassword.Click += new System.EventHandler(this.btnShowPassword_Click);
             // 
             // btnRegister
             // 
@@ -607,7 +622,7 @@
             // btnRemove
             // 
             this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.Location = new System.Drawing.Point(459, 5);
+            this.btnRemove.Location = new System.Drawing.Point(485, 5);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(97, 25);
             this.btnRemove.TabIndex = 6;
@@ -618,7 +633,7 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(356, 5);
+            this.btnAdd.Location = new System.Drawing.Point(382, 5);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(97, 25);
             this.btnAdd.TabIndex = 5;
@@ -954,17 +969,19 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btnShowPassword
+            // chkShowPassword
             // 
-            this.btnShowPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShowPassword.Location = new System.Drawing.Point(190, 5);
-            this.btnShowPassword.Name = "btnShowPassword";
-            this.btnShowPassword.Size = new System.Drawing.Size(112, 25);
-            this.btnShowPassword.TabIndex = 14;
-            this.btnShowPassword.Tag = "Hide";
-            this.btnShowPassword.Text = "Hiện mật khẩu";
-            this.btnShowPassword.UseVisualStyleBackColor = true;
-            this.btnShowPassword.Click += new System.EventHandler(this.btnShowPassword_Click);
+            this.chkShowPassword.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.chkShowPassword.Font = new System.Drawing.Font("Constantia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkShowPassword.Location = new System.Drawing.Point(168, 67);
+            this.chkShowPassword.Name = "chkShowPassword";
+            this.chkShowPassword.Size = new System.Drawing.Size(76, 16);
+            this.chkShowPassword.TabIndex = 23;
+            this.chkShowPassword.Tag = "Hide";
+            this.chkShowPassword.Text = "a b c";
+            this.chkShowPassword.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkShowPassword.UseVisualStyleBackColor = false;
+            this.chkShowPassword.CheckedChanged += new System.EventHandler(this.chkShowPassword_CheckedChanged);
             // 
             // frmMain
             // 
@@ -1079,6 +1096,7 @@
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.CheckBox chkJobLessMoney;
         private System.Windows.Forms.Button btnShowPassword;
+        private System.Windows.Forms.CheckBox chkShowPassword;
     }
 }
 
