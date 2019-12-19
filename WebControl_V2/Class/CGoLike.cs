@@ -56,6 +56,48 @@ namespace WebControl_V2.Class
         {
             _exit = true;
         }
+        public bool LogOutLinkAccount(bqService service)
+        {
+            service.GotoURL("http://facebook.com");
+
+            bqInterface.UpdateAccount("Timer", "9000");
+            System.Threading.Thread.Sleep(9000);
+            try
+            {
+                //Logout facebook
+                //Show Logout DIV: div._6a._6b.uiPopover._1io_._5v-0
+                //Logout : li._54ni.navSubmenu._6398._64kz.__MenuItem
+                IWebElement loginButtonFB = null;
+                if (service.TryFindElement(By.CssSelector("div._6a._6b.uiPopover._1io_._5v-0"), out loginButtonFB))
+                {
+                    OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                    action = action.MoveToElement(loginButtonFB);
+                    action = action.Click(loginButtonFB);
+                    action.Build().Perform();
+
+                    bqInterface.UpdateAccount("Timer", "3000");
+                    System.Threading.Thread.Sleep(3000);
+
+                    if (service.TryFindElement(By.CssSelector("a._54nc"), out loginButtonFB))
+                    {
+                        System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> cardRedo = driver.FindElements(By.CssSelector("a._54nc"));
+                        //action = action.MoveToElement(cardRedo[5]);
+                        //action = action.Click(cardRedo[5]);
+                        //action.Build().Perform();
+
+                        cardRedo[5].Click();
+
+                        bqInterface.UpdateAccount("Timer", "5000");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                }
+            }
+            catch (Exception ii)
+            {
+                return false;
+            }
+            return true;
+        }
         public void DoJobTest(bqService service)
         {
             int jobFinish = 0;
@@ -156,6 +198,17 @@ namespace WebControl_V2.Class
             string faceName = "";
             int delay = 0;
             _exit = false;
+
+            bqInterface.UpdateProgress("Logout Link Account");
+            if (LogOutLinkAccount(service) == false)
+            {
+                bqInterface.UpdateProgress("Logout Link Account FAULT");
+                CEventLog.Log.WriteEntry(linkAccount.User, "Logout Link Account FAULT");
+                return;
+            }
+
+            bqInterface.UpdateProgress("Login GoLike");
+
             service.GotoURL("https://app.golike.net");
             //service.Driver().Manage().Window.Minimize();
 
@@ -181,13 +234,13 @@ namespace WebControl_V2.Class
             {
                 ab[0].SendKeys(CGlobal.user.User);
 
-                bqInterface.UpdateAccount("Timer", "8000");
-                System.Threading.Thread.Sleep(8000);
+                bqInterface.UpdateAccount("Timer", "10000");
+                System.Threading.Thread.Sleep(10000);
 
                 ab[1].SendKeys(CGlobal.user.Password);
 
-                bqInterface.UpdateAccount("Timer", "8000");
-                System.Threading.Thread.Sleep(8000);
+                bqInterface.UpdateAccount("Timer", "10000");
+                System.Threading.Thread.Sleep(10000);
 
                 IWebElement loginButton = driver.FindElement(By.CssSelector("button.btn.bg-gradient-1.py-2.border-0.text-light.btn-block"));
                 if (loginButton != null)
@@ -195,8 +248,8 @@ namespace WebControl_V2.Class
                     OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
                     action.MoveToElement(loginButton).Perform();
 
-                    bqInterface.UpdateAccount("Timer", "5500");
-                    System.Threading.Thread.Sleep(5500);
+                    bqInterface.UpdateAccount("Timer", "30000");
+                    System.Threading.Thread.Sleep(30000);
 
                     bqInterface.UpdateProgress("Dang nhap");
                     loginButton.Click();
@@ -540,6 +593,16 @@ namespace WebControl_V2.Class
                 //}
                 //catch (Exception ii)
                 //{ }
+                bqInterface.UpdateProgress("Wait facebook ...");
+                while (true)
+                {
+                    if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
+                    {
+                        break;
+                    }
+                    bqInterface.UpdateAccount("Timer", "1000");
+                    System.Threading.Thread.Sleep(1000);
+                }
                 //To get facebook name : a._5afe
                 if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
                 {
@@ -584,6 +647,17 @@ namespace WebControl_V2.Class
                     //}
                     //catch (Exception ii)
                     //{ }
+                    bqInterface.UpdateProgress("Wait facebook ...");
+                    while (true)
+                    {
+                        if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
+                        {
+                            break;
+                        }
+                        bqInterface.UpdateAccount("Timer", "1000");
+                        System.Threading.Thread.Sleep(1000);
+                    }
+
                     //To get facebook name : a._5afe
                     if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
                     {
@@ -1168,13 +1242,17 @@ namespace WebControl_V2.Class
                                 jobInfo = jobInfos[1].Text;
                             }
                             System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> reportErr = driver.FindElements(By.CssSelector("div.card.card-job-detail"));
-                            if (CGlobal.user.CheckLogJob(jobIDText + "." + jobInfo) == true)
+                            if (CGlobal.user.CheckLogJob(jobInfo) == true)
                             {
                                 bqInterface.UpdateProgress("Job bi trung lap .....");
                                 //Update Follow GoLike (Ver 1.1)
+                                js = (IJavaScriptExecutor)driver;
+                                js.ExecuteScript("arguments[0].scrollIntoView(true);", reportErr[2]);
+
                                 OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
-                                action = action.MoveToElement(reportErr[3]);
-                                action = action.Click(reportErr[3]);
+                                action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                action = action.MoveToElement(reportErr[2]);
+                                action = action.Click(reportErr[2]);
                                 action.Build().Perform();
 
                                 timeOut = 0;
@@ -1195,22 +1273,22 @@ namespace WebControl_V2.Class
                                 {//There are have issue about GoLike
 
                                 }
-
-                                bqInterface.UpdateProgress("Job bi trung lap ...Report Error to GoLike");
-
                                 action = new OpenQA.Selenium.Interactions.Actions(driver);
-                                action = action.MoveToElement(reportList[1]);
-                                action = action.Click(reportList[1]);
+                                action = action.MoveToElement(reportList[0]);
+                                action = action.Click(reportList[0]);
                                 action.Build().Perform();
 
                                 delay = CGlobal.user.GoLikeDelay1;
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
                                 System.Threading.Thread.Sleep(delay);
-                                //Click on Button "Gui bao cao"
+                                //Click on Button "Gui bao cao" 
                                 //button.btn.btn-primary.btn-sm.form-control.mt-3
                                 IWebElement errorButton = null;
-                                if (service.TryFindElement(By.CssSelector("utton.btn.btn-primary.btn-sm.form-control.mt-3"), out errorButton))
+                                if (service.TryFindElement(By.CssSelector("button.btn.btn-primary.btn-sm.form-control.mt-3"), out errorButton))
                                 {
+                                    js = (IJavaScriptExecutor)driver;
+                                    js.ExecuteScript("arguments[0].scrollIntoView(true);", errorButton);
+
                                     action = new OpenQA.Selenium.Interactions.Actions(driver);
                                     action = action.MoveToElement(errorButton);
                                     action = action.Click(errorButton);
@@ -1253,7 +1331,7 @@ namespace WebControl_V2.Class
                                 continue;
                             }
                             else
-                                CGlobal.user.AddLogJob(jobIDText);
+                                CGlobal.user.AddLogJob(jobInfo);
 
                             bqInterface.UpdateJob(i, jobIDText, "Dang lam");
                         }

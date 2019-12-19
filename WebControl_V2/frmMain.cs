@@ -442,7 +442,13 @@ namespace WebControl_V2
                     startDoJob = true;
                     lblProgress.Text = "Go ...";
                 });
+                test = new bqChromeService();
+
+                test.Initialize();
+
+                test.Start(chkInvisibleBrowser.Checked);
                 while (true)
+                
                 {
                     bool finish = true;
                     foreach (string id in CGlobal.user.linkAccount.Keys)
@@ -488,11 +494,7 @@ namespace WebControl_V2
                             System.Threading.Thread.Sleep(550);
                             UpdateProgress("Tạm ngưng .....");
                         }
-                        test = new bqChromeService();
-
-                        test.Initialize();
-
-                        test.Start(chkInvisibleBrowser.Checked);
+                        
 
                         //test.GotoURL("https://app.golike.net");
                         if (CGlobal.user.linkAccount[id].Type == "Facebook")
@@ -538,13 +540,20 @@ namespace WebControl_V2
                             }
                         }
 
-                        test.Quit();
+                        UpdateProgress("Waiting next account...");
+                        UpdateAccount("Timer", "9000");
+                        System.Threading.Thread.Sleep(9000);                       
+
+                        
                         if (startDoJob == false)
                             break;
                     }
                     if (finish || startDoJob == false)
                         break;
                 }
+
+                test.Quit();
+
                 this.Invoke((MethodInvoker)delegate
                 {
                     //btnRun.Enabled = true;

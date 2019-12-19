@@ -55,6 +55,10 @@ namespace WebControl_V2.Class
         {
             _exit = true;
         }
+        public bool LogOutLinkAccount(bqService service)
+        {
+            return true;
+        }
         public void DoJobTest(bqService service)
         {
 

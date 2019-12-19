@@ -12,6 +12,8 @@ namespace WebControl_V2.Class
         void DoJob(bqService service);
 
         void DoJobTest(bqService service);
+
+        bool LogOutLinkAccount(bqService service);
         void Exit();
 
         bool LikeArticel
