@@ -1970,3 +1970,123 @@ dangky8007@gmail.com, 22/11/2019 9:47:03 PM
     Point#8 GOLIKE ACCEPT: 
 833821537, 12/18/2019 5:53:57 AM
     Point#GOLIKE Job: Cannot Back Job List
+833821537, 19/12/2019 11:30:02 AM
+    Bat dau ... [Job count on GoLike: 4]
+833821537, 19/12/2019 11:30:06 AM
+    Point#2 Job name: 
+833821537, 19/12/2019 11:30:30 AM
+    Point#5 TANG LIKE: 
+833821537, 19/12/2019 11:30:45 AM
+    Point#7 FACEBOOK OK: 
+833821537, 19/12/2019 11:30:50 AM
+    Point#7 Hoan Thanh GoLike OK: 
+833821537, 19/12/2019 11:31:04 AM
+    Point#8.1 GOLIKE : Click Confirm button
+833821537, 19/12/2019 11:31:04 AM
+    Point#8 GOLIKE ACCEPT: 
+833821537, 19/12/2019 11:31:12 AM
+    Point#GOLIKE Job: Cannot Back Job List
+0833873695, 19/12/2019 11:34:47 AM
+    Bat dau ... [Job count on GoLike: 1]
+0833873695, 19/12/2019 11:35:11 AM
+    Bat dau ... [Job count on GoLike: 5]
+0833873695, 19/12/2019 11:35:15 AM
+    Point#2 Job name: 
+0833873695, 19/12/2019 11:35:39 AM
+    Point#5 TANG LIKE: 
+0833873695, 19/12/2019 11:35:53 AM
+    Point#7 FACEBOOK OK: 
+0833873695, 19/12/2019 11:36:01 AM
+    Point#7 Hoan Thanh GoLike OK: 
+0833873695, 19/12/2019 11:36:15 AM
+    Point#8.1 GOLIKE : Click Confirm button
+0833873695, 19/12/2019 11:36:15 AM
+    Point#8 GOLIKE ACCEPT: 
+0833873695, 19/12/2019 11:36:23 AM
+    Point#GOLIKE Job: Cannot Back Job List
+0833873695, 19/12/2019 11:36:32 AM
+    Point#1 : Cannot click on job
+0833873695, 19/12/2019 11:36:51 AM
+    Bat dau ... [Job count on GoLike: 11]
+0833873695, 19/12/2019 11:36:55 AM
+    Point#2 Job name: 
+0833873695, 19/12/2019 11:37:16 AM
+    Point#5 TANG LIKE: 
+0833873695, 19/12/2019 11:37:30 AM
+    Point#7 FACEBOOK OK: 
+0833873695, 19/12/2019 11:37:39 AM
+    Point#7 Hoan Thanh GoLike OK: 
+0833873695, 19/12/2019 11:37:55 AM
+    Point#8.1 GOLIKE : Click Confirm button
+0833873695, 19/12/2019 11:37:55 AM
+    Point#8 GOLIKE ACCEPT: 
+0833873695, 19/12/2019 11:38:03 AM
+    Point#GOLIKE Job: Cannot Back Job List
+tanthi4, 19/12/2019 12:00:03 PM
+    Bat dau ... [Job count on GoLike: 1]
+tanthi4, 19/12/2019 12:00:20 PM
+    Point#2 Job name: 
+tanthi4, 19/12/2019 12:00:47 PM
+    Point#3 Follow: 
+tanthi4, 19/12/2019 12:00:50 PM
+    Point#9 Instagram INVALID: 
+hongut5, 23/12/2019 4:08:50 PM
+    Bat dau ... [Job count on GoLike: 1]
+hongut5, 23/12/2019 4:09:07 PM
+    Point#2 Job name: 
+hongut5, 23/12/2019 4:09:33 PM
+    Point#3 Follow: 
+hongut5, 23/12/2019 4:14:22 PM
+    Bat dau ... [Job count on GoLike: 1]
+hongut5, 23/12/2019 4:14:37 PM
+    Point#2 Job name: 
+hongut5, 23/12/2019 4:15:03 PM
+    Point#3 Follow: 
+hongut5, 23/12/2019 4:15:18 PM
+    Point#3.1 Follow: 
+hongut5, 23/12/2019 4:15:29 PM
+    Point#7 Instagram: Waiting confirm
+hongut5, 23/12/2019 4:15:38 PM
+    Point#7.1 Instagram: FAULT
+hongut5, 23/12/2019 4:16:40 PM
+    Bat dau ... [Job count on GoLike: 1]
+hongut5, 23/12/2019 4:17:00 PM
+    Point#2 Job name: 
+hongut5, 23/12/2019 4:24:49 PM
+    Bat dau ... [Job count on GoLike: 1]
+hongut5, 23/12/2019 4:25:06 PM
+    Point#2 Job name: 
+hongut5, 23/12/2019 4:25:33 PM
+    Point#3 Follow: 
+hongut5, 23/12/2019 4:25:37 PM
+    Point#9 Instagram INVALID: 
+hongut5, 23/12/2019 4:43:10 PM
+    Bat dau ... [Job count on GoLike: 1]
+hongut5, 23/12/2019 4:43:25 PM
+    Point#2 Job name: 
+hongut5, 23/12/2019 4:43:52 PM
+    Point#3 Follow: 
+hongut5, 23/12/2019 4:43:56 PM
+    Point#9 Instagram INVALID: 
+hongut5, 23/12/2019 4:50:16 PM
+    Bat dau ... [Job count on GoLike: 1]
+hongut5, 23/12/2019 4:50:41 PM
+    Point#2 Job name: 
+hongut5, 23/12/2019 4:51:08 PM
+    Point#3 Follow: 
+hongut5, 23/12/2019 4:51:12 PM
+    Point#9 Instagram INVALID: 
+hongut5, 23/12/2019 4:52:34 PM
+    Bat dau ... [Job count on GoLike: 1]
+hongut5, 23/12/2019 4:52:50 PM
+    Point#2 Job name: 
+hongut5, 23/12/2019 4:53:17 PM
+    Point#3 Follow: 
+hongut5, 23/12/2019 4:53:32 PM
+    Point#3.1 Follow: 
+hongut5, 23/12/2019 4:53:43 PM
+    Point#7 Instagram: Waiting confirm
+hongut5, 23/12/2019 4:53:53 PM
+    Point#7.2 Instagram: OK
+hongut5, 23/12/2019 4:53:59 PM
+    Point#8 GOLIKE ACCEPT: 

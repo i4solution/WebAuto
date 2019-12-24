@@ -53,6 +53,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnRun = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.chkShowPassword = new System.Windows.Forms.CheckBox();
             this.btnShowPassword = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.LinkLabel();
             this.btnDefaultProfile = new System.Windows.Forms.Button();
@@ -110,7 +111,7 @@
             this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label19 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.chkShowPassword = new System.Windows.Forms.CheckBox();
+            this.btnNew = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridJobReport)).BeginInit();
             this.panel4.SuspendLayout();
@@ -124,6 +125,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnNew);
             this.panel1.Controls.Add(this.lblRegister);
             this.panel1.Controls.Add(this.label23);
             this.panel1.Controls.Add(this.chkInvisibleBrowser);
@@ -352,7 +354,7 @@
             // btnRun
             // 
             this.btnRun.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRun.Location = new System.Drawing.Point(221, 15);
+            this.btnRun.Location = new System.Drawing.Point(221, 13);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(88, 46);
             this.btnRun.TabIndex = 6;
@@ -380,6 +382,20 @@
             this.panel4.Size = new System.Drawing.Size(593, 459);
             this.panel4.TabIndex = 5;
             // 
+            // chkShowPassword
+            // 
+            this.chkShowPassword.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.chkShowPassword.Font = new System.Drawing.Font("Constantia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkShowPassword.Location = new System.Drawing.Point(168, 67);
+            this.chkShowPassword.Name = "chkShowPassword";
+            this.chkShowPassword.Size = new System.Drawing.Size(76, 16);
+            this.chkShowPassword.TabIndex = 23;
+            this.chkShowPassword.Tag = "Hide";
+            this.chkShowPassword.Text = "a b c";
+            this.chkShowPassword.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkShowPassword.UseVisualStyleBackColor = false;
+            this.chkShowPassword.CheckedChanged += new System.EventHandler(this.chkShowPassword_CheckedChanged);
+            // 
             // btnShowPassword
             // 
             this.btnShowPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -397,7 +413,7 @@
             // 
             this.btnRegister.AutoSize = true;
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.Location = new System.Drawing.Point(119, 431);
+            this.btnRegister.Location = new System.Drawing.Point(114, 431);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(137, 18);
             this.btnRegister.TabIndex = 13;
@@ -600,7 +616,7 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(459, 427);
+            this.btnSave.Location = new System.Drawing.Point(491, 427);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(97, 25);
             this.btnSave.TabIndex = 8;
@@ -611,7 +627,7 @@
             // btnLoad
             // 
             this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoad.Location = new System.Drawing.Point(356, 427);
+            this.btnLoad.Location = new System.Drawing.Point(388, 427);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(97, 25);
             this.btnLoad.TabIndex = 7;
@@ -969,19 +985,16 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // chkShowPassword
+            // btnNew
             // 
-            this.chkShowPassword.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.chkShowPassword.Font = new System.Drawing.Font("Constantia", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkShowPassword.Location = new System.Drawing.Point(168, 67);
-            this.chkShowPassword.Name = "chkShowPassword";
-            this.chkShowPassword.Size = new System.Drawing.Size(76, 16);
-            this.chkShowPassword.TabIndex = 23;
-            this.chkShowPassword.Tag = "Hide";
-            this.chkShowPassword.Text = "a b c";
-            this.chkShowPassword.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.chkShowPassword.UseVisualStyleBackColor = false;
-            this.chkShowPassword.CheckedChanged += new System.EventHandler(this.chkShowPassword_CheckedChanged);
+            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNew.Location = new System.Drawing.Point(221, 59);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(88, 25);
+            this.btnNew.TabIndex = 24;
+            this.btnNew.Text = "Tạo Mới";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // frmMain
             // 
@@ -1097,6 +1110,7 @@
         private System.Windows.Forms.CheckBox chkJobLessMoney;
         private System.Windows.Forms.Button btnShowPassword;
         private System.Windows.Forms.CheckBox chkShowPassword;
+        private System.Windows.Forms.Button btnNew;
     }
 }
 

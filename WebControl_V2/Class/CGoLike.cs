@@ -593,18 +593,28 @@ namespace WebControl_V2.Class
                 //}
                 //catch (Exception ii)
                 //{ }
-                bqInterface.UpdateProgress("Wait facebook ...");
+                bqInterface.UpdateProgress("Wait facebook ... 3 minutes");
+                int faceTimeOut = 0;
                 while (true)
                 {
                     if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
                     {
                         break;
                     }
+                    if (faceTimeOut > 180)
+                    {
+                        break;
+                    }
                     bqInterface.UpdateAccount("Timer", "1000");
                     System.Threading.Thread.Sleep(1000);
+                    faceTimeOut++;
+                }
+                if (faceTimeOut >= 180)
+                {
+                    faceName = "";
                 }
                 //To get facebook name : a._5afe
-                if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
+                else if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
                 {
                     faceName = loginButtonFB.GetAttribute("title");
                     bqInterface.UpdateAccount("facebook", faceName);
@@ -647,19 +657,28 @@ namespace WebControl_V2.Class
                     //}
                     //catch (Exception ii)
                     //{ }
-                    bqInterface.UpdateProgress("Wait facebook ...");
+                    bqInterface.UpdateProgress("Wait facebook ... 3 minutes");
+                    int faceTimeOut = 0;
                     while (true)
                     {
                         if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
                         {
                             break;
                         }
+                        if (faceTimeOut > 180)
+                        {
+                            break;
+                        }
                         bqInterface.UpdateAccount("Timer", "1000");
                         System.Threading.Thread.Sleep(1000);
+                        faceTimeOut++;
                     }
-
+                    if (faceTimeOut >= 180)
+                    {
+                        faceName = "";
+                    }
                     //To get facebook name : a._5afe
-                    if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
+                    else if (service.TryFindElement(By.CssSelector("a._5afe"), out loginButtonFB))
                     {
                         faceName = loginButtonFB.GetAttribute("title");
                         bqInterface.UpdateAccount("facebook", faceName);
@@ -698,7 +717,7 @@ namespace WebControl_V2.Class
 
                 if (CGlobal.user.CheckLinkCondition)
                 {
-                    if ((jobFinish >= linkAccount.JobCount && linkAccount.JobCountUpFB >= linkAccount.JobCountFB) || _exit ||
+                    if ((jobFinish >= linkAccount.JobCount || linkAccount.JobCountUpFB >= linkAccount.JobCountFB) || _exit ||
                     linkAccount.JobCountUpMax >= linkAccount.JobCountMax ||
                     linkAccount.JobCountUpFBMax >= linkAccount.JobCountFBMax)
                     {
@@ -1107,7 +1126,7 @@ namespace WebControl_V2.Class
                         }
                         if (CGlobal.user.CheckLinkCondition)
                         {
-                            if ((jobFinish >= linkAccount.JobCount && linkAccount.JobCountUpFB >= linkAccount.JobCountFB) || _exit ||
+                            if ((jobFinish >= linkAccount.JobCount || linkAccount.JobCountUpFB >= linkAccount.JobCountFB) || _exit ||
                             linkAccount.JobCountUpMax >= linkAccount.JobCountMax ||
                             linkAccount.JobCountUpFBMax >= linkAccount.JobCountFBMax)
                             {
@@ -2414,6 +2433,9 @@ namespace WebControl_V2.Class
                                     //driver.Navigate().Refresh();
 
                                     //Update Follow GoLike (Ver 1.1)
+                                    js = (IJavaScriptExecutor)driver;
+                                    js.ExecuteScript("arguments[0].scrollIntoView(true);", finish[2]);
+
                                     action = new OpenQA.Selenium.Interactions.Actions(driver);
                                     action = action.MoveToElement(finish[2]);
                                     action = action.Click(finish[2]);
@@ -2622,6 +2644,9 @@ namespace WebControl_V2.Class
                                 System.Threading.Thread.Sleep(delay);
 
                                 //Update Follow GoLike (Ver 1.1)
+                                js = (IJavaScriptExecutor)driver;
+                                js.ExecuteScript("arguments[0].scrollIntoView(true);", finish[2]);
+
                                 OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
                                 action = action.MoveToElement(finish[2]);
                                 action = action.Click(finish[2]);

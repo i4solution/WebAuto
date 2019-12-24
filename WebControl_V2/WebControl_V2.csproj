@@ -130,6 +130,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\chromedriver.exe" />
     <Content Include="web_auto.ico" />
     <None Include="Image\rect286-3.png" />
     <Content Include="logo 48x48.ico" />

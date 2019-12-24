@@ -141,6 +141,8 @@ namespace WebControl_V2
             //gridUser.Rows.Add(new object[] { "833821537", "abcd1234@", "1" , true});
             gridUser.CellFormatting += new DataGridViewCellFormattingEventHandler(gridUser_CellFormatting);
             gridUser.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(gridUser_EditingControlShowing);
+
+            CGlobal._session.CreateSession("bq", 300);
         }
         public void LoadJobs(System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> Job)
         {
@@ -430,6 +432,7 @@ namespace WebControl_V2
                     //btnRun.Enabled = false;
                     btnLoad.Enabled = false;
                     btnSave.Enabled = false;
+                    btnNew.Enabled = false;
                     btnLikeArticle.Enabled = false;
                     btnLikeFanPage.Enabled = false;
                     chkEnableRedo.Enabled = false;
@@ -560,6 +563,7 @@ namespace WebControl_V2
                     btnRun.Text = "Làm việc";
                     btnLoad.Enabled = true;
                     btnSave.Enabled = true;
+                    btnNew.Enabled = true;
                     btnLikeArticle.Enabled = true;
                     btnLikeFanPage.Enabled = true;
                     chkEnableRedo.Enabled = true;
@@ -820,6 +824,12 @@ namespace WebControl_V2
                     gridUser.InvalidateCell(r.Cells["colPass"].ColumnIndex, r.Index);
                 }
             }
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            txtUserName.Text = txtPassword.Text = "";
+            gridUser.Rows.Clear();
         }
     }
 }
