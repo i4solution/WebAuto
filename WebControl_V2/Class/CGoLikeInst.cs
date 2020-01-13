@@ -295,7 +295,7 @@ namespace WebControl_V2.Class
                     //ab[0] : Facebook
                     //ab[1] : Instagram
                     ab = driver.FindElements(By.CssSelector("p.font-bold.font-16.my-0.red"));
-                    if (ab[0].Text.Equals("0 đ") == false)
+                    if (ab[1].Text.Equals("0 đ") == false)
                     {//For Facebook
                         bqInterface.UpdateProgress("Can lam lai");
                         ab[1].Click();
@@ -374,7 +374,7 @@ namespace WebControl_V2.Class
                                         //Panel of "Lam lai jobs" => div.card.mb-2
                                         System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> cardRedo = driver.FindElements(By.CssSelector("div.card.mb-2"));
                                         //List of Job need redo
-                                        ab = driver.FindElements(By.CssSelector("button.btn.btn-block.bg-button-1.px-0.complete-rework"));
+                                        ab = driver.FindElements(By.CssSelector("button.btn.btn-xs.bg-gradient-1.border-0.b-0.btn-block"));
                                         if (ab != null)
                                         {
                                             int offSet = 0;
@@ -552,7 +552,7 @@ namespace WebControl_V2.Class
                 System.Threading.Thread.Sleep(2000);
 
                 faceLogin[0].SendKeys(linkAccount.User);
-                bqInterface.UpdateAccount("Timer", "35000");
+                bqInterface.UpdateAccount("Timer", "3500");
                 System.Threading.Thread.Sleep(3500);
 
                 action.MoveToElement(faceLogin[1]).Perform();
@@ -611,6 +611,7 @@ namespace WebControl_V2.Class
                 if (jobFinish >= linkAccount.JobCount || _exit)
                     break;
 
+                bqInterface.UpdateProgress("Waiting load dock...");
                 //font-20 d-block mb-1 icon-wallet
                 ab = driver.FindElements(By.CssSelector("i.font-20.d-block.mb-1.icon-wallet"));
                 while (true)
@@ -806,6 +807,26 @@ namespace WebControl_V2.Class
                         break;
                     }
                     ab[0].Click();
+
+                    delay = 1000;
+                    bqInterface.UpdateAccount("Timer", delay.ToString());
+                    System.Threading.Thread.Sleep(delay);
+
+                    //Message no job
+                    IWebElement abMessage = null;
+                    //button.swal2-confirm swal2-styled
+                    if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out abMessage))
+                    {//Confirm OK to exit
+                        bqInterface.UpdateProgress("No JOB MESSAGE");
+                        abMessage.Click();
+                        delay = 2000;
+                        bqInterface.UpdateAccount("Timer", delay.ToString());
+                        System.Threading.Thread.Sleep(delay);
+
+                        CEventLog.Log.WriteEntry(linkAccount.User, "No JOB MESSAGE");
+
+                        break;
+                    }
                     while (CGlobal._pauseJob)
                     {
                         bqInterface.UpdateProgress("Tạm ngưng ..");
@@ -1012,9 +1033,9 @@ namespace WebControl_V2.Class
                         //End
 
                         //Waiting alert facebook
-                        delay = CGlobal.user.FBDelay1;
-                        bqInterface.UpdateAccount("Timer", delay.ToString());
-                        System.Threading.Thread.Sleep(delay);
+                        //delay = CGlobal.user.FBDelay1;
+                        //bqInterface.UpdateAccount("Timer", delay.ToString());
+                        //System.Threading.Thread.Sleep(delay);
                         
                         while (CGlobal._pauseJob)
                         {
@@ -1026,9 +1047,9 @@ namespace WebControl_V2.Class
  
                         //End 
 
-                        delay = CGlobal.user.FBDelay1;
-                        bqInterface.UpdateAccount("Timer", delay.ToString());
-                        System.Threading.Thread.Sleep(delay);
+                        //delay = CGlobal.user.FBDelay1;
+                        //bqInterface.UpdateAccount("Timer", delay.ToString());
+                        //System.Threading.Thread.Sleep(delay);
                         
                         //Check Facebook "Bat dau tro chuyen" window.
                         //If window present then CLOSE it
@@ -1053,74 +1074,150 @@ namespace WebControl_V2.Class
                         bool faceOK = true;
                         if (value.Contains("THEO"))
                         {//TANG LUOT THEO DOI 
-                            CEventLog.Log.WriteEntry(linkAccount.User, "Point#3 Follow: ");
-                            bqInterface.UpdateProgress("Cong viec : Theo doi FanPage");
-
-                            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                            js.ExecuteScript("window.scrollBy(0, document.body.scrollHeight)", "");
-
-                            bqInterface.UpdateAccount("Timer", "3000");
-                            System.Threading.Thread.Sleep(3000);                            
-
-                            IWebElement follow = null; //        
-                            bool ok = false;
-                            if (service.TryFindElement(By.CssSelector("button.BY3EC.sqdOP.L3NKy.y3zKF"), out follow))
-                                ok = true; 
-                            else if (service.TryFindElement(By.CssSelector("button._5f5mN.jIbKX._6VtSN.yZn4P"), out follow))
-                                ok = true;
-                            else if (service.TryFindElement(By.CssSelector("button._5f5mN.-fzfL._6VtSN.yZn4P"), out follow))
-                                ok = true;
-                            if (ok)
+                            try
                             {
-                                string text = follow.Text;
-                                if (text.ToLower() == "follow")
+                                CEventLog.Log.WriteEntry(linkAccount.User, "Point#3 Follow: ");
+                                bqInterface.UpdateProgress("Cong viec : Theo doi FanPage");
+
+                                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                js.ExecuteScript("window.scrollBy(0, document.body.scrollHeight)", "");
+
+                                bqInterface.UpdateAccount("Timer", "1000");
+                                System.Threading.Thread.Sleep(1000);
+
+                                IWebElement follow = null; //        
+                                bool ok = false;
+                                if (service.TryFindElement(By.CssSelector("button.BY3EC.sqdOP.L3NKy.y3zKF"), out follow))
+                                    ok = true;
+                                else if (service.TryFindElement(By.CssSelector("button._5f5mN.jIbKX._6VtSN.yZn4P"), out follow))
+                                    ok = true;
+                                else if (service.TryFindElement(By.CssSelector("button._5f5mN.-fzfL._6VtSN.yZn4P"), out follow))
+                                    ok = true;
+                                if (ok)
                                 {
-                                    OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
-                                    action.MoveToElement(follow).Build().Perform();
-
-                                    //Waiting alert Instagram
-                                    delay = CGlobal.user.FBDelay1;
-                                    bqInterface.UpdateAccount("Timer", delay.ToString());
-                                    System.Threading.Thread.Sleep(delay);
-
-                                    CEventLog.Log.WriteEntry(linkAccount.User, "Point#3.1 Follow: ");
-
-                                    while (CGlobal._pauseJob)
+                                    string text = follow.Text;
+                                    if (text.ToLower() == "follow")
                                     {
-                                        bqInterface.UpdateProgress("Tạm ngưng ..");
-                                        System.Threading.Thread.Sleep(270);
-                                        bqInterface.UpdateProgress("Tạm ngưng .....");
-                                        System.Threading.Thread.Sleep(270);
-                                    }
+                                        OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                        action.MoveToElement(follow).Build().Perform();
 
-                                    //try
-                                    //{
-                                    //    IAlert a = driver.SwitchTo().Alert();
-                                    //    driver.SwitchTo().Alert().Accept();
-                                    //}
-                                    //catch (Exception ii)
-                                    //{ }
-                                    //End 
-                                    follow.Click();
+                                        //Waiting alert Instagram
+                                        delay = 3000;// CGlobal.user.FBDelay1;
+                                        bqInterface.UpdateAccount("Timer", delay.ToString());
+                                        System.Threading.Thread.Sleep(delay);
 
-                                    delay = CGlobal.user.FBDelay1;
-                                    bqInterface.UpdateAccount("Timer", delay.ToString());
-                                    System.Threading.Thread.Sleep(delay);
+                                        CEventLog.Log.WriteEntry(linkAccount.User, "Point#3.1 Follow: ");
 
-                                    //Check Instagram Disable Report
-                                    //button.aOOlW.HoLwm 
-                                    if (service.TryFindElement(By.CssSelector("button.aOOlW.HoLwm"), out follow))
-                                    {
-                                        bqInterface.UpdateProgress("Instagram Reject Follow ...");
-                                        faceOK = false;
+                                        while (CGlobal._pauseJob)
+                                        {
+                                            bqInterface.UpdateProgress("Tạm ngưng ..");
+                                            System.Threading.Thread.Sleep(270);
+                                            bqInterface.UpdateProgress("Tạm ngưng .....");
+                                            System.Threading.Thread.Sleep(270);
+                                        }
+
+                                        //try
+                                        //{
+                                        //    IAlert a = driver.SwitchTo().Alert();
+                                        //    driver.SwitchTo().Alert().Accept();
+                                        //}
+                                        //catch (Exception ii)
+                                        //{ }
+                                        //End 
                                         follow.Click();
+
+                                        delay = 5000;// CGlobal.user.FBDelay1;
+                                        bqInterface.UpdateAccount("Timer", delay.ToString());
+                                        System.Threading.Thread.Sleep(delay);
+
+                                        //Check Instagram Disable Report
+                                        //button.aOOlW.HoLwm 
+                                        if (service.TryFindElement(By.CssSelector("button.aOOlW.HoLwm"), out follow))
+                                        {
+                                            bqInterface.UpdateProgress("Instagram Reject Follow ...");
+                                            faceOK = false;
+                                            follow.Click();
+                                        }
                                     }
+                                    else
+                                        faceOK = false;
+                                }
+                                else
+                                    faceOK = false;
+                            }catch(Exception exp)
+                            {
+                                faceOK = false;
+                                CEventLog.Log.WriteEntry(linkAccount.User, "Point#3.x Follow: " + exp.StackTrace);
+                            }
+                        }
+                        else if (value.ToLower().Contains("like"))
+                        {
+                            try
+                            {
+                                CEventLog.Log.WriteEntry(linkAccount.User, "Point#3 Like: ");
+                                bqInterface.UpdateProgress("Cong viec : Like");
+
+                                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                js.ExecuteScript("window.scrollBy(0, document.body.scrollHeight)", "");
+
+                                bqInterface.UpdateAccount("Timer", "1000");
+                                System.Threading.Thread.Sleep(1000);
+
+                                IWebElement follow = null; //        
+                                bool ok = false;
+                                if (service.TryFindElement(By.CssSelector("button.dCJp8.afkep"), out follow))
+                                    ok = true;
+                                if (ok)
+                                {
+                                    //span.glyphsSpriteHeart__outline__24__grey_9.u-__7
+                                    System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> likeClass = driver.FindElements(By.CssSelector("span.glyphsSpriteHeart__outline__24__grey_9.u-__7"));
+                                    System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> likeButton = driver.FindElements(By.CssSelector("button.dCJp8.afkep"));
+                                    if (likeClass.Count > 0 && likeButton.Count > 0)
+                                    {
+                                        OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                        action.MoveToElement(likeButton[0]).Build().Perform();
+
+                                        //Waiting alert Instagram
+                                        delay = 3000;// CGlobal.user.FBDelay1;
+                                        bqInterface.UpdateAccount("Timer", delay.ToString());
+                                        System.Threading.Thread.Sleep(delay);
+
+                                        CEventLog.Log.WriteEntry(linkAccount.User, "Point#3.1 Like: ");
+
+                                        while (CGlobal._pauseJob)
+                                        {
+                                            bqInterface.UpdateProgress("Tạm ngưng ..");
+                                            System.Threading.Thread.Sleep(270);
+                                            bqInterface.UpdateProgress("Tạm ngưng .....");
+                                            System.Threading.Thread.Sleep(270);
+                                        }
+
+                                        likeButton[0].Click();
+
+                                        delay = 5000;// CGlobal.user.FBDelay1;
+                                        bqInterface.UpdateAccount("Timer", delay.ToString());
+                                        System.Threading.Thread.Sleep(delay);
+
+                                        //Check Instagram Disable Report
+                                        //button.aOOlW.HoLwm 
+                                        if (service.TryFindElement(By.CssSelector("button.aOOlW.HoLwm"), out follow))
+                                        {
+                                            bqInterface.UpdateProgress("Instagram Reject Follow ...");
+                                            faceOK = false;
+                                            follow.Click();
+                                        }
+                                    }
+                                    else
+                                        faceOK = false;
                                 }
                                 else
                                     faceOK = false;
                             }
-                            else
+                            catch (Exception exp)
+                            {
                                 faceOK = false;
+                                CEventLog.Log.WriteEntry(linkAccount.User, "Point#3.x Like: " + exp.StackTrace);
+                            }
                         }
                         else
                             faceOK = false;
@@ -1135,7 +1232,7 @@ namespace WebControl_V2.Class
                             driver.SwitchTo().Window(driver.WindowHandles.First());
                             //service.Driver().Manage().Window.Minimize();
 
-                            delay = CGlobal.user.GoLikeDelay1;
+                            delay = 2000;
                             bqInterface.UpdateAccount("Timer", delay.ToString());
                             System.Threading.Thread.Sleep(delay);
                             idBrowswer = 0;
@@ -1234,20 +1331,154 @@ namespace WebControl_V2.Class
                                     System.Threading.Thread.Sleep(270);
                                 }
 
-                                delay = CGlobal.user.GoLikeDelay1;
-                                bqInterface.UpdateAccount("Timer", delay.ToString());
-                                System.Threading.Thread.Sleep(delay);
+                                id = "div.col-6.pl-2.pr-0";
+                                while (true)
+                                {
+                                    if (timeOut >= 5)
+                                        break;
+                                    jobBrowser = driver.FindElements(By.CssSelector(id));
+                                    if (jobBrowser.Count > 0)
+                                    {
+                                        for (int x = 0; x < jobBrowser.Count; x++)
+                                        {
+                                            if (jobBrowser[x].Text.ToLower() == "báo lỗi")
+                                            {
+                                                jobBrowser[x].Click();
+                                                break;
+                                            }
+                                        }
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        id = "div.col-6.pl-0.pr-2";
+                                    }
+                                    System.Threading.Thread.Sleep(2000);
+                                    timeOut++;
+                                }
+                                timeOut = 0;
+                                if (jobBrowser.Count == 0)
+                                {
+                                    bqInterface.UpdateProgress("Khong tim thay [Bo qua] Job Instagram (6) ? Qua tai khoan tiep...");
+                                    System.Threading.Thread.Sleep(2000);
+                                    break;
+                                }
 
-                                bqInterface.UpdateJob(i, jobIDText, "That Bai");
-                                int fbCount = linkAccount.JobCountFB;
-                                linkAccount.JobCountFB += 1;
-                                bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount.ToString(), linkAccount.JobCountFB.ToString());
-                                //bqInterface.UpdateAccountJob(linkAccount.User, linkAccount.JobCount.ToString(), jobFinish.ToString());
+                                IWebElement error = null;
+                                if (service.TryFindElement(By.CssSelector("div.col-6.pl-0.pr-2"), out error))
+                                {//found div "Bo qua"
+                                    //////////delay = 2000;
+                                    //////////bqInterface.UpdateAccount("Timer", delay.ToString());
+                                    //////////System.Threading.Thread.Sleep(delay);
+
+                                    ////////////found button "Bo qua"
+                                    ////////////button.btn.btn-block.px-0.bg-button-1 (old)
+                                    ////////////button.btn.btn-block.b-0.bg-button-1.px-0
+                                    //////////if (service.TryFindElement(By.CssSelector("button.btn.btn-block.b-0.bg-button-1.px-0"), out error))
+                                    //////////{
+                                    //////////    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                    //////////    js.ExecuteScript("arguments[0].scrollIntoView();", error);
+
+                                    //////////    delay = CGlobal.user.GoLikeDelay1;
+                                    //////////    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                    //////////    System.Threading.Thread.Sleep(delay);
+
+                                    //////////    error.Click();
+                                    //////////}
+                                    delay = 3000;// CGlobal.user.GoLikeDelay1;
+                                    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                    System.Threading.Thread.Sleep(delay);
+
+                                    //Update Follow GoLike (Ver 1.1)   
+
+                                    timeOut = 0;
+                                    System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> reportList = null;
+                                    while (true)
+                                    {
+                                        if (timeOut >= 60)
+                                            break;
+                                        reportList = driver.FindElements(By.CssSelector("div.row.align-items-center.mt-2"));
+                                        if (reportList.Count > 0)
+                                            break;
+                                        bqInterface.UpdateAccount("Timer", "1000");
+                                        System.Threading.Thread.Sleep(1000);
+                                        timeOut++;
+                                    }
+
+                                    if (timeOut >= 60)
+                                    {//There are have issue about GoLike
+
+                                    }
+                                    OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                    action = action.MoveToElement(reportList[0]);
+                                    action = action.Click(reportList[0]);
+                                    action.Build().Perform();
+
+                                    delay = 2000;
+                                    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                    System.Threading.Thread.Sleep(delay);
+                                    //Click on Button "Gui bao cao" 
+                                    //button.btn.btn-primary.btn-sm.form-control.mt-3
+                                    IWebElement errorButton = null;
+                                    if (service.TryFindElement(By.CssSelector("button.btn.btn-primary.btn-sm.form-control.mt-3"), out errorButton))
+                                    {
+                                        IJavaScriptExecutor js1 = (IJavaScriptExecutor)driver;
+                                        js1.ExecuteScript("arguments[0].scrollIntoView(true);", errorButton);
+
+                                        action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                        action = action.MoveToElement(errorButton);
+                                        action = action.Click(errorButton);
+                                        action.Build().Perform();
+
+                                        confirm = null;
+                                        timeOut = 0;
+                                        while (true)
+                                        {
+                                            if (timeOut >= 60)
+                                                break;
+                                            if (service.TryFindElement(By.CssSelector("button.swal2-confirm.swal2-styled"), out confirm))
+                                            {
+                                                action = new OpenQA.Selenium.Interactions.Actions(driver);
+                                                action = action.MoveToElement(confirm);
+                                                action = action.Click(confirm);
+                                                action.Build().Perform();
+                                                //confirm.Click();
+                                                delay = 2500;
+                                                bqInterface.UpdateAccount("Timer", delay.ToString());
+                                                System.Threading.Thread.Sleep(delay);
+                                                break;
+                                            }
+                                            bqInterface.UpdateAccount("Timer", "1000");
+                                            System.Threading.Thread.Sleep(1000);
+                                            timeOut++;
+                                        }
+
+                                        if (timeOut >= 60)
+                                        {//There are have issue about GoLike
+
+                                        }
+                                    }
+                                    //End-Update Follow GoLike (Ver 1.1)
+
+                                    delay = CGlobal.user.GoLikeDelay1;
+                                    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                    System.Threading.Thread.Sleep(delay);
+
+                                    bqInterface.UpdateJob(i, jobIDText, "That Bai");
+                                    int fbCount = linkAccount.JobCountFB;
+                                    linkAccount.JobCountFB += 1;
+                                    bqInterface.UpdateAccountJobFB(linkAccount.User, fbCount.ToString(), linkAccount.JobCountFB.ToString());
+                                    //bqInterface.UpdateAccountJob(linkAccount.User, linkAccount.JobCount.ToString(), jobFinish.ToString());
+                                }
                             }
                             else
                             {
                                 //if (Int32.TryParse(txt, out jobFinish) == false)
-                                    jobFinish++;
+                                jobFinish++;
+
+                                linkAccount.JobCountUp = jobFinish;
+                                linkAccount.JobCountUpMax += 1;
+
                                 bqInterface.UpdateJob(i, jobIDText, "Thanh Cong");
                                 bqInterface.UpdateAccountJob(linkAccount.User, linkAccount.JobCount.ToString(), jobFinish.ToString());
                                 int fbCount = linkAccount.JobCountFB;
@@ -1315,25 +1546,25 @@ namespace WebControl_V2.Class
                             IWebElement error = null;
                             if (service.TryFindElement(By.CssSelector("div.col-6.pl-0.pr-2"), out error))
                             {//found div "Bo qua"
+                                ////////delay = CGlobal.user.GoLikeDelay1;
+                                ////////bqInterface.UpdateAccount("Timer", delay.ToString());
+                                ////////System.Threading.Thread.Sleep(delay);                               
+
+                                //////////found button "Bo qua"
+                                //////////button.btn.btn-block.px-0.bg-button-1 (old)
+                                //////////button.btn.btn-block.b-0.bg-button-1.px-0
+                                ////////if (service.TryFindElement(By.CssSelector("button.btn.btn-block.b-0.bg-button-1.px-0"), out error))
+                                ////////{
+                                ////////    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                ////////    js.ExecuteScript("arguments[0].scrollIntoView();", error);
+
+                                ////////    delay = CGlobal.user.GoLikeDelay1;
+                                ////////    bqInterface.UpdateAccount("Timer", delay.ToString());
+                                ////////    System.Threading.Thread.Sleep(delay);
+
+                                ////////    error.Click();
+                                ////////}
                                 delay = CGlobal.user.GoLikeDelay1;
-                                bqInterface.UpdateAccount("Timer", delay.ToString());
-                                System.Threading.Thread.Sleep(delay);                               
-
-                                //found button "Bo qua"
-                                //button.btn.btn-block.px-0.bg-button-1 (old)
-                                //button.btn.btn-block.b-0.bg-button-1.px-0
-                                if (service.TryFindElement(By.CssSelector("button.btn.btn-block.b-0.bg-button-1.px-0"), out error))
-                                {
-                                    IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                                    js.ExecuteScript("arguments[0].scrollIntoView();", error);
-
-                                    delay = CGlobal.user.GoLikeDelay1;
-                                    bqInterface.UpdateAccount("Timer", delay.ToString());
-                                    System.Threading.Thread.Sleep(delay);
-
-                                    error.Click();
-                                }
-                                delay = 3000;// CGlobal.user.GoLikeDelay1;
                                 bqInterface.UpdateAccount("Timer", delay.ToString());
                                 System.Threading.Thread.Sleep(delay);
 
@@ -1357,6 +1588,9 @@ namespace WebControl_V2.Class
                                 {//There are have issue about GoLike
 
                                 }
+                                bqInterface.UpdateAccount("Timer", "1000");
+                                System.Threading.Thread.Sleep(1000);
+
                                 OpenQA.Selenium.Interactions.Actions action = new OpenQA.Selenium.Interactions.Actions(driver);
                                 action = action.MoveToElement(reportList[0]);
                                 action = action.Click(reportList[0]);
@@ -1475,6 +1709,7 @@ namespace WebControl_V2.Class
                             System.Threading.Thread.Sleep(2000);
                             break;
                         }
+                        System.Threading.Thread.Sleep(2000);
                     }
                     bqInterface.UpdateProgress("Xong viec :)");
                     Console.WriteLine("COMPLETE ==>> ");

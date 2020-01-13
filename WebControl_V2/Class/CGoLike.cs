@@ -1117,6 +1117,17 @@ namespace WebControl_V2.Class
                     int JobFinishedError = 0;
                     for (int i = 0; i < ab.Count; )
                     {
+                        try
+                        {
+                            if (ab[i].Text.Length <= 15)
+                            {
+                                i++;
+                                continue;
+                            }
+                        }catch (Exception exc)
+                        {
+
+                        }
                         while (CGlobal._pauseJob)
                         {
                             bqInterface.UpdateProgress("Tạm ngưng ..");
@@ -2906,6 +2917,7 @@ namespace WebControl_V2.Class
                                 //if (ab.Count == 0)
                                 //    break;
                                 bqInterface.LoadJobs(ab);
+                                i = 0;
                             }
                         }
                         if (timeOut >= 60)

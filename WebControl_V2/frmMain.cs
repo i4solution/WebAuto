@@ -142,7 +142,7 @@ namespace WebControl_V2
             gridUser.CellFormatting += new DataGridViewCellFormattingEventHandler(gridUser_CellFormatting);
             gridUser.EditingControlShowing += new DataGridViewEditingControlShowingEventHandler(gridUser_EditingControlShowing);
 
-            CGlobal._session.CreateSession("bq", 300);
+            CGlobal._session.CreateSession("bq", 1800);
         }
         public void LoadJobs(System.Collections.ObjectModel.ReadOnlyCollection<IWebElement> Job)
         {
@@ -470,10 +470,12 @@ namespace WebControl_V2
                                 break;
                             }
                         }
-                        if (CGlobal.user.linkAccount[id].EnableJob == false)
-                            continue;
+                        //if (CGlobal.user.linkAccount[id].EnableJob == false)
+                        //    continue;
                         if (CGlobal.user.linkAccount[id].EnableJob == false && CGlobal.user.EnableRedoJob == false)
                             continue;
+                        else if (CGlobal.user.linkAccount[id].EnableJob == false && CGlobal.user.EnableRedoJob == true)
+                            startDoJob = false;
                         if (CGlobal.user.CheckLinkCondition)
                         {
                             if (CGlobal.user.linkAccount[id].JobCountUp >= CGlobal.user.linkAccount[id].JobCount ||
