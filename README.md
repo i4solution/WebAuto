@@ -1,13 +1,15 @@
 # WebAuto
-Web Auto Click using WebDriver<br>
-Using C# and Visual Studio 2013<br>
-Simulate step by step earn money online. Webiste Golike.vn<br>
-##1. Project structure##
-> Main
+Web Auto Click using WebDriver
+Using Visual Studio 2013
+Simulate step by step earn money online. Webiste Golike.vn
+## 1. Project structure
 > WebControl_V2
-##2. Utility
-<p>This part do not relate to Web Driver. I have developed check new update software when user run application.<br>
-  <span>PHP Host : www.00Webhost.com</span><br>
-  <span>PHP file : testdb.php</span><br>
+> Service WebDriver
+> Server request
+## 2. Server Restfull API
+This part do not relate to Web Driver. I have developed check new update software when user run application.
+PHP Host : www.00Webhost.com
+PHP file : testdb.php
   
-</p>
+> Because the Host is expired. So can be edit testdb.php file to new implement.
+
